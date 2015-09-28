@@ -27,7 +27,7 @@ Install Git Client as explained at: https://git-scm.com/book/en/v2/Getting-Start
 
 Docker currently runs natively on Linux. It can be configured to run in a virtual machine on Mac or Windows. This is why Virtualbox is a requirement for Mac or Windows.
 
-Virtual Box 5.0.0 does not allow Kubernetes cluster to be started: https://github.com/kubernetes/kubernetes/issues/12614. Make sure to download VirtualBox 4.3.30[https://www.virtualbox.org/wiki/Download_Old_Builds_4_3] and install.
+Downloads are available from https://www.virtualbox.org/.
 
 [WARNING]
 ====
@@ -40,9 +40,7 @@ Linux Users
 
 ### Vagrant
 
-Download Vagrant from https://www.vagrantup.com/downloads.html and install.
-
-Kubernetes requires >= 1.6.2. So if you have an older version then make sure you install the latest one.
+Download Vagrant from http://classroom.example.com:8082/downloads/virtualbox/ and install.
 
 ### Docker Machine
 
@@ -51,15 +49,15 @@ Docker Machine makes it really easy to create Docker hosts on your computer, on 
 [source, text]
 ----
 # Mac
-curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
 chmod +x /usr/local/bin/docker-machine
 
 # Linux
-curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 > /usr/local/bin/docker-machine
+sudo curl -L  http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
 chmod +x /usr/local/bin/docker-machine
 
 #Windows
-curl https://github.com/docker/machine/releases/download/v0.4.1/docker-machine.exe
+curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe
 ----
 
 ### Create Lab Docker Host
@@ -69,6 +67,7 @@ curl https://github.com/docker/machine/releases/download/v0.4.1/docker-machine.e
 [source, text]
 ----
 docker-machine create --driver=virtualbox lab
+TODO Setup the insecure registry
 eval "$(docker-machine env lab)"
 ----
 +
@@ -104,28 +103,28 @@ Docker Client is used to communicate with Docker Host.
 [source, text]
 ----
 # Mac
-curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest > /usr/local/bin/docker
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-mac -o /usr/local/bin/docker
 chmod +x /usr/local/bin/docker
 
 # Linux
-curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest > docker-latest-linux
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o docker-latest-linux
 chmod +x /usr/local/bin/docker
 
 # Windows
-curl -L http://test.docker.com.s3.amazonaws.com/builds/Windows/x86_64/docker-1.7.0.exe -o docker.exe
+curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe
 ----
 
 ### WildFly
 
-. Download WildFly 9.0 from http://download.jboss.org/wildfly/9.0.0.Final/wildfly-9.0.0.Final.zip.
+. Download WildFly 9.0.1 from http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip.
 . Install it by extracting the archive.
 
-### JBoss Developer Studio 9 - Beta 2
+### JBoss Developer Studio 9 - CR1
 
 To install JBoss Developer Studio stand-alone, complete the following steps:
 
-. Download http://tools.jboss.org/downloads/devstudio/mars/9.0.0.Beta2.html[9.0.0 Beta 2] or
-https://devstudio.redhat.com/9.0/snapshots/builds/devstudio.product_master/latest/installer/[Latest Nightly].
+. Download http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.CR1-v20150911-1025-B3967-installer-standalone.jar[9.0.0 CR1].
+
 . Start the installer as:
 +
 [source, text]
@@ -134,20 +133,6 @@ java -jar <JAR FILE NAME>
 ----
 +
 Follow the on-screen instructions to complete the installation process.
-
-### Pull Docker images
-
-IMPORTANT: These commands need to be issued from the shell or command prompt where `docker-machine env lab` and associated commands were issued.
-
-[source, text]
-----
-docker pull jboss/wildfly
-docker pull arungupta/wildfly-management
-docker pull arungupta/javaee7-hol
-docker pull mysql
-docker pull swarm
-docker pull arungupta/wildfly-mysql-javaee7
-----
 
 #### Create Docker Swarm Cluster
 
