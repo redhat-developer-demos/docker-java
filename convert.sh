@@ -22,7 +22,7 @@ MASTER_ADOC=readme.adoc
 MASTER_DOCBOOK=${MASTER_ADOC/.adoc/.xml}
 
 # Command options
-SHARED_OPTIONS='-a numbered -a experimental -a source-highlighter=coderay -a imagesdir=images'
+SHARED_OPTIONS='-a numbered -a experimental -a source-highlighter=coderay -a imagesdir=chapters/images -a data-uri ' 
 
 # Formats
 if [ ! -z $1 ]; then

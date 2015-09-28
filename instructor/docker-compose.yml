@@ -1,5 +1,5 @@
-registryv1:
-  image: registry:0.9.1
+registryv2:
+  image: registry:2.1.1
   ports:
    - "5000:5000"
   environment:
@@ -8,7 +8,7 @@ registryv1:
    - SEARCH_BACKEND=sqlalchemy
    - STORAGE_PATH=/var/lib/registry
   volumes:
-    - /srv/docker/registry_v1:/var/lib/registry
+    - /srv/docker/registry_v2:/var/lib/registry
   restart: always
 httpserver:
   build: dockerfiles/lab-httpd-server/
