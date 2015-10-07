@@ -58,7 +58,7 @@ And save to c:\Users\<username>\docker\docker.exe
 ----
 
 ## Install Docker Compose
-Docker Compose simplifies instructor's setup. The link:https://github.com/arun-gupta/docker-java/blob/master/instructor/docker-compose.yml[docker-compose.yml] contains all the instructions for the tool to setup and start the infrastructure.
+Docker Compose simplifies instructor's setup. The link:https://github.com/redhat-developer/docker-java/blob/javaone2015/instructor/docker-compose.yml[docker-compose.yml] contains all the instructions for the tool to setup and start the infrastructure.
 
 Learn more about the tool on link:https://docs.docker.com/compose/[Docker Compose Website].
 
@@ -232,9 +232,9 @@ The folder permissions in Windows don't allow for a location of your choice.
 
 This will download the Nexus image on Docker host and populate it with the Nexus dependencies.
 
-## Download JBoss Developer Studio 9.0 Nightly
+## Download JBoss Developer Studio 9.0.0.GA
 
-Download https://devstudio.redhat.com/9.0/snapshots/builds/devstudio.product_master/latest/all/jboss-devstudio-9.0.0.CR1-v20150911-1025-B3967-installer-standalone.jar[JBoss Developer Studio 9.0 - CR1 - 490MB - JAR File] and place it inside `dockerfiles/lab-httpd-server/downloads` folder.
+Download http://www.jboss.org/download-manager/file/jboss-devstudio-9.0.0.GA-standalone_jar.jar[JBoss Developer Studio 9.0.0.GA - 489MB - (Stand-alone Installer) JAR File] and place it inside `dockerfiles/lab-httpd-server/downloads` folder.
 
 ## Start the Instructor Environment
 

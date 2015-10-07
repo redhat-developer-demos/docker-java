@@ -8,7 +8,7 @@ v1.4.0, Sep 28, 2015
 :imagesdir: ./chapters/images
 
 Latest HTML:
-https://htmlpreview.github.io/?https://github.com/javaee-samples/docker-java/blob/master/readme.html
+https://htmlpreview.github.io/?https://github.com/redhat-developer/docker-java/blob/javaone2015/readme.html
 
 toc::[]
 

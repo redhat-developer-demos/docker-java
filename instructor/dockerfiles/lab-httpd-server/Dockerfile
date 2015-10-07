@@ -12,10 +12,10 @@ RUN mkdir -p /var/www/html/downloads
 WORKDIR /var/www/html/downloads
 
 #Place JBDS inside the image
-ADD downloads/jboss-devstudio-9.0.0.CR1-v20150911-1025-B3967-installer-standalone.jar /var/www/html/downloads/
+ADD downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar /var/www/html/downloads/
 
 #Setup permission for JBDS
-RUN chmod 644 /var/www/html/downloads/jboss-devstudio-9.0.0.CR1-v20150911-1025-B3967-installer-standalone.jar
+RUN chmod 644 /var/www/html/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar
 
 #Get WildFly 9.0
 RUN curl -L http://download.jboss.org/wildfly/9.0.1.Final/wildfly-9.0.1.Final.zip -o wildfly-9.0.1.Final.zip
@@ -51,7 +51,7 @@ RUN curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-ma
 
 #Get Docker Machine Linux
 RUN curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 -o docker-machine_linux-amd64
- 
+
 #Get Docker Client Mac OS
 RUN curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest -o docker-latest-mac
 
@@ -89,10 +89,10 @@ ADD downloads/lab-settings.xml /var/www/html/downloads/
 
 EXPOSE 80
 
-# Simple startup script to avoid some issues observed with container restart 
+# Simple startup script to avoid some issues observed with container restart
 ADD run-apache.sh /run-apache.sh
 RUN chmod -v +x /run-apache.sh
 
-#Run the default apache command 
+#Run the default apache command
 CMD ["/run-apache.sh"]
 

@@ -1,2 +1,3 @@
 ticket-monster
 dockerfiles/ticketmonster-pgsql-wildfly/ticket-monster.war
+dockerfiles/lab-httpd-server/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar
