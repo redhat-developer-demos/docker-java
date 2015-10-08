@@ -15,7 +15,7 @@ At first, this list is empty. Now, let's get a vanilla `jboss/wildfly` image:
 
 [source, text]
 ----
-docker pull jboss/wildfly
+docker pull classroom.example.com:5000/wildfly:latest
 ----
 
 By default, docker images are retrieved from https://hub.docker.com/[Docker Hub].
@@ -35,15 +35,15 @@ We call the union of the read-write layer and all the read-only layers a _union 
 image::plain-wildfly0.png[]
 ====
 
-In our particular case, the https://github.com/jboss-dockerfiles/wildfly/blob/master/Dockerfile[jboss/wildfly] image extends the https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile[jboss/base-jdk:7] image which adds the OpenJDK distribution on top of the https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile[jboss/base] image.
+In our particular case, the https://github.com/jboss-dockerfiles/wildfly/blob/9.0.1.Final/Dockerfile[jboss/wildfly] image extends the https://github.com/jboss-dockerfiles/base-jdk/blob/jdk8/Dockerfile[jboss/base-jdk:8] image which adds the OpenJDK distribution on top of the https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile[jboss/base] image.
 The base image is used for all JBoss community images. It provides a base layer that includes:
 
 . A jboss user (uid/gid 1000) with home directory set to `/opt/jboss`
 . A few tools that may be useful when extending the image or installing software, like unzip.
 
-The "`jboss/base-jdk:7`" image adds:
+The "`jboss/base-jdk:8`" image adds:
 
-. OpenJDK 7 distribution
+. OpenJDK 8 distribution
 . Adds a `JAVA_HOME` environment variable
 
 When the download is done, you can list the images again and will see the following:
@@ -51,8 +51,8 @@ When the download is done, you can list the images again and will see the follow
 [source, text]
 ----
 docker images
-REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-jboss/wildfly       latest              e908c8c95a8b        5 days ago          581.5 MB
+REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+classroom.example.com:5000/wildfly   latest              7688aaf382ab        5 weeks ago         581.4 MB
 ----
 
 ### Run Container
@@ -63,7 +63,7 @@ Run WildFly container in an interactive mode.
 
 [source, text]
 ----
-docker run -it jboss/wildfly
+docker run -it classroom.example.com:5000/wildfly
 ----
 
 This will show the output as:
@@ -106,7 +106,7 @@ Restart the container in detached mode:
 
 [source, text]
 ----
-docker run -d jboss/wildfly
+docker run -d classroom.example.com:5000/wildfly
 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 ----
 
@@ -131,8 +131,8 @@ We can check it by issuing the `docker ps` command which retrieves the images pr
 [source, text]
 ----
 > docker ps
-CONTAINER ID        IMAGE                                 COMMAND                CREATED             STATUS              PORTS                    NAMES
-922abbb9c63a        jboss/wildfly       "/opt/jboss/wildfly/   3 seconds ago       Up 2 seconds        8080/tcp            desperate_lovelace
+CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                    NAMES
+922abbb9c63a        classroom.example.com:5000/wildfly       "/opt/jboss/wildfly/   3 seconds ago       Up 2 seconds        8080/tcp            desperate_lovelace
 ----
 
 Also try `docker ps -a` to see all the containers on this machine.
@@ -154,7 +154,7 @@ Restart the container as:
 
 [source, text]
 ----
-docker run -d -P jboss/wildfly
+docker run -d -P classroom.example.com:5000/wildfly
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host. This can be verified as:
@@ -162,8 +162,8 @@ docker run -d -P jboss/wildfly
 [source, text]
 ----
 > docker ps
-CONTAINER ID        IMAGE                                 COMMAND                CREATED             STATUS              PORTS                     NAMES
-63a69bff9c69        jboss/wildfly       "/opt/jboss/wildfly/   14 seconds ago      Up 13 seconds       0.0.0.0:32768->8080/tcp   kickass_bohr
+CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                     NAMES
+63a69bff9c69        classroom.example.com:5000/wildfly       "/opt/jboss/wildfly/   14 seconds ago      Up 13 seconds       0.0.0.0:32768->8080/tcp   kickass_bohr
 ----
 
 The port mapping is shown in the `PORTS` column. Access the WildFly server at http://dockerhost:32768. Make sure to use the correct port number as shown in your case.
@@ -183,7 +183,7 @@ Restart the container as:
 
 [source, text]
 ----
-docker run -it -p 8080:8080 jboss/wildfly
+docker run -it -p 8080:8080 classroom.example.com:5000/wildfly
 ----
 
 The format is `-p hostPort:containerPort`. This option maps container ports to host ports and allows other containers on our host to access them.
@@ -211,14 +211,14 @@ The following command will override the default command in Docker file, start Wi
 
 [source, text]
 ----
-docker run -P -d jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+docker run -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
 ----
 
 Accessing WildFly Administration Console require a user in administration realm. A pre-created image, with appropriate username/password credentials, is used to start WildFly as:
 
 [source, text]
 ----
-docker run -P -d arungupta/wildfly-management
+docker run -P -d classroom.example.com:5000/wildfly-management
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host.
@@ -229,7 +229,7 @@ Look at the exposed ports as:
 ----
 docker ps
 CONTAINER ID        IMAGE                                           COMMAND                CREATED             STATUS              PORTS                                              NAMES
-af7d6914a1f9        arungupta/wildfly-management   "/opt/jboss/wildfly/   2 seconds ago       Up 1 seconds        0.0.0.0:32770->8080/tcp, 0.0.0.0:32769->9990/tcp   happy_bardeen
+af7d6914a1f9        classroom.example.com:5000/wildfly-management   "/opt/jboss/wildfly/   2 seconds ago       Up 1 seconds        0.0.0.0:32770->8080/tcp, 0.0.0.0:32769->9990/tcp   happy_bardeen
 ----
 
 Look for the host port that is mapped in the container, `32769` in this case. Access the admin console at http://dockerhost:32769.
@@ -284,7 +284,7 @@ This management image can also be started with a pre-defined port mapping as:
 
 [source, text]
 ----
-docker run -p 8080:8080 -p 9990:9990 -d arungupta/wildfly-management
+docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management
 ----
 
 In this case, Docker port mapping will be shown as:
@@ -310,7 +310,7 @@ docker stop <CONTAINER ID>
 +
 [source, text]
 ----
-docker stop $(docker ps -q)
+docker stop $(docker ps -aq)
 ----
 +
 . Stop only the exited containers
