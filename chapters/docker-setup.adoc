@@ -147,7 +147,7 @@ java -jar <JAR FILE NAME>
 +
 Follow the on-screen instructions to complete the installation process.
 
-#### Create Docker Swarm Cluster
+### Create Docker Swarm Cluster
 
 Create Docker Swarm cluster as:
 

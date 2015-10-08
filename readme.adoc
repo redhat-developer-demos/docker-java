@@ -1,7 +1,7 @@
 # Docker for Java Developers
 v1.4.0, Sep 28, 2015
 :toc:
-:toc-title: Table of Dockernetes
+:toc-title: Table of Contents
 :toclevels: 3
 :toc-placement!:
 :data-uri:
