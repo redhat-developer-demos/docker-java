@@ -570,93 +570,38 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#JavaEE7_PreBuilt_WAR">5. Deploy Java EE 7 Application (Pre-Built WAR)</a></li>
 <li><a href="#JavaEE7_Container_Linking">6. Deploy Java EE 7 Application (Container Linking)</a></li>
-<li><a href="#_build_and_deploy_java_ee_7_application">7. Build and Deploy Java EE 7 Application</a>
+<li><a href="#Docker_Compose">7. Multiple Containers Using Docker Compose</a>
 <ul class="sectlevel2">
-<li><a href="#Build_Application">7.1. Build Application</a></li>
-<li><a href="#_start_application_server">7.2. Start Application Server</a></li>
-<li><a href="#_configure_jboss_developer_studio">7.3. Configure JBoss Developer Studio</a></li>
-<li><a href="#_deploy_application_using_shared_volumes">7.4. Deploy Application Using Shared Volumes</a></li>
-<li><a href="#_deploy_application_using_cli">7.5. Deploy Application Using CLI</a></li>
-<li><a href="#_deploy_application_using_web_console">7.6. Deploy Application Using Web Console</a></li>
-<li><a href="#_deploy_application_using_management_api">7.7. Deploy Application Using Management API</a></li>
+<li><a href="#_configuration_file">7.1. Configuration File</a></li>
+<li><a href="#_start_services">7.2. Start Services</a></li>
+<li><a href="#_verify_application">7.3. Verify Application</a></li>
+<li><a href="#_stop_services">7.4. Stop Services</a></li>
+<li><a href="#_remove_containers">7.5. Remove Containers</a></li>
+<li><a href="#_scale_services">7.6. Scale Services</a></li>
 </ul>
 </li>
-<li><a href="#_docker_maven_plugin">8. Docker Maven Plugin</a>
+<li><a href="#Docker_Swarm">8. Java EE Application on Docker Swarm Cluster</a>
 <ul class="sectlevel2">
-<li><a href="#_run_java_ee_application">8.1. Run Java EE Application</a></li>
-<li><a href="#_understand_plugin_configuration">8.2. Understand Plugin Configuration</a></li>
+<li><a href="#_key_components_of_docker_swarm">8.1. Key Components of Docker Swarm</a></li>
+<li><a href="#_create_a_docker_swarm_cluster">8.2. Create a Docker Swarm Cluster</a></li>
+<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster">8.3. Deploy Java EE Application to Docker Swarm Cluster</a></li>
+<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">8.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</a></li>
 </ul>
 </li>
-<li><a href="#_docker_tools_in_eclipse">9. Docker Tools in Eclipse</a>
+<li><a href="#Common_Docker_Commands">9. Common Docker Commands</a></li>
+<li><a href="#_troubleshooting">10. Troubleshooting</a>
 <ul class="sectlevel2">
-<li><a href="#_install_docker_tools_plugins">9.1. Install Docker Tools Plugins</a></li>
-<li><a href="#_docker_explorer">9.2. Docker Explorer</a></li>
-<li><a href="#_docker_images">9.3. Docker Images</a></li>
-<li><a href="#_docker_containers">9.4. Docker Containers</a></li>
-<li><a href="#_details_on_images_and_containers">9.5. Details on Images and Containers</a></li>
-</ul>
-</li>
-<li><a href="#_test_java_ee_applications_on_docker">10. Test Java EE Applications on Docker</a></li>
-<li><a href="#Docker_Compose">11. Multiple Containers Using Docker Compose</a>
-<ul class="sectlevel2">
-<li><a href="#_configuration_file">11.1. Configuration File</a></li>
-<li><a href="#_start_services">11.2. Start Services</a></li>
-<li><a href="#_verify_application">11.3. Verify Application</a></li>
-<li><a href="#_stop_services">11.4. Stop Services</a></li>
-<li><a href="#_remove_containers">11.5. Remove Containers</a></li>
-<li><a href="#_scale_services">11.6. Scale Services</a></li>
-</ul>
-</li>
-<li><a href="#Docker_Swarm">12. Java EE Application on Docker Swarm Cluster</a>
-<ul class="sectlevel2">
-<li><a href="#_key_components_of_docker_swarm">12.1. Key Components of Docker Swarm</a></li>
-<li><a href="#_create_a_docker_swarm_cluster">12.2. Create a Docker Swarm Cluster</a></li>
-<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster">12.3. Deploy Java EE Application to Docker Swarm Cluster</a></li>
-<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">12.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</a></li>
-</ul>
-</li>
-<li><a href="#_java_ee_application_on_kubernetes_cluster">13. Java EE Application on Kubernetes Cluster</a>
-<ul class="sectlevel2">
-<li><a href="#_key_components">13.1. Key Components</a></li>
-<li><a href="#_start_kubernetes_cluster">13.2. Start Kubernetes Cluster</a>
+<li><a href="#_network_timed_out">10.1. Network Timed Out</a>
 <ul class="sectlevel3">
-<li><a href="#_using_previously_downloaded_kubernetes_distribution">13.2.1. Using Previously Downloaded Kubernetes Distribution</a></li>
-<li><a href="#_download_and_start_the_cluster_together">13.2.2. Download and Start the Cluster Together</a></li>
-<li><a href="#_verify_the_cluster">13.2.3. Verify the Cluster</a></li>
+<li><a href="#_restart_docker_machine">10.1.1. Restart Docker Machine</a></li>
+<li><a href="#_loading_images_offline">10.1.2. Loading Images Offline</a></li>
 </ul>
 </li>
-<li><a href="#_deploy_java_ee_application_multiple_configuration_files">13.3. Deploy Java EE Application (multiple configuration files)</a>
-<ul class="sectlevel3">
-<li><a href="#_start_mysql_pod">13.3.1. Start MySQL Pod</a></li>
-<li><a href="#_start_mysql_service">13.3.2. Start MySQL service</a></li>
-<li><a href="#_start_wildfly_replication_controller">13.3.3. Start WildFly Replication Controller</a></li>
-<li><a href="#Access_Kubernetes_Application_Node">13.3.4. Access the application (using node)</a></li>
-<li><a href="#Access_Kubernetes_Application_Proxy">13.3.5. Access the application (using proxy)</a></li>
+<li><a href="#_cannot_create_docker_machine_on_windows">10.2. Cannot create Docker Machine on Windows</a></li>
+<li><a href="#_no_route_to_host">10.3. No route to host</a></li>
 </ul>
 </li>
-<li><a href="#_deploy_java_ee_application_one_configuration_file">13.4. Deploy Java EE Application (one configuration file)</a></li>
-<li><a href="#_rescheduling_pods">13.5. Rescheduling Pods</a></li>
-<li><a href="#_scaling_pods">13.6. Scaling Pods</a></li>
-<li><a href="#_application_logs">13.7. Application Logs</a></li>
-<li><a href="#_delete_kubernetes_resources">13.8. Delete Kubernetes Resources</a></li>
-<li><a href="#_stop_kubernetes_cluster">13.9. Stop Kubernetes Cluster</a></li>
-<li><a href="#_debug_kubernetes_master">13.10. Debug Kubernetes Master</a></li>
-</ul>
-</li>
-<li><a href="#Common_Docker_Commands">14. Common Docker Commands</a></li>
-<li><a href="#_troubleshooting">15. Troubleshooting</a>
-<ul class="sectlevel2">
-<li><a href="#_network_timed_out">15.1. Network Timed Out</a>
-<ul class="sectlevel3">
-<li><a href="#_restart_docker_machine">15.1.1. Restart Docker Machine</a></li>
-<li><a href="#_loading_images_offline">15.1.2. Loading Images Offline</a></li>
-</ul>
-</li>
-<li><a href="#_cannot_create_docker_machine_on_windows">15.2. Cannot create Docker Machine on Windows</a></li>
-<li><a href="#_no_route_to_host">15.3. No route to host</a></li>
-</ul>
-</li>
-<li><a href="#_references">16. References</a></li>
+<li><a href="#_references">11. References</a></li>
 </ul>
 </div>
 </div>
@@ -1858,7 +1803,7 @@ Exact port number may be different in your case.
 <p>Start MySQL server as:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1869,7 +1814,7 @@ Exact port number may be different in your case.
 <p>Start WildFly and deploy Java EE 7 application as:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -it --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1908,994 +1853,18 @@ Exact port number may be different in your case.
 </li>
 </ol>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_build_and_deploy_java_ee_7_application">7. Build and Deploy Java EE 7 Application</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://github.com/javaee-samples/javaee7-simple-sample">Java EE 7 Simple Sample</a> is a trivial Java EE 7 sample application.</p>
-</div>
-<div class="sect2">
-<h3 id="Build_Application">7.1. Build Application</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Clone the repo:</p>
-<div class="literalblock">
-<div class="content">
-<pre>git clone https://github.com/javaee-samples/javaee7-simple-sample.git</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Build the application:</p>
-<div class="literalblock">
-<div class="content">
-<pre>mvn clean package</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_start_application_server">7.2. Start Application Server</h3>
-<div class="paragraph">
-<p>Start WildFly server as:</p>
+<p>Lets stop the previously running container as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name wildfly -d -p 8080:8080 -v /Users/youruser/tmp/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Make sure to replace <code>/Users/youruser/tmp/deployments</code> to a directory on your local machine. Also, make sure this directory already exists. For example, on my machine this directory is <code>/Users/arungupta/tmp/deployments</code>.</p>
-</div>
-<div class="paragraph">
-<p>This command starts a container named &#8220;wildfly&#8221;.</p>
-</div>
-<div class="paragraph">
-<p>The <code>-v</code> flag maps a directory from the host into the container. This will be the directory to put the deployments. <code>rw</code> ensures that the Docker container can write to it.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-Windows users, please make sure to use <code>-v /c/Users/</code> notation for drive letters.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Check logs to verify if the server has started.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker logs -f wildfly</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Access <a href="http://dockerhost:8080" class="bare">http://dockerhost:8080</a> in your browser to make sure the instance is up and running.</p>
-</div>
-<div class="paragraph">
-<p>Now you&#8217;re ready to deploy the application for the first time.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_configure_jboss_developer_studio">7.3. Configure JBoss Developer Studio</h3>
-<div class="paragraph">
-<p>Start JBoss Developer Studio, if not already started.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Select &#8216;Servers&#8217; tab, create a new server adapter</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds1.png" alt="jbds1">
-</div>
-<div class="title">Figure 9. Server adapter</div>
-</div>
-</li>
-<li>
-<p>Assign an existing or create a new WildFly 9.0.0 runtime (changed properties are highlighted.)</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds2.png" alt="jbds2">
-</div>
-<div class="title">Figure 10. WildFly Runtime Properties</div>
-</div>
-</li>
-<li>
-<p>If a new runtime needs to be created, pick the directory for WildFly 9.0.0:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds3.png" alt="jbds3">
-</div>
-<div class="title">Figure 11. WildFly 9.0.0.Final Runtime</div>
-</div>
-<div class="paragraph">
-<p>Click on &#8216;Finish&#8217;.</p>
-</div>
-</li>
-<li>
-<p>Double-click on the newly selected server to configure server properties:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds4.png" alt="jbds4">
-</div>
-<div class="title">Figure 12. Server properties</div>
-</div>
-<div class="paragraph">
-<p>The host name is specified to &#8216;dockerhost&#8217;. Two properties on the left are automatically propagated from the previous dialog. Additional two properties on the right side are required to disable to keep deployment scanners in sync with the server.</p>
-</div>
-</li>
-<li>
-<p>Specify a custom deployment folder on Deployment tab of Server Editor</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds5.png" alt="jbds5">
-</div>
-<div class="title">Figure 13. Custom deployment folder</div>
-</div>
-</li>
-<li>
-<p>Right-click on the newly created server adapter and click &#8216;Start&#8217;.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds6.png" alt="jbds6">
-</div>
-<div class="title">Figure 14. Started server</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deploy_application_using_shared_volumes">7.4. Deploy Application Using Shared Volumes</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Import javaee7-simple-sample application source code using Import &#8594; Existing Maven Projects.</p>
-</li>
-<li>
-<p>Right-click on the project, select &#8216;Run on Server&#8217; and chose the previously created server.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>The project runs and displays the start page of the application.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds7.png" alt="jbds7">
-</div>
-<div class="title">Figure 15. Start Server</div>
-</div>
-<div class="paragraph">
-<p>Congratulations!</p>
-</div>
-<div class="paragraph">
-<p>You&#8217;ve deployed your first application to WildFly running in a Docker container from JBoss Developer Studio.</p>
-</div>
-<div class="paragraph">
-<p>Stop WildFly container when you&#8217;re done.</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>docker stop wildfly</pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deploy_application_using_cli">7.5. Deploy Application Using CLI</h3>
-<div class="paragraph">
-<p>The Command Line Interface (CLI) is a tool for connecting to WildFly instances to manage all tasks from command line environment. Some of the tasks that you can do using the CLI are:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Deploy/Undeploy web application in standalone/Domain Mode.</p>
-</li>
-<li>
-<p>View all information about the deployed application on runtime.</p>
-</li>
-<li>
-<p>Start/Stop/Restart Nodes in respective mode i.e. Standalone/Domain.</p>
-</li>
-<li>
-<p>Adding/Deleting resource or subsystems to servers.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Lets use the CLI to deploy javaee7-simple-sample to WildFly running in the container.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. <code>/Users/arungupta/tools/</code>). This will create <code>wildfly-9.0.0.Final</code> directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the <code>/Users/arungupta/tools/wildfly-9.0.0.Final/bin</code> to your $PATH.</p>
-</li>
-<li>
-<p>Run the &#8220;wildfly-management&#8221; image with fixed port mapping as explained in <a href="#Management_Fixed_Port_Mapping">Fixed Port Mapping</a>.</p>
-</li>
-<li>
-<p>Run the <code>jboss-cli</code> command and connect to the WildFly instance.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">jboss-cli.sh --controller=dockerhost:9990  -u=admin -p=docker#admin -c</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will show the output as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">[standalone@dockerhost:9990 /]</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Deploy the application as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">deploy &lt;javaee7-simple-sample PATH&gt;target/javaee7-simple-sample-1.10.war --force</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Now you&#8217;ve sucessfully used the CLI to remote deploy the Java EE 7 sample application to WildFly running as docker container.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deploy_application_using_web_console">7.6. Deploy Application Using Web Console</h3>
-<div class="paragraph">
-<p>WildFly comes with a web-based administration console. It also relies on the same management APIs that are used by JBoss Developer Tools and the CLI. It provides a simple and easy to use web-based console to manage WildFly instance. For a Docker image, it needs to be explicitly enabled as explained in <a href="#Enabling_WildFly_Administration">Enabling WildFly Administration</a>. Once enabled, it can be accessed at <a href="http://dockerhost:9990" class="bare">http://dockerhost:9990</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/console1.png" alt="console1">
-</div>
-<div class="title">Figure 16. WildFly Web Console</div>
-</div>
-<div class="paragraph">
-<p>Username and password credentials are shown in <a href="#WildFly_Administration_Credentials">[WildFly_Administration_Credentials]</a>.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>You may like to stop and remove the Docker container running WildFly. This can be done as <code>docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm -f</code>.</p>
-</div>
-<div class="paragraph">
-<p>Start a new container as <code>docker run -d --name wildfly -p 8080:8080 -p 9990:9990 arungupta/wildfly-management</code>.</p>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Deploy the application using the console with the following steps:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Go to &#8216;Deployments&#8217; tab.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/wildfly9-deployments-tab.png" alt="wildfly9 deployments tab">
-</div>
-<div class="title">Figure 17. Deployments tab in WildFly Web Console</div>
-</div>
-</li>
-<li>
-<p>Click on &#8216;Add&#8217; button.</p>
-</li>
-<li>
-<p>On &#8216;Add Deployment&#8217; screen, take the default of &#8216;Upload a new deployment&#8217; and click &#8216;Next&gt;&gt;&#8217;.</p>
-</li>
-<li>
-<p>Click on &#8216;Choose File&#8217;, select <code>&lt;javaee7-simple-sample PATH&gt;/javaee7-simple-sample.war</code> file on your computer. This would be <code>javaee7-simple-sample/target/javaee7-simple-sample.war</code> from <a href="#Build_Application">Build Application</a>.</p>
-</li>
-<li>
-<p>Click on &#8216;Next&gt;&gt;&#8217;.</p>
-</li>
-<li>
-<p>Select &#8216;Enable&#8217; checkbox.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/wildfly9-add-deployments.png" alt="wildfly9 add deployments">
-</div>
-<div class="title">Figure 18. Enable a deployment</div>
-</div>
-</li>
-<li>
-<p>Click &#8216;Finish&#8217;.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/wildfly9-javaee7-simple-sample-deployed.png" alt="wildfly9 javaee7 simple sample deployed">
-</div>
-<div class="title">Figure 19. Java EE 7 Simple Sample Deployed</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>This will complete the deployment of the Java EE 7 application using Web Console. The output can be seen out <a href="http://dockerhost:8080/javaee7-simple-sample" class="bare">http://dockerhost:8080/javaee7-simple-sample</a> and looks like:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/wildfly9-javaee7-simple-sample-output.png" alt="wildfly9 javaee7 simple sample output">
-</div>
-<div class="title">Figure 20. Java EE 7 Simple Sample Output</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deploy_application_using_management_api">7.7. Deploy Application Using Management API</h3>
-<div class="paragraph">
-<p>A standalone WildFly process, process can be configured to listen for remote management requests using its &#8220;native management interface&#8221;. The CLI tool that comes with the application server uses this interface, and user can develop custom clients that use it as well. By default, WildFly management interface listens on 127.0.0.1. When running inside a Docker container, the network interface should be bound to all publicly assigned addresses. This can be easily changed by biding to 0.0.0.0 instead of 127.0.0.1.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start another WildFly instance again:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -d --name wildfly -p 8080:8080 -p 9990:9990 arungupta/wildfly-management</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.</p>
-</div>
-</li>
-<li>
-<p>Create a new server adapter in JBoss Developer Studio and name it &#8220;WildFly 9.0.0-Management&#8221;. Specify the host name as &#8216;dockerhost&#8217;.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds8.png" alt="jbds8">
-</div>
-</div>
-</li>
-<li>
-<p>Click on &#8216;Next&gt;&#8217; and change the values as shown.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds9.png" alt="jbds9">
-</div>
-<div class="title">Figure 21. Create New Server Adapter</div>
-</div>
-</li>
-<li>
-<p>Take the default values in &#8216;Remote System Integration&#8217; and click on &#8216;Finish&#8217;.</p>
-</li>
-<li>
-<p>Change server properties by double clicking on the newly created server adapter. Specify admin credentials (username: docker, password: docker#admin). Note, you need to delete the existing password and use this instead:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds10.png" alt="jbds10">
-</div>
-<div class="title">Figure 22. Management Login Credentials</div>
-</div>
-</li>
-<li>
-<p>Right-click on the newly created server adapter and click &#8216;Start&#8217;. Status quickly changes to &#8216;Started&#8217; as shown.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds11.png" alt="jbds11">
-</div>
-<div class="title">Figure 23. Synchronized WildFly Server</div>
-</div>
-</li>
-<li>
-<p>Right-click on the javaee7-simple-sample project, select &#8216;Run on Server&#8217; and choose this server. The project runs and displays the start page of the application.</p>
-</li>
-<li>
-<p>Stop WildFly when you&#8217;re done.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker stop wildfly</code></pre>
-</div>
-</div>
-</li>
-</ol>
+<pre class="CodeRay highlight"><code data-lang="text">docker stop mywildfly-mysql</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_docker_maven_plugin">8. Docker Maven Plugin</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Maven plugin allows you to manage Docker images and containers from <code>pom.xml</code>. It comes with predefined goals:</p>
-</div>
-<table class="tableblock frame-all grid-all spread">
-<colgroup>
-<col style="width: 50%;">
-<col style="width: 50%;">
-</colgroup>
-<thead>
-<tr>
-<th class="tableblock halign-left valign-top">Goal</th>
-<th class="tableblock halign-left valign-top">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docker:start</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Create and start containers</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docker:stop</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Stop and destroy containers</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docker:build</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Build images</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docker:push</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Push images to a registry</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docker:remove</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Remove images from local docker host</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>docker:logs</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Show container logs</p></td>
-</tr>
-</tbody>
-</table>
-<div class="sect2">
-<h3 id="_run_java_ee_application">8.1. Run Java EE Application</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Clone the workspace as:</p>
-<div class="literalblock">
-<div class="content">
-<pre>git clone https://github.com/javaee-samples/javaee7-docker-maven.git</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Build the image as:</p>
-<div class="literalblock">
-<div class="content">
-<pre>mvn package -Pdocker</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Verify the image as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker images
-REPOSITORY                        TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-arungupta/javaee7-docker-maven    latest              2e51b3fca40f        4 seconds ago       581.5 MB</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Run the container as:</p>
-<div class="literalblock">
-<div class="content">
-<pre>mvn install -Pdocker</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Access your application at <a href="http://dockerhost:8080/javaee7-docker-maven/resources/persons" class="bare">http://dockerhost:8080/javaee7-docker-maven/resources/persons</a>. It shows the output as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml">curl http://dockerhost:8080/javaee7-docker-maven/resources/persons
-<span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span><span class="tag">&lt;collection&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Penny<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Leonard<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Sheldon<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Amy<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Howard<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Bernadette<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Raj<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;person&gt;</span><span class="tag">&lt;name&gt;</span>Priya<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/person&gt;</span><span class="tag">&lt;/collection&gt;</span></code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_understand_plugin_configuration">8.2. Understand Plugin Configuration</h3>
-<div class="paragraph">
-<p><code>pom.xml</code> is updated to include docker-maven-plugin as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;plugin&gt;</span>
-    <span class="tag">&lt;groupId&gt;</span>org.jolokia<span class="tag">&lt;/groupId&gt;</span>
-    <span class="tag">&lt;artifactId&gt;</span>docker-maven-plugin<span class="tag">&lt;/artifactId&gt;</span>
-    <span class="tag">&lt;version&gt;</span>0.11.5<span class="tag">&lt;/version&gt;</span>
-    <span class="tag">&lt;configuration&gt;</span>
-        <span class="tag">&lt;images&gt;</span>
-            <span class="tag">&lt;image&gt;</span>
-                <span class="tag">&lt;alias&gt;</span>user<span class="tag">&lt;/alias&gt;</span>
-                <span class="tag">&lt;name&gt;</span>arungupta/javaee7-docker-maven<span class="tag">&lt;/name&gt;</span>
-                <span class="tag">&lt;build&gt;</span>
-                    <span class="tag">&lt;from&gt;</span>arungupta/wildfly:8.2<span class="tag">&lt;/from&gt;</span>
-                    <span class="tag">&lt;assembly&gt;</span>
-                        <span class="tag">&lt;descriptor&gt;</span>assembly.xml<span class="tag">&lt;/descriptor&gt;</span>
-                        <span class="tag">&lt;basedir&gt;</span>/<span class="tag">&lt;/basedir&gt;</span>
-                    <span class="tag">&lt;/assembly&gt;</span>
-                    <span class="tag">&lt;ports&gt;</span>
-                        <span class="tag">&lt;port&gt;</span>8080<span class="tag">&lt;/port&gt;</span>
-                    <span class="tag">&lt;/ports&gt;</span>
-                <span class="tag">&lt;/build&gt;</span>
-                <span class="tag">&lt;run&gt;</span>
-                    <span class="tag">&lt;ports&gt;</span>
-                        <span class="tag">&lt;port&gt;</span>8080:8080<span class="tag">&lt;/port&gt;</span>
-                    <span class="tag">&lt;/ports&gt;</span>
-                <span class="tag">&lt;/run&gt;</span>
-            <span class="tag">&lt;/image&gt;</span>
-        <span class="tag">&lt;/images&gt;</span>
-    <span class="tag">&lt;/configuration&gt;</span>
-    <span class="tag">&lt;executions&gt;</span>
-        <span class="tag">&lt;execution&gt;</span>
-            <span class="tag">&lt;id&gt;</span>docker:build<span class="tag">&lt;/id&gt;</span>
-            <span class="tag">&lt;phase&gt;</span>package<span class="tag">&lt;/phase&gt;</span>
-            <span class="tag">&lt;goals&gt;</span>
-                <span class="tag">&lt;goal&gt;</span>build<span class="tag">&lt;/goal&gt;</span>
-            <span class="tag">&lt;/goals&gt;</span>
-        <span class="tag">&lt;/execution&gt;</span>
-        <span class="tag">&lt;execution&gt;</span>
-            <span class="tag">&lt;id&gt;</span>docker:start<span class="tag">&lt;/id&gt;</span>
-            <span class="tag">&lt;phase&gt;</span>install<span class="tag">&lt;/phase&gt;</span>
-            <span class="tag">&lt;goals&gt;</span>
-                <span class="tag">&lt;goal&gt;</span>start<span class="tag">&lt;/goal&gt;</span>
-            <span class="tag">&lt;/goals&gt;</span>
-        <span class="tag">&lt;/execution&gt;</span>
-    <span class="tag">&lt;/executions&gt;</span>
-<span class="tag">&lt;/plugin&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Each image configuration has three parts:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Image name and alias</p>
-</li>
-<li>
-<p><code>&lt;build&gt;</code> that defines how the image is created. Base image, build artifacts and their dependencies, ports to be exposed, etc to be included in the image are specified here. <a href="http://maven.apache.org/plugins/maven-assembly-plugin/assembly.html">Assembly descriptor format</a> is used to specify the artifacts to be included and is defined in the <code>src/main/docker</code> directory.</p>
-<div class="paragraph">
-<p><code>assembly.xml</code> in our case looks like:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;assembly</span> <span class="attribute-name">.</span> <span class="attribute-name">.</span> <span class="attribute-name">.</span><span class="tag">&gt;</span>
-  <span class="tag">&lt;id&gt;</span>javaee7-docker-maven<span class="tag">&lt;/id&gt;</span>
-  <span class="tag">&lt;dependencySets&gt;</span>
-    <span class="tag">&lt;dependencySet&gt;</span>
-      <span class="tag">&lt;includes&gt;</span>
-        <span class="tag">&lt;include&gt;</span>org.javaee7.sample:javaee7-docker-maven<span class="tag">&lt;/include&gt;</span>
-      <span class="tag">&lt;/includes&gt;</span>
-      <span class="tag">&lt;outputDirectory&gt;</span>/opt/jboss/wildfly/standalone/deployments/<span class="tag">&lt;/outputDirectory&gt;</span>
-      <span class="tag">&lt;outputFileNameMapping&gt;</span>javaee7-docker-maven.war<span class="tag">&lt;/outputFileNameMapping&gt;</span>
-    <span class="tag">&lt;/dependencySet&gt;</span>
-  <span class="tag">&lt;/dependencySets&gt;</span>
-<span class="tag">&lt;/assembly&gt;</span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p><code>&lt;run&gt;</code> that defines how the container is run. Ports that need to be exposed are specified here.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>In addition, <code>package</code> phase is tied to <code>docker:build</code> goal and <code>install</code> phase is tied to <code>docker:start</code> goal.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_docker_tools_in_eclipse">9. Docker Tools in Eclipse</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>The Docker tooling is aimed at providing at minimum the same basic level features as the command-line interface, but also provide some advantages by having access to a full fledged UI.</p>
-</div>
-<div class="sect2">
-<h3 id="_install_docker_tools_plugins">9.1. Install Docker Tools Plugins</h3>
-<div class="paragraph">
-<p>As this is still in early access stage, you will have to install it first:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use JBoss Developer Studio 9.0 Beta 2.</p>
-<div class="paragraph">
-<p>Alternatively, download <a href="http://www.eclipse.org/downloads/index-developer-default.php">Eclipse Mars latest build</a> and configure JBoss Tools plugin from the update site <a href="http://download.jboss.org/jbosstools/updates/nightly/mars/" class="bare">http://download.jboss.org/jbosstools/updates/nightly/mars/</a>.</p>
-</div>
-</li>
-<li>
-<p>Open JBoss Developer Studio 9.0 Nightly</p>
-</li>
-<li>
-<p>Add a new site using the menu items: &#8216;Help&#8217; &gt; &#8216;Install New Software&#8230;&#8203;&#8217; &gt; &#8216;Add&#8230;&#8203;&#8217;.</p>
-<div class="paragraph">
-<p>Specify the &#8216;Name:&#8217; as &#8220;Docker Nightly&#8221; and &#8216;Location:&#8217; as <a href="http://download.eclipse.org/linuxtools/updates-docker-nightly/" class="bare">http://download.eclipse.org/linuxtools/updates-docker-nightly/</a>.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools1.png" alt="jbds docker tools1">
-</div>
-<div class="title">Figure 24. Add Docker Tooling To JBoss Developer Studio</div>
-</div>
-</li>
-<li>
-<p>Expand Linux Tools, select &#8216;Docker Client&#8217; and &#8216;Docker Tooling&#8217;.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-nightly-setup.png" alt="jbds docker tools nightly setup">
-</div>
-<div class="title">Figure 25. Add Docker Tooling</div>
-</div>
-</li>
-<li>
-<p>Click on &#8216;Next &gt;&#8217;, &#8216;Next &gt;&#8217;, accept the terms of the license agreement, and click on &#8216;Finish&#8217;. This will complete the installation of plugins.</p>
-<div class="paragraph">
-<p>Restart the IDE for the changes to take effect.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_docker_explorer">9.2. Docker Explorer</h3>
-<div class="paragraph">
-<p>The Docker Explorer provides a wizard to establish a new connection to a Docker daemon. This wizard can detect default settings if the user’s machine runs Docker natively (such as in Linux) or in a VM using Boot2Docker (such as in Mac or Windows). Both Unix sockets on Linux machines and the REST API on other OSes are detected and supported. The wizard also allows remote connections using custom settings.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use the menu &#8216;Window&#8217;, &#8216;Show View&#8217;, &#8216;Other&#8230;&#8203;&#8217;. Type &#8216;docker&#8217; to see the output as:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-docker-view.png" alt="jbds docker tools docker view">
-</div>
-</div>
-</li>
-<li>
-<p>Select &#8216;Docker Explorer&#8217; to open Docker Explorer.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-docker-explorer-view.png" alt="jbds docker tools docker explorer view">
-</div>
-</div>
-</li>
-<li>
-<p>Click on the link in this window to create a connection to Docker Host. Specify the settings as shown:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools2.png" alt="jbds docker tools2">
-</div>
-<div class="title">Figure 26. Docker Explorer</div>
-</div>
-<div class="paragraph">
-<p>Make sure to get IP address of the Docker Host as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker-machine ip lab</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Also, make sure to specify the correct directory for <code>.docker</code> on your machine.</p>
-</div>
-</li>
-<li>
-<p>Click on &#8216;Test Connection&#8217; to check the connection. This should show the output as:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-test-connection-output.png" alt="jbds docker tools test connection output">
-</div>
-<div class="title">Figure 27. Docker Explorer</div>
-</div>
-<div class="paragraph">
-<p>Click on &#8216;OK&#8217; and &#8216;Finish&#8217; to exit out of the wizard.</p>
-</div>
-</li>
-<li>
-<p>Docker Explorer itself is a tree view that handles multiple connections and provides users with quick overview of the existing images and containers.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools3.png" alt="jbds docker tools3">
-</div>
-<div class="title">Figure 28. Docker Explorer Tree View</div>
-</div>
-</li>
-<li>
-<p>Customize the view by clicking on the arrow in toolbar:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-customize-view-option.png" alt="jbds docker tools customize view option">
-</div>
-<div class="title">Figure 29. Docker Explorer Customize View</div>
-</div>
-<div class="paragraph">
-<p>Built-in filters can show/hide intermediate and &#8216;dangling&#8217; images, as well as stopped containers.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-customize-view-wizard.png" alt="jbds docker tools customize view wizard">
-</div>
-<div class="title">Figure 30. Docker Explorer Customize View Wizard</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_docker_images">9.3. Docker Images</h3>
-<div class="paragraph">
-<p>The Docker Images view lists all images in the Docker host selected in the Docker Explorer view. This view allows user to manage images, including:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Pull/push images from/to the Docker Hub Registry (other registries will be supported as well, <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=469306">#469306</a>)</p>
-</li>
-<li>
-<p>Build images from a Dockerfile</p>
-</li>
-<li>
-<p>Create a container from an image</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Lets take a look at it.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use the menu &#8216;Window&#8217;, &#8216;Show View&#8217;, &#8216;Other&#8230;&#8203;&#8217;, select &#8216;Docker Images&#8217;. It shows the list of images on Docker Host:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools4.png" alt="jbds docker tools4">
-</div>
-<div class="title">Figure 31. Docker Images View</div>
-</div>
-</li>
-<li>
-<p>Right-click on the image ending with &#8220;wildfly:latest&#8221; and click on the green arrow in the toolbar. This will show the following wizard:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-run-container-wizard.png" alt="jbds docker tools run container wizard">
-</div>
-<div class="title">Figure 32. Docker Run Container Wizard</div>
-</div>
-<div class="paragraph">
-<p>By default, all exports ports from the image are mapped to random ports on the host interface. This setting can be changed by unselecting the first checkbox and specify exact port mapping.</p>
-</div>
-<div class="paragraph">
-<p>Click on &#8216;Finish&#8217; to start the container.</p>
-</div>
-</li>
-<li>
-<p>When the container is started, all logs are streamed into Eclipse Console:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools5.png" alt="jbds docker tools5">
-</div>
-<div class="title">Figure 33. Docker Container Logs</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_docker_containers">9.4. Docker Containers</h3>
-<div class="paragraph">
-<p>Docker Containers view lets the user manage the containers. The view toolbar provides commands to start, stop, pause, unpause, display the logs and kill containers.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Use the menu &#8216;Window&#8217;, &#8216;Show View&#8217;, &#8216;Other&#8230;&#8203;&#8217;, select &#8216;Docker Containers&#8217;. It shows the list of running containers on Docker Host:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools6.png" alt="jbds docker tools6">
-</div>
-<div class="title">Figure 34. Docker Containers View</div>
-</div>
-</li>
-<li>
-<p>Pause the container by clicking on the &#8220;pause&#8221; button in the toolbar (<a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=469310">#469310</a>). Show the complete list of containers by clicking on the &#8216;View Menu&#8217;, &#8216;Show all containers&#8217;.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-all-containers.png" alt="jbds docker tools all containers">
-</div>
-<div class="title">Figure 35. All Docker Containers</div>
-</div>
-</li>
-<li>
-<p>Select the paused container, and click on the green arrow in the toolbar to restart the container.</p>
-</li>
-<li>
-<p>Right-click on any running container and select &#8220;Display Log&#8221; to view the log for this container.</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-display-log.png" alt="jbds docker tools display log">
-</div>
-<div class="title">Figure 36. Eclipse Properties View</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>TODO: Users can also attach an Eclipse console to a running Docker container to follow the logs and use the STDIN to interact with it.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_details_on_images_and_containers">9.5. Details on Images and Containers</h3>
-<div class="paragraph">
-<p>Eclipse Properties view is used to provide more information about the containers and images.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Just open the Properties View and click on a Connection, Container, or Image in any of the Docker Explorer View, Docker Containers View, or Docker Images View. This will fill in data in the Properties view.</p>
-<div class="paragraph">
-<p>Info view is shown as:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-properties-info.png" alt="jbds docker tools properties info">
-</div>
-<div class="title">Figure 37. Docker Container Properties View Info</div>
-</div>
-<div class="paragraph">
-<p>Inspect view is shown as:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/jbds-docker-tools-properties-inspect.png" alt="jbds docker tools properties inspect">
-</div>
-<div class="title">Figure 38. Docker Container Properties View Inspect</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_test_java_ee_applications_on_docker">10. Test Java EE Applications on Docker</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Testing Java EE applications is a very important aspect. Especially when it comes to in-container tests, <a href="http://www.arquillian.org">JBoss Arquillian</a> is well known to make this very easy for Java EE application servers. Picking up where unit tests leave off, Arquillian handles all the plumbing of container management, deployment and framework initialization so you can focus on the task at hand, writing your tests.</p>
-</div>
-<div class="paragraph">
-<p>With Arquillian, you can use <a href="http://arquillian.org/modules/wildfly-arquillian-wildfly-remote-container-adapter/">WildFly remote container adapter</a> and connect to any WildFly instance running in a Docker container. But this wouldn&#8217;t help with the Docker container lifycycle management.</p>
-</div>
-<div class="paragraph">
-<p><a href="http://arquillian.org/modules/cube-extension/">Arquillian Cube</a>, an extension of Arquillian, allows you to control the lifecycle of Docker images as part of the test lifecyle, either automatically or manually. This extension allows to start a Docker container with a server installed, deploy the required deployable file within it and execute Arquillian tests.</p>
-</div>
-<div class="paragraph">
-<p>The key point here is that if Docker is used as deployable platform in production, your tests are executed in a the same container as it will be in production, so your tests are even more real than before.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Check out the workspace:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">git clone http://github.com/javaee-samples/javaee-arquillian-cube</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Edit <code>src/test/resources/arquillian.xml</code> file and change the IP address specified in <code>serverUri</code> property value to point to your Docker host&#8217;s IP. This can be found out as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker-machine ip lab</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Run the tests as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">mvn test</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will create a container using the image defined in <code>src/test/resources/wildfly/Dockerfile</code>. The container qualifier in <code>arquillian.xml</code> defines the directory name in <code>src/test/resources</code> directory.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>A pre-built image can be used by specifying:</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>wildfly:
-  image: jboss/wildfly</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>instead of</p>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>wildfly:
-  buildImage:
-    dockerfileLocation: src/test/resources/wildfly</pre>
-</div>
-</div>
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>By default, the &#8220;cube&#8221; profile is activated and this includes all the required dependencies.</p>
-</div>
-<div class="paragraph">
-<p>The result is shown as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">Running org.javaee7.sample.PersonDatabaseTest
-Jun 16, 2015 9:23:04 AM org.jboss.arquillian.container.impl.MapObject populate
-WARNING: Configuration contain properties not supported by the backing object org.jboss.as.arquillian.container.remote.RemoteContainerConfiguration
-Unused property entries: {target=wildfly:8.1.0.Final:remote}
-Supported property names: [managementAddress, password, managementPort, managementProtocol, username]
-Jun 16, 2015 9:23:13 AM org.xnio.Xnio &lt;clinit&gt;
-INFO: XNIO version 3.2.0.Beta4
-Jun 16, 2015 9:23:13 AM org.xnio.nio.NioXnio &lt;clinit&gt;
-INFO: XNIO NIO Implementation Version 3.2.0.Beta4
-Jun 16, 2015 9:23:13 AM org.jboss.remoting3.EndpointImpl &lt;clinit&gt;
-INFO: JBoss Remoting version (unknown)
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.406 sec - in org.javaee7.sample.PersonDatabaseTest
-
-Results :
-
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>In <code>arquillian.xml</code>, add the following property:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="tag">&lt;property</span> <span class="attribute-name">name</span>=<span class="string"><span class="delimiter">&quot;</span><span class="content">connectionMode</span><span class="delimiter">&quot;</span></span><span class="tag">&gt;</span>STARTORCONNECT<span class="tag">&lt;/property&gt;</span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This bypasses the create/start Cube commands if a Docker Container with the same name is already running on the target system.</p>
-</div>
-<div class="paragraph">
-<p>This allows you to prestart the containers manually during development and just connect to them to avoid the extra cost of starting the Docker Containers for each test run. This assumes you are not changing the actual definition of the Docker Container itself.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="Docker_Compose">11. Multiple Containers Using Docker Compose</h2>
+<h2 id="Docker_Compose">7. Multiple Containers Using Docker Compose</h2>
 <div class="sectionbody">
 <div class="quoteblock">
 <blockquote>
@@ -2982,7 +1951,7 @@ Docker Compose is a tool for defining and running complex applications with Dock
 <p>Docker Compose script is only available for OSX and Linux. <a href="https://github.com/arun-gupta/docker-java/issues/3" class="bare">https://github.com/arun-gupta/docker-java/issues/3</a> is used for tracking Docker Compose on Windows.</p>
 </div>
 <div class="sect2">
-<h3 id="_configuration_file">11.1. Configuration File</h3>
+<h3 id="_configuration_file">7.1. Configuration File</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3031,7 +2000,7 @@ Docker Compose is a tool for defining and running complex applications with Dock
 </div>
 </div>
 <div class="sect2">
-<h3 id="_start_services">11.2. Start Services</h3>
+<h3 id="_start_services">7.2. Start Services</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3127,7 +2096,7 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verify_application">11.3. Verify Application</h3>
+<h3 id="_verify_application">7.3. Verify Application</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3139,11 +2108,11 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 <div class="content">
 <img src="chapters/images/docker-compose-output.png" alt="docker compose output">
 </div>
-<div class="title">Figure 39. Output From Servers Run Using Docker Compose</div>
+<div class="title">Figure 9. Output From Servers Run Using Docker Compose</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stop_services">11.4. Stop Services</h3>
+<h3 id="_stop_services">7.4. Stop Services</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -3185,7 +2154,7 @@ wildfly_1 | ]&quot;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_remove_containers">11.5. Remove Containers</h3>
+<h3 id="_remove_containers">7.5. Remove Containers</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -3199,7 +2168,7 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scale_services">11.6. Scale Services</h3>
+<h3 id="_scale_services">7.6. Scale Services</h3>
 <div class="paragraph">
 <p><a href="https://github.com/arun-gupta/docker-java/issues/51" class="bare">https://github.com/arun-gupta/docker-java/issues/51</a></p>
 </div>
@@ -3207,18 +2176,18 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Docker_Swarm">12. Java EE Application on Docker Swarm Cluster</h2>
+<h2 id="Docker_Swarm">8. Java EE Application on Docker Swarm Cluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Docker Swarm is native clustering for Docker. It allows you create and access to a pool of Docker hosts using the full suite of Docker tools. Because Docker Swarm serves the standard Docker API, any tool that already communicates with a Docker daemon can use Swarm to transparently scale to multiple hosts</p>
 </div>
 <div class="sect2">
-<h3 id="_key_components_of_docker_swarm">12.1. Key Components of Docker Swarm</h3>
+<h3 id="_key_components_of_docker_swarm">8.1. Key Components of Docker Swarm</h3>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/docker-swarm-components.png" alt="docker swarm components">
 </div>
-<div class="title">Figure 40. Key Components of Docker Swarm</div>
+<div class="title">Figure 10. Key Components of Docker Swarm</div>
 </div>
 <div class="paragraph">
 <p><strong>Swarm Manager</strong>: Docker Swarm has a Manager, that is a pre-defined Docker Host, and is a single point for all administration. The swarm manager orchestrates and schedules containers on the entire cluster. Currently only a single instance of manager is allowed in the cluster. This is a SPOF for high availability architectures and additional managers will be allowed in a future version of Swarm with <a href="https://github.com/docker/swarm/issues/598">#598</a>.</p>
@@ -3240,7 +2209,7 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_create_a_docker_swarm_cluster">12.2. Create a Docker Swarm Cluster</h3>
+<h3 id="_create_a_docker_swarm_cluster">8.2. Create a Docker Swarm Cluster</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3476,7 +2445,7 @@ Total Memory: 3.065 GiB</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster">12.3. Deploy Java EE Application to Docker Swarm Cluster</h3>
+<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster">8.3. Deploy Java EE Application to Docker Swarm Cluster</h3>
 <div class="paragraph">
 <p>The complete cluster is in place now, and we need to deploy the Java EE application to it.</p>
 </div>
@@ -3571,7 +2540,7 @@ ababc544df97        mysql                             &quot;/entrypoint.sh mysq 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">12.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</h3>
+<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">8.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</h3>
 <div class="paragraph">
 <p><a href="#Docker_Compose">Multiple Containers Using Docker Compose</a> explains how multi container applications can be easily started using Docker Compose.</p>
 </div>
@@ -3689,929 +2658,7 @@ ac9c967e4b1d        mysql:latest                      &quot;/entrypoint.sh mysq 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_java_ee_application_on_kubernetes_cluster">13. Java EE Application on Kubernetes Cluster</h2>
-<div class="sectionbody">
-<div class="quoteblock">
-<blockquote>
-Kubernetes is an open source system for managing containerized applications across multiple hosts, providing basic mechanisms for deployment, maintenance, and scaling of applications.
-</blockquote>
-<div class="attribution">
-&#8212; github.com/GoogleCloudPlatform/kubernetes/
-</div>
-</div>
-<div class="paragraph">
-<p>Kubernetes, or &#8220;k8s&#8221; in short, allows the user to provide declarative primitives for the desired state, for example &#8220;need 5 WildFly servers and 1 MySQL server running&#8221;. Kubernetes self-healing mechanisms, such as auto-restarting, re-scheduling, and replicating containers then ensure this state is met. The user just define the state and Kubernetes ensures that the state is met at all times on the cluster.</p>
-</div>
-<div class="paragraph">
-<p><strong>How is it related to Docker?</strong></p>
-</div>
-<div class="paragraph">
-<p>Docker provides the lifecycle management of containers. A Docker image defines a build time representation of the runtime containers. There are commands to start, stop, restart, link, and perform other lifecycle methods on these containers. Kubernetes uses Docker to package, instantiate, and run containerized applications.</p>
-</div>
-<div class="paragraph">
-<p><strong>How does Kubernetes simplify containerized application deployment?</strong></p>
-</div>
-<div class="paragraph">
-<p>A typical application would have a cluster of containers across multiple hosts. For example, your web tier (for example Undertow) might run as a few instances, and likely on a set of containers. Similarly, your application tier (for example, WildFly) would run on a different set of containers. The web tier would need to delegate the request to application tier. The web, application, and database tier would generally run on a separate set of containers. These containers would need to talk to each other. Using any of the solutions mentioned above would require scripting to start the containers, and monitoring/bouncing if something goes down. Kubernetes does all of that for the user after the application state has been defined.</p>
-</div>
-<div class="sect2">
-<h3 id="_key_components">13.1. Key Components</h3>
-<div class="paragraph">
-<p>At a very high level, there are three key components:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Pods</strong> are the smallest deployable units that can be created, scheduled, and managed. Its a logical collection of containers that belong to an application.</p>
-</li>
-<li>
-<p><strong>Master</strong> is the central control point that provides a unified view of the cluster. There is a single master node that control multiple worker nodes.</p>
-</li>
-<li>
-<p><strong>Node</strong> (née minion) is a worker node that run tasks as delegated by the master. Nodes can run one or more pods. It provides an application-specific &#8220;virtual host&#8221; in a containerized environment.</p>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>A picture is always worth a thousand words and so this is a high-level logical block diagram for Kubernetes:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/kubernetes-key-components.png" alt="kubernetes key components">
-</div>
-<div class="title">Figure 41. Kubernetes Key Components</div>
-</div>
-<div class="paragraph">
-<p>After the 50,000 feet view, lets fly a little lower at 30,000 feet and take a look at how Kubernetes make all of this happen. There are a few key components at Master and Node that make this happen.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><strong>Replication Controller</strong> is a resource at Master that ensures that requested number of pods are running on nodes at all times.</p>
-</li>
-<li>
-<p><strong>Service</strong> is an object on master that provides load balancing across a replicated group of pods.
-Label is an arbitrary key/value pair in a distributed watchable storage that the Replication Controller uses for service discovery.</p>
-</li>
-<li>
-<p><strong>Kubelet</strong> Each node runs services to run containers and be managed from the master. In addition to Docker, Kubelet is another key service installed there. It reads container manifests as YAML files that describes a pod. Kubelet ensures that the containers defined in the pods are started and continue running.</p>
-</li>
-<li>
-<p>Master serves <strong>RESTful Kubernetes API</strong> that validate and configure Pod, Service, and Replication Controller.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_start_kubernetes_cluster">13.2. Start Kubernetes Cluster</h3>
-<div class="paragraph">
-<p>Kubernetes cluster can be easily started using Vagrant. There are two options to start the cluster - first using a downloaded Kubernetes distribution bundle and second by downloading the latest bundle as part of the install.</p>
-</div>
-<div class="sect3">
-<h4 id="_using_previously_downloaded_kubernetes_distribution">13.2.1. Using Previously Downloaded Kubernetes Distribution</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Setup a Kubernetes cluster as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">cd kubernetes
-
-export KUBERNETES_PROVIDER=vagrant
-./cluster/kube-up.sh</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The <code>KUBERNETES_PROVIDER</code> environment variable tells all of the various cluster management scripts which variant to use.</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-This will take a few minutes, so be patience! Vagrant will provision each machine in the cluster with all the necessary components to run Kubernetes.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>It shows the output as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">Starting cluster using provider: vagrant
-... calling verify-prereqs
-... calling kube-up
-Using credentials: vagrant:vagrant
-
-. . .
-
-Cluster validation succeeded
-Done, listing cluster services:
-
-Kubernetes master is running at https://10.245.1.2
-KubeDNS is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/services/kube-dns
-KubeUI is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/services/kube-ui</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Note down the address for Kubernetes master, <code><a href="https://10.245.1.2" class="bare">https://10.245.1.2</a></code> in this case.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_download_and_start_the_cluster_together">13.2.2. Download and Start the Cluster Together</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Alternatively, the cluster can also be started as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">&gt; curl -sS https://get.k8s.io | bash
-Downloading kubernetes release v0.21.1 to /Users/arungupta/tools/kubernetes.tar.gz
---2015-07-13 15:56:54--  https://storage.googleapis.com/kubernetes-release/release/v0.21.1/kubernetes.tar.gz
-Resolving storage.googleapis.com... 74.125.28.128, 2607:f8b0:400e:c02::80
-Connecting to storage.googleapis.com|74.125.28.128|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 117901998 (112M) [application/x-tar]
-Saving to: 'kubernetes.tar.gz'
-
-kubernetes.tar.gz               100%[=========================================================&gt;] 112.44M  6.21MB/s   in 18s
-
-2015-07-13 15:57:13 (6.13 MB/s) - 'kubernetes.tar.gz' saved [117901998/117901998]
-
-. . .
-
-NAME                 STATUS    MESSAGE              ERROR
-controller-manager   Healthy   ok                   nil
-scheduler            Healthy   ok                   nil
-etcd-0               Healthy   {&quot;health&quot;: &quot;true&quot;}   nil
-Cluster validation succeeded
-Done, listing cluster services:
-
-Kubernetes master is running at https://10.245.1.2
-KubeDNS is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/services/kube-dns
-KubeUI is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/services/kube-ui
-
-Kubernetes binaries at /Users/arungupta/tools/kubernetes/kubernetes/cluster/
-You may want to add this directory to your PATH in $HOME/.profile
-Installation successful!</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_verify_the_cluster">13.2.3. Verify the Cluster</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Verify the Kubernetes cluster as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubernetes&gt; vagrant status
-Current machine states:
-
-master                    running (virtualbox)
-minion-1                  running (virtualbox)
-
-This environment represents multiple VMs. The VMs are all listed
-above with their current state. For more information about a specific
-VM, run `vagrant status NAME`.</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>By default, the Vagrant setup will create a single Master and one node. Each VM will take 1 GB, so make sure you have at least 2GB to 4GB of free memory (plus appropriate free disk space).</p>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-By default, only one node is created. This can be manipulated by setting an environment variable NUM_MINIONS variable to an integer before invoking <code>kube-up.sh</code> script.
-</td>
-</tr>
-</table>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/kubernetes-cluster-vagrant.png" alt="kubernetes cluster vagrant">
-</div>
-<div class="title">Figure 42. Kubernetes Cluster using Vagrant</div>
-</div>
-<div class="paragraph">
-<p>By default, each VM in the cluster is running Fedora, Kubelet is installed into ``systemd'', and all other Kubernetes services are running as containers on Master.</p>
-</div>
-</li>
-<li>
-<p>Access <a href="https://10.245.1.2" class="bare">https://10.245.1.2</a> (or whatever IP address is assigned to your kubernetes cluster start up log). This may present the warning as shown below:</p>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/kubernetes-master-default-output-certificate.png" alt="kubernetes master default output certificate">
-</div>
-</div>
-<div class="paragraph">
-<p>Click on &#8216;Advanced&#8217;, on &#8216;Proceed to 10.245.1.2&#8217;, enter the username as &#8216;vagrant&#8217; and password as &#8216;vagrant&#8217; to see the output as:</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/kubernetes-master-default-output.png" alt="kubernetes master default output">
-</div>
-<div class="title">Figure 43. Kubernetes Output from Master</div>
-</div>
-<div class="paragraph">
-<p>Check the list of nodes as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">&gt; ./cluster/kubectl.sh get nodes
-NAME         LABELS                              STATUS
-10.245.1.3   kubernetes.io/hostname=10.245.1.3   Ready</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Check the list of pods:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubernetes&gt; ./cluster/kubectl.sh get po
-NAME      READY     STATUS    RESTARTS   AGE</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Check the list of services running:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubernetes&gt; ./cluster/kubectl.sh get se
-NAME         LABELS                                    SELECTOR   IP(S)        PORT(S)
-kubernetes   component=apiserver,provider=kubernetes   &lt;none&gt;     10.247.0.1   443/TCP</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Check the list of replication controllers:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubernetes&gt; ./cluster/kubectl.sh get rc
-CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR   REPLICAS</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deploy_java_ee_application_multiple_configuration_files">13.3. Deploy Java EE Application (multiple configuration files)</h3>
-<div class="paragraph">
-<p>Pods, and the IP addresses assigned to them, are ephemeral. If a pod dies then Kubernetes will recreate that pod because of its self-healing features, but it might recreate it on a different host. Even if it is on the same host, a different IP address could be assigned to it. And so any application cannot rely upon the IP address of the pod.</p>
-</div>
-<div class="paragraph">
-<p>Kubernetes services is an abstraction which defines a logical set of pods. A service is typically back-ended by one or more physical pods (associated using labels), and it has a permanent IP address that can be used by other pods/applications. For example, WildFly pod can not directly connect to a MySQL pod but can connect to MySQL service. In essence, Kubernetes service offers clients an IP and port pair which, when accessed, redirects to the appropriate backends.</p>
-</div>
-<div class="imageblock">
-<div class="content">
-<img src="chapters/images/kubernetes-service.png" alt="kubernetes service">
-</div>
-<div class="title">Figure 44. Kubernetes Service</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-In this case, all the pods are running on a single node. This is because, that is the default number for a Kubernetes cluster. The pod can very be on another node if more number of nodes are configured to start in the cluster.
-</td>
-</tr>
-</table>
-</div>
-<div class="paragraph">
-<p>Any Service that a Pod wants to access must be created before the Pod itself, or else the environment variables will not be populated.</p>
-</div>
-<div class="paragraph">
-<p>The order of Service and the targeted Pods does not matter. However Service needs to be started before any other Pods consuming the Service are started.</p>
-</div>
-<div class="sect3">
-<h4 id="_start_mysql_pod">13.3.1. Start MySQL Pod</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start MySQL Pod:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-mysql-pod.yaml
-pods/mysql-pod</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It uses the following configuration file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">apiVersion</span>: <span class="string"><span class="content">v1</span></span>
-<span class="key">kind</span>: <span class="string"><span class="content">Pod</span></span>
-<span class="key">metadata</span>:
-  <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-  <span class="key">labels</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="key">spec</span>:
-  <span class="key">containers</span>:
-    -
-      <span class="key">name</span>: <span class="string"><span class="content">mysql</span></span>
-      <span class="key">image</span>: <span class="string"><span class="content">mysql:latest</span></span>
-      <span class="key">env</span>:
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_USER</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">mysql</span><span class="delimiter">&quot;</span></span>
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_PASSWORD</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">mysql</span><span class="delimiter">&quot;</span></span>
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_DATABASE</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">sample</span><span class="delimiter">&quot;</span></span>
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_ROOT_PASSWORD</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">supersecret</span><span class="delimiter">&quot;</span></span>
-      <span class="key">ports</span>:
-        -
-          <span class="key">containerPort</span>: <span class="string"><span class="content">3306</span></span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Get status of the Pod:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubernetes&gt; ./cluster/kubectl.sh get -w po
-NAME        READY     STATUS    RESTARTS   AGE
-mysql-pod   0/1       Pending   0          4s
-NAME        READY     STATUS    RESTARTS   AGE
-mysql-pod   0/1       Running   0          44s
-mysql-pod   1/1       Running   0         44s</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p><code>-w</code> watches for changes to the requested object. Wait for the MySQL pod to be in Running status.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_start_mysql_service">13.3.2. Start MySQL service</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start MySQL Service:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-mysql-service.yaml
-services/mysql-service</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It uses the following configuration file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">apiVersion</span>: <span class="string"><span class="content">v1</span></span>
-<span class="key">kind</span>: <span class="string"><span class="content">Service</span></span>
-<span class="key">metadata</span>:
-  <span class="key">name</span>: <span class="string"><span class="content">mysql-service</span></span>
-  <span class="key">labels</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="key">spec</span>:
-  <span class="key">ports</span>:
-    <span class="comment"># the port that this service should serve on</span>
-    - <span class="string"><span class="content">port: 3306</span></span>
-  <span class="comment"># label keys and values that must match in order to receive traffic for this service</span>
-  <span class="key">selector</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Once again, the label &#8220;context: docker-k8s-lab&#8221; is used. This simplifies querying the created pods later on.</p>
-</div>
-</li>
-<li>
-<p>Get status of the Service:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get -w se
-NAME            LABELS                                    SELECTOR                                IP(S)          PORT(S)
-kubernetes      component=apiserver,provider=kubernetes   &lt;none&gt;                                  10.247.0.1     443/TCP
-mysql-service   context=docker-k8s-lab,name=mysql-pod     context=docker-k8s-lab,name=mysql-pod   10.247.63.43   3306/TCP</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>If multiple services are running, then it can be narrowed by specifying the labels:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh  get -w po -l context=docker-k8s-lab,name=mysql-pod
-NAME        READY     STATUS    RESTARTS   AGE
-mysql-pod   1/1       Running   0          4m</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This is also the selector label used by Service to target Pods.</p>
-</div>
-<div class="paragraph">
-<p>When a Service is run on a node, the kubelet adds a set of environment variables for each active Service. It supports both Docker links compatible variables and simpler <code>{SVCNAME}_SERVICE_HOST</code> and <code>{SVCNAME}_SERVICE_PORT</code> variables, where the Service name is upper-cased and dashes are converted to underscores.</p>
-</div>
-<div class="paragraph">
-<p>Our service name is &#8220;mysql-service&#8221; and so <code>MYSQL_SERVICE_SERVICE_HOST</code> and <code>MYSQL_SERVICE_SERVICE_PORT</code> variables are available to other pods.</p>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Kubernetes also allows services to be resolved using DNS configuration. Send a Pull Request for adding this functionality to the lab as explained in <a href="https://github.com/javaee-samples/docker-java/issues/62">#62</a>.</p>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_start_wildfly_replication_controller">13.3.3. Start WildFly Replication Controller</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start WildFly replication controller:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-wildfly-rc.yaml
-replicationcontrollers/wildfly-rc</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>It uses the following configuration file:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">apiVersion</span>: <span class="string"><span class="content">v1</span></span>
-<span class="key">kind</span>: <span class="string"><span class="content">ReplicationController</span></span>
-<span class="key">metadata</span>:
-  <span class="key">name</span>: <span class="string"><span class="content">wildfly-rc</span></span>
-  <span class="key">labels</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">wildfly</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="key">spec</span>:
-  <span class="key">replicas</span>: <span class="string"><span class="content">1</span></span>
-  <span class="key">template</span>:
-    <span class="key">metadata</span>:
-      <span class="key">labels</span>:
-        <span class="key">name</span>: <span class="string"><span class="content">wildfly</span></span>
-    <span class="key">spec</span>:
-      <span class="key">containers</span>:
-      - <span class="string"><span class="content">name: wildfly-rc-pod</span></span>
-        <span class="key">image</span>: <span class="string"><span class="content">arungupta/wildfly-mysql-javaee7:k8s</span></span>
-        <span class="key">ports</span>:
-        - <span class="string"><span class="content">containerPort: 8080</span></span></code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Check status of the Pod inside Replication Controller:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get po
-NAME               READY     STATUS    RESTARTS   AGE
-mysql-pod          1/1       Running   0          1h
-wildfly-rc-w2kk5   1/1       Running   0          6m</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Get IP address of the Pod:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get -o template po wildfly-rc-w2kk5 --template={{.status.podIP}}
-10.246.1.23</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Access_Kubernetes_Application_Node">13.3.4. Access the application (using node)</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log in to node:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">vagrant ssh minion-1</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Access the application using <code>curl <a href="http://10.246.1.23:8080/employees/resources/employees/" class="bare">http://10.246.1.23:8080/employees/resources/employees/</a></code> and replace IP address with the one obtained earlier:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">Last login: Thu Jul 16 00:24:36 2015 from 10.0.2.2
-[vagrant@kubernetes-minion-1 ~]$ curl http://10.246.1.23:8080/employees/resources/employees/
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;&lt;collection&gt;&lt;employee&gt;&lt;id&gt;1&lt;/id&gt;&lt;name&gt;Penny&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;2&lt;/id&gt;&lt;name&gt;Sheldon&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;3&lt;/id&gt;&lt;name&gt;Amy&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;4&lt;/id&gt;&lt;name&gt;Leonard&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;5&lt;/id&gt;&lt;name&gt;Bernadette&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;6&lt;/id&gt;&lt;name&gt;Raj&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;7&lt;/id&gt;&lt;name&gt;Howard&lt;/name&gt;&lt;/employee&gt;&lt;employee&gt;&lt;id&gt;8&lt;/id&gt;&lt;name&gt;Priya&lt;/name&gt;&lt;/employee&gt;&lt;/collection&gt;</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Access_Kubernetes_Application_Proxy">13.3.5. Access the application (using proxy)</h4>
-<div class="paragraph">
-<p>Send a PR for <a href="https://github.com/javaee-samples/docker-java/issues/80" class="bare">https://github.com/javaee-samples/docker-java/issues/80</a></p>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_deploy_java_ee_application_one_configuration_file">13.4. Deploy Java EE Application (one configuration file)</h3>
-<div class="paragraph">
-<p>Kubernetes allow multiple resources to be specified in a single configuration file. This allows to create a &#8220;Kubernetes Application&#8221; that can consists of multiple resources easily.</p>
-</div>
-<div class="paragraph">
-<p>Previous section showed how to deploy the Java EE application using multiple configuration files. This application can be delpoyed using a single configuration file as well.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Start the application using the configuration file:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">apiVersion</span>: <span class="string"><span class="content">v1</span></span>
-<span class="key">kind</span>: <span class="string"><span class="content">Pod</span></span>
-<span class="key">metadata</span>:
-  <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-  <span class="key">labels</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="key">spec</span>:
-  <span class="key">containers</span>:
-    -
-      <span class="key">name</span>: <span class="string"><span class="content">mysql</span></span>
-      <span class="key">image</span>: <span class="string"><span class="content">mysql:latest</span></span>
-      <span class="key">env</span>:
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_USER</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">mysql</span><span class="delimiter">&quot;</span></span>
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_PASSWORD</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">mysql</span><span class="delimiter">&quot;</span></span>
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_DATABASE</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">sample</span><span class="delimiter">&quot;</span></span>
-        -
-          <span class="key">name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">MYSQL_ROOT_PASSWORD</span><span class="delimiter">&quot;</span></span>
-          <span class="key">value</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">supersecret</span><span class="delimiter">&quot;</span></span>
-      <span class="key">ports</span>:
-        -
-          <span class="key">containerPort</span>: <span class="string"><span class="content">3306</span></span>
-<span class="head"><span class="head">---</span></span>-
-<span class="key">apiVersion</span>: <span class="string"><span class="content">v1</span></span>
-<span class="key">kind</span>: <span class="string"><span class="content">Service</span></span>
-<span class="key">metadata</span>:
-  <span class="key">name</span>: <span class="string"><span class="content">mysql-service</span></span>
-  <span class="key">labels</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="key">spec</span>:
-  <span class="key">ports</span>:
-    <span class="comment"># the port that this service should serve on</span>
-    - <span class="string"><span class="content">port: 3306</span></span>
-  <span class="comment"># label keys and values that must match in order to receive traffic for this service</span>
-  <span class="key">selector</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">mysql-pod</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="head"><span class="head">---</span></span>-
-<span class="key">apiVersion</span>: <span class="string"><span class="content">v1</span></span>
-<span class="key">kind</span>: <span class="string"><span class="content">ReplicationController</span></span>
-<span class="key">metadata</span>:
-  <span class="key">name</span>: <span class="string"><span class="content">wildfly-rc</span></span>
-  <span class="key">labels</span>:
-    <span class="key">name</span>: <span class="string"><span class="content">wildfly</span></span>
-    <span class="key">context</span>: <span class="string"><span class="content">docker-k8s-lab</span></span>
-<span class="key">spec</span>:
-  <span class="key">replicas</span>: <span class="string"><span class="content">1</span></span>
-  <span class="key">template</span>:
-    <span class="key">metadata</span>:
-      <span class="key">labels</span>:
-        <span class="key">name</span>: <span class="string"><span class="content">wildfly</span></span>
-    <span class="key">spec</span>:
-      <span class="key">containers</span>:
-      - <span class="string"><span class="content">name: wildfly-rc-pod</span></span>
-        <span class="key">image</span>: <span class="string"><span class="content">arungupta/wildfly-mysql-javaee7:k8s</span></span>
-        <span class="key">ports</span>:
-        - <span class="string"><span class="content">containerPort: 8080</span></span></code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Notice that each section, one each for MySQL Pod, MySQL Service, and WildFly Replication Controller, is separated by <code>----</code>.</p>
-</div>
-</li>
-<li>
-<p>Start the application:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh create -f ../../attendees/kubernetes/app.yaml
-pods/mysql-pod
-services/mysql-service
-replicationcontrollers/wildfly-rc</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Access the application using <a href="#Access_Kubernetes_Application_Node">Access the application (using node)</a> or <a href="#Access_Kubernetes_Application_Proxy">Access the application (using proxy)</a>.</p>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_rescheduling_pods">13.5. Rescheduling Pods</h3>
-<div class="paragraph">
-<p>Replication Controller ensures that specified number of pod &#8220;replicas&#8221; are running at any one time. If there are too many, the replication controller kills some pods. If there are too few, it starts more.</p>
-</div>
-<div class="paragraph">
-<p>WildFly Replication Controller is already running with one Pod. Lets delete this Pod and see how a new Pod is automatically rescheduled.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Find the Pod&#8217;s name:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get po
-NAME               READY     STATUS    RESTARTS   AGE
-wildfly-rc-w2kk5   1/1       Running   0          6m</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Delete the Pod:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh delete po wildfly-rc-w2kk5
-pods/wildfly-rc-w2kk5</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Status of the Pods can be seen in another shell:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get -w po
-NAME               READY     STATUS    RESTARTS   AGE
-wildfly-rc-w2kk5   1/1       Running   0          2m
-NAME               READY     STATUS    RESTARTS   AGE
-wildfly-rc-xz6wu   0/1       Pending   0         2s
-wildfly-rc-xz6wu   0/1       Pending   0         2s
-wildfly-rc-xz6wu   0/1       Pending   0         12s
-wildfly-rc-xz6wu   0/1       Running   0         14s
-wildfly-rc-xz6wu   1/1       Running   0         22s</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Notice how Pod with name &#8220;wildfly-rc-w2kk5&#8221; was deleted and a new Pod with the name &#8220;wildfly-rc-xz6wu&#8221; was created.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_scaling_pods">13.6. Scaling Pods</h3>
-<div class="paragraph">
-<p>Replication Controller allows dynamic scaling up and down of Pods.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Scale up the number of Pods:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh scale --replicas=2 rc wildfly-rc
-scaled</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Status of the Pods can be seen in another shell:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get -w po
-NAME               READY     STATUS    RESTARTS   AGE
-wildfly-rc-bgtkg   1/1       Running   0          3m
-NAME               READY     STATUS    RESTARTS   AGE
-wildfly-rc-bymu7   0/1       Pending   0          2s
-wildfly-rc-bymu7   0/1       Pending   0         2s
-wildfly-rc-bymu7   0/1       Pending   0         2s
-wildfly-rc-bymu7   0/1       Running   0         3s
-wildfly-rc-bymu7   1/1       Running   0         12s</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Notice a new Pod with the name &#8220;wildfly-rc-bymu7&#8221; is created.</p>
-</div>
-</li>
-<li>
-<p>Scale down the number of Pods:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh scale --replicas=1 rc wildfly-rc
-scaled</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Status of the Pods using <code>-w</code> is not shown correctly <a href="https://github.com/GoogleCloudPlatform/kubernetes/issues/11338">#11338</a>. But status of the Pods can be seen correctly as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get po
-NAME               READY     STATUS    RESTARTS   AGE
-wildfly-rc-bgtkg   1/1       Running   0          9m</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Notice only one Pod is running now.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_application_logs">13.7. Application Logs</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Get a list of the Pods:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh get po
-NAME               READY     STATUS    RESTARTS   AGE
-mysql-pod          1/1       Running   0          18h
-wildfly-rc-w2kk5   1/1       Running   0          16h</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Get logs for the WildFly Pod:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">./cluster/kubectl.sh logs wildfly-rc-w2kk5
-=&gt; Starting WildFly server
-=&gt; Waiting for the server to boot
-=========================================================================
-
-  JBoss Bootstrap Environment
-
-  JBOSS_HOME: /opt/jboss/wildfly
-
-  . . .</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-<div class="paragraph">
-<p>Logs can be obtained for any Kubernetes resources using this way. Alternatively, the logs can also be seen by logging into the node:</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log in to the node VM:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">&gt; vagrant ssh minion-1
-Last login: Fri Jun  5 23:01:36 2015 from 10.0.2.2
-[vagrant@kubernetes-minion-1 ~]$</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Log in as root:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">[vagrant@kubernetes-minion-1 ~]$ su -
-Password:
-[root@kubernetes-minion-1 ~]#</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Default root password for VM images created by Vagrant is &#8216;vagrant&#8217;.</p>
-</div>
-</li>
-<li>
-<p>See the list of Docker containers running on this VM:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker ps</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>View WildFly log as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker logs $(docker ps | grep arungupta/wildfly | awk '{print $1}')</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>View MySQL log as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker logs &lt;CID&gt;</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_delete_kubernetes_resources">13.8. Delete Kubernetes Resources</h3>
-<div class="paragraph">
-<p>Individual resources (service, replication controller, or pod) can be deleted by using <code>delete</code> command instead of <code>create</code> command. Alternatively, all services and replication controllers can be deleted using a label as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubectl delete -l se,po context=docker-k8s-lab</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_stop_kubernetes_cluster">13.9. Stop Kubernetes Cluster</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">&gt; ./cluster/kube-down.sh
-Bringing down cluster using provider: vagrant
-==&gt; minion-1: Forcing shutdown of VM...
-==&gt; minion-1: Destroying VM and associated drives...
-==&gt; master: Forcing shutdown of VM...
-==&gt; master: Destroying VM and associated drives...
-Done</code></pre>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_debug_kubernetes_master">13.10. Debug Kubernetes Master</h3>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Log in to the master as:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">vagrant ssh master
-Last login: Wed Jul 15 20:36:32 2015 from 10.0.2.2
-[vagrant@kubernetes-master ~]$</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>Log in as root:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">[vagrant@kubernetes-master ~]$ su -
-Password:
-[root@kubernetes-master ~]#</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Default root password for VM images created by Vagrant is &#8216;vagrant&#8217;.</p>
-</div>
-</li>
-<li>
-<p>Check the containers running on master:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">CONTAINER ID        IMAGE                                                                               COMMAND                CREATED             STATUS              PORTS               NAMES
-dc59a764953c        gcr.io/google_containers/etcd:2.0.12                                                &quot;/bin/sh -c '/usr/lo   20 hours ago        Up 20 hours                             k8s_etcd-container.fa2ab1d9_etcd-server-kubernetes-master_default_7b64ecafde589b94a342982699601a19_2b69c4d5
-b722e22d3ddb        gcr.io/google_containers/kube-scheduler:d1107ff3b8fcdcbf5a9d78d9d6dbafb1            &quot;/bin/sh -c '/usr/lo   20 hours ago        Up 20 hours                             k8s_kube-scheduler.7501c229_kube-scheduler-kubernetes-master_default_98b354f725c1589ea5a12119795546ae_b81b9740
-38a73e342866        gcr.io/google_containers/kube-controller-manager:fafaf8100ccc963e643b55e35386d713   &quot;/bin/sh -c '/usr/lo   20 hours ago        Up 20 hours                             k8s_kube-controller-manager.db050993_kube-controller-manager-kubernetes-master_default_f5c25224fbfb2de87e1e5c35e6b3a293_dcd4cb5d
-01001de6409e        gcr.io/google_containers/kube-apiserver:cff9e185796caa8b281e7d961aea828b            &quot;/bin/sh -c '/usr/lo   20 hours ago        Up 20 hours                             k8s_kube-apiserver.7e06f4e1_kube-apiserver-kubernetes-master_default_829f8c23fd5fc7951253cac7618447fc_b39c0a5d
-0f8ccb144ece        gcr.io/google_containers/pause:0.8.0                                                &quot;/pause&quot;               20 hours ago        Up 20 hours                             k8s_POD.e4cc795_kube-scheduler-kubernetes-master_default_98b354f725c1589ea5a12119795546ae_eb1efcac
-0b8f527456c0        gcr.io/google_containers/pause:0.8.0                                                &quot;/pause&quot;               20 hours ago        Up 20 hours                             k8s_POD.e4cc795_kube-apiserver-kubernetes-master_default_829f8c23fd5fc7951253cac7618447fc_5dd4dee7
-39d9c41ab1a2        gcr.io/google_containers/pause:0.8.0                                                &quot;/pause&quot;               20 hours ago        Up 20 hours                             k8s_POD.e4cc795_kube-controller-manager-kubernetes-master_default_f5c25224fbfb2de87e1e5c35e6b3a293_522972ae
-d970ddff7046        gcr.io/google_containers/pause:0.8.0                                                &quot;/pause&quot;               20 hours ago        Up 20 hours                             k8s_POD.e4cc795_etcd-server-kubernetes-master_default_7b64ecafde589b94a342982699601a19_fa75b27f</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="Common_Docker_Commands">14. Common Docker Commands</h2>
+<h2 id="Common_Docker_Commands">9. Common Docker Commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Here is the list of commonly used Docker commands:</p>
@@ -4727,10 +2774,10 @@ d970ddff7046        gcr.io/google_containers/pause:0.8.0                        
 </div>
 </div>
 <div class="sect1">
-<h2 id="_troubleshooting">15. Troubleshooting</h2>
+<h2 id="_troubleshooting">10. Troubleshooting</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_network_timed_out">15.1. Network Timed Out</h3>
+<h3 id="_network_timed_out">10.1. Network Timed Out</h3>
 <div class="paragraph">
 <p>Depending upon the network speed and restrictions, you may not be able to download Docker images from Docker Hub. The error message may look like:</p>
 </div>
@@ -4746,7 +2793,7 @@ Network timed out while trying to connect to https://index.docker.io/v1/reposito
 <p>This section provide a couple of alternatives to solve this.</p>
 </div>
 <div class="sect3">
-<h4 id="_restart_docker_machine">15.1.1. Restart Docker Machine</h4>
+<h4 id="_restart_docker_machine">10.1.1. Restart Docker Machine</h4>
 <div class="paragraph">
 <p>It seems like Docker Machine gets into a strange state and restarting it fixes that.</p>
 </div>
@@ -4758,7 +2805,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_loading_images_offline">15.1.2. Loading Images Offline</h4>
+<h4 id="_loading_images_offline">10.1.2. Loading Images Offline</h4>
 <div class="paragraph">
 <p>Images can be downloaded from a previously saved <code>.tar</code> file. All images required for this workshop can be downloaded from:</p>
 </div>
@@ -4787,7 +2834,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cannot_create_docker_machine_on_windows">15.2. Cannot create Docker Machine on Windows</h3>
+<h3 id="_cannot_create_docker_machine_on_windows">10.2. Cannot create Docker Machine on Windows</h3>
 <div class="paragraph">
 <p>Are you not able to create Docker Machine on Windows?</p>
 </div>
@@ -4796,7 +2843,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_no_route_to_host">15.3. No route to host</h3>
+<h3 id="_no_route_to_host">10.3. No route to host</h3>
 <div class="paragraph">
 <p>Accessing the WildFly and MySQL sample in Kubernetes gives 404 when you give the command <code>curl <a href="http://10.246.1.23:8080/employees/resources/employees/" class="bare">http://10.246.1.23:8080/employees/resources/employees/</a></code>.</p>
 </div>
@@ -4816,7 +2863,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_references">16. References</h2>
+<h2 id="_references">11. References</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -4839,7 +2886,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-07 21:03:18 EDT
+Last updated 2015-10-13 15:00:32 EDT
 </div>
 </div>
 </body>
