@@ -7,24 +7,36 @@ https://github.com/javaee-samples/javaee7-simple-sample[Java EE 7 Simple Sample]
 
 . Clone the repo:
 
-  git clone https://github.com/javaee-samples/javaee7-simple-sample.git
+  git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git
 
 . Build the application:
 
-  mvn clean package
+[source, text]
+----
+  cd javaee7-simple-sample/
+  curl http://classroom.example.com:8082/downloads/lab-settings.xml -o settings.xml
+  mvn -s settings.xml clean package
+----
 
 ### Start Application Server
+
+
+Create a folder to place the deployments and git it write access
+
+[source, text]
+----
+mkdir deployments
+chmod a+w deployments
+----
 
 Start WildFly server as:
 
 [source, text]
 ----
-docker run --name wildfly -d -p 8080:8080 -v /Users/youruser/tmp/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly
 ----
 
-Make sure to replace `/Users/youruser/tmp/deployments` to a directory on your local machine. Also, make sure this directory already exists. For example, on my machine this directory is `/Users/arungupta/tmp/deployments`.
-
-This command starts a container named "`wildfly`". 
+This command starts a container named "`wildfly`".
 
 The `-v` flag maps a directory from the host into the container. This will be the directory to put the deployments. `rw` ensures that the Docker container can write to it.
 
@@ -55,9 +67,9 @@ image::jbds1.png[]
 .WildFly Runtime Properties
 image::jbds2.png[]
 +
-. If a new runtime needs to be created, pick the directory for WildFly 9.0.0:
+. If a new runtime needs to be created, pick the directory for WildFly 9.0.1:
 +
-.WildFly 9.0.0.Final Runtime
+.WildFly 9.0.1.Final Runtime
 image::jbds3.png[]
 +
 Click on '`Finish`'.
@@ -99,7 +111,7 @@ Stop WildFly container when you're done.
 
 ### Deploy Application Using CLI
 
-The Command Line Interface (CLI) is a tool for connecting to WildFly instances to manage all tasks from command line environment. Some of the tasks that you can do using the CLI are:
+TThe Command Line Interface (CLI) is a tool for connecting to WildFly instances to manage all tasks from command line environment. Some of the tasks that you can do using the CLI are:
 
 . Deploy/Undeploy web application in standalone/Domain Mode.
 . View all information about the deployed application on runtime.
@@ -112,6 +124,16 @@ Lets use the CLI to deploy javaee7-simple-sample to WildFly running in the conta
 +
 . Run the "`wildfly-management`" image with fixed port mapping as explained in <<Management_Fixed_Port_Mapping>>.
 . Run the `jboss-cli` command and connect to the WildFly instance.
+
+Start WildFly server as:
+
+[source, text]
+----
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly
+----
+
+This command starts a container named "`wildfly-managed`".
+
 +
 [source, text]
 ----
@@ -141,13 +163,13 @@ WildFly comes with a web-based administration console. It also relies on the sam
 .WildFly Web Console
 image::console1.png[]
 
-Username and password credentials are shown in <<WildFly_Administration_Credentials>>. 
+Username and password credentials are shown in <<WildFly_Administration_Credentials>>.
 
 [NOTE]
 ====
 You may like to stop and remove the Docker container running WildFly. This can be done as `docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm -f`.
 
-Start a new container as `docker run -d --name wildfly -p 8080:8080 -p 9990:9990 arungupta/wildfly-management`.
+Start a new container as `docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management`.
 ====
 
 Deploy the application using the console with the following steps:
@@ -184,7 +206,7 @@ A standalone WildFly process, process can be configured to listen for remote man
 +
 [source, text]
 ----
-docker run -d --name wildfly -p 8080:8080 -p 9990:9990 arungupta/wildfly-management
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management
 ----
 +
 In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.

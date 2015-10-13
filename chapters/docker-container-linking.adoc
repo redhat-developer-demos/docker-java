@@ -12,7 +12,7 @@ This section will show how https://docs.docker.com/userguide/dockerlinks/[Docker
 +
 [source, text]
 ----
-docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql
 ----
 +
 `-e` define environment variables that are read by the database at startup and allow us to access the database with this user and password.
@@ -21,7 +21,7 @@ docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_D
 +
 [source, text]
 ----
-docker run -it --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7
+docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7
 ----
 +
 `--link` takes two parameters - first is name of the container we're linking to and second is the alias for the link name.
@@ -43,3 +43,11 @@ See more about container communication on the Docker website https://docs.docker
 > curl http://dockerhost:8080/employees/resources/employees
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><collection><employee><id>1</id><name>Penny</name></employee><employee><id>2</id><name>Sheldon</name></employee><employee><id>3</id><name>Amy</name></employee><employee><id>4</id><name>Leonard</name></employee><employee><id>5</id><name>Bernadette</name></employee><employee><id>6</id><name>Raj</name></employee><employee><id>7</id><name>Howard</name></employee><employee><id>8</id><name>Priya</name></employee></collection>
 ----
+
+Lets stop the previously running container as:
+
+[source, text]
+----
+docker stop mywildfly-mysql
+----
+
