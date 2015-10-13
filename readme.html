@@ -570,38 +570,49 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#JavaEE7_PreBuilt_WAR">5. Deploy Java EE 7 Application (Pre-Built WAR)</a></li>
 <li><a href="#JavaEE7_Container_Linking">6. Deploy Java EE 7 Application (Container Linking)</a></li>
-<li><a href="#Docker_Compose">7. Multiple Containers Using Docker Compose</a>
+<li><a href="#_build_and_deploy_java_ee_7_application">7. Build and Deploy Java EE 7 Application</a>
 <ul class="sectlevel2">
-<li><a href="#_configuration_file">7.1. Configuration File</a></li>
-<li><a href="#_start_services">7.2. Start Services</a></li>
-<li><a href="#_verify_application">7.3. Verify Application</a></li>
-<li><a href="#_stop_services">7.4. Stop Services</a></li>
-<li><a href="#_remove_containers">7.5. Remove Containers</a></li>
-<li><a href="#_scale_services">7.6. Scale Services</a></li>
+<li><a href="#Build_Application">7.1. Build Application</a></li>
+<li><a href="#_start_application_server">7.2. Start Application Server</a></li>
+<li><a href="#_configure_jboss_developer_studio">7.3. Configure JBoss Developer Studio</a></li>
+<li><a href="#_deploy_application_using_shared_volumes">7.4. Deploy Application Using Shared Volumes</a></li>
+<li><a href="#_deploy_application_using_cli">7.5. Deploy Application Using CLI</a></li>
+<li><a href="#_deploy_application_using_web_console">7.6. Deploy Application Using Web Console</a></li>
+<li><a href="#_deploy_application_using_management_api">7.7. Deploy Application Using Management API</a></li>
 </ul>
 </li>
-<li><a href="#Docker_Swarm">8. Java EE Application on Docker Swarm Cluster</a>
+<li><a href="#Docker_Compose">8. Multiple Containers Using Docker Compose</a>
 <ul class="sectlevel2">
-<li><a href="#_key_components_of_docker_swarm">8.1. Key Components of Docker Swarm</a></li>
-<li><a href="#_create_a_docker_swarm_cluster">8.2. Create a Docker Swarm Cluster</a></li>
-<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster">8.3. Deploy Java EE Application to Docker Swarm Cluster</a></li>
-<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">8.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</a></li>
+<li><a href="#_configuration_file">8.1. Configuration File</a></li>
+<li><a href="#_start_services">8.2. Start Services</a></li>
+<li><a href="#_verify_application">8.3. Verify Application</a></li>
+<li><a href="#_stop_services">8.4. Stop Services</a></li>
+<li><a href="#_remove_containers">8.5. Remove Containers</a></li>
+<li><a href="#_scale_services">8.6. Scale Services</a></li>
 </ul>
 </li>
-<li><a href="#Common_Docker_Commands">9. Common Docker Commands</a></li>
-<li><a href="#_troubleshooting">10. Troubleshooting</a>
+<li><a href="#Docker_Swarm">9. Java EE Application on Docker Swarm Cluster</a>
 <ul class="sectlevel2">
-<li><a href="#_network_timed_out">10.1. Network Timed Out</a>
+<li><a href="#_key_components_of_docker_swarm">9.1. Key Components of Docker Swarm</a></li>
+<li><a href="#_create_a_docker_swarm_cluster">9.2. Create a Docker Swarm Cluster</a></li>
+<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster">9.3. Deploy Java EE Application to Docker Swarm Cluster</a></li>
+<li><a href="#_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">9.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</a></li>
+</ul>
+</li>
+<li><a href="#Common_Docker_Commands">10. Common Docker Commands</a></li>
+<li><a href="#_troubleshooting">11. Troubleshooting</a>
+<ul class="sectlevel2">
+<li><a href="#_network_timed_out">11.1. Network Timed Out</a>
 <ul class="sectlevel3">
-<li><a href="#_restart_docker_machine">10.1.1. Restart Docker Machine</a></li>
-<li><a href="#_loading_images_offline">10.1.2. Loading Images Offline</a></li>
+<li><a href="#_restart_docker_machine">11.1.1. Restart Docker Machine</a></li>
+<li><a href="#_loading_images_offline">11.1.2. Loading Images Offline</a></li>
 </ul>
 </li>
-<li><a href="#_cannot_create_docker_machine_on_windows">10.2. Cannot create Docker Machine on Windows</a></li>
-<li><a href="#_no_route_to_host">10.3. No route to host</a></li>
+<li><a href="#_cannot_create_docker_machine_on_windows">11.2. Cannot create Docker Machine on Windows</a></li>
+<li><a href="#_no_route_to_host">11.3. No route to host</a></li>
 </ul>
 </li>
-<li><a href="#_references">11. References</a></li>
+<li><a href="#_references">12. References</a></li>
 </ul>
 </div>
 </div>
@@ -1864,7 +1875,439 @@ Exact port number may be different in your case.
 </div>
 </div>
 <div class="sect1">
-<h2 id="Docker_Compose">7. Multiple Containers Using Docker Compose</h2>
+<h2 id="_build_and_deploy_java_ee_7_application">7. Build and Deploy Java EE 7 Application</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="https://github.com/javaee-samples/javaee7-simple-sample">Java EE 7 Simple Sample</a> is a trivial Java EE 7 sample application.</p>
+</div>
+<div class="sect2">
+<h3 id="Build_Application">7.1. Build Application</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Clone the repo:</p>
+<div class="literalblock">
+<div class="content">
+<pre>git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git</pre>
+</div>
+</div>
+</li>
+<li>
+<p>Build the application:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">  cd javaee7-simple-sample/
+  curl http://classroom.example.com:8082/downloads/lab-settings.xml -o settings.xml
+  mvn -s settings.xml clean package</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_start_application_server">7.2. Start Application Server</h3>
+<div class="paragraph">
+<p>Create a folder to place the deployments and git it write access</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">mkdir deployments
+chmod a+w deployments</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Start WildFly server as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command starts a container named &#8220;wildfly&#8221;.</p>
+</div>
+<div class="paragraph">
+<p>The <code>-v</code> flag maps a directory from the host into the container. This will be the directory to put the deployments. <code>rw</code> ensures that the Docker container can write to it.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+Windows users, please make sure to use <code>-v /c/Users/</code> notation for drive letters.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Check logs to verify if the server has started.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker logs -f wildfly</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Access <a href="http://dockerhost:8080" class="bare">http://dockerhost:8080</a> in your browser to make sure the instance is up and running.</p>
+</div>
+<div class="paragraph">
+<p>Now you&#8217;re ready to deploy the application for the first time.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configure_jboss_developer_studio">7.3. Configure JBoss Developer Studio</h3>
+<div class="paragraph">
+<p>Start JBoss Developer Studio, if not already started.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Select &#8216;Servers&#8217; tab, create a new server adapter</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds1.png" alt="jbds1">
+</div>
+<div class="title">Figure 9. Server adapter</div>
+</div>
+</li>
+<li>
+<p>Assign an existing or create a new WildFly 9.0.0 runtime (changed properties are highlighted.)</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds2.png" alt="jbds2">
+</div>
+<div class="title">Figure 10. WildFly Runtime Properties</div>
+</div>
+</li>
+<li>
+<p>If a new runtime needs to be created, pick the directory for WildFly 9.0.1:</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds3.png" alt="jbds3">
+</div>
+<div class="title">Figure 11. WildFly 9.0.1.Final Runtime</div>
+</div>
+<div class="paragraph">
+<p>Click on &#8216;Finish&#8217;.</p>
+</div>
+</li>
+<li>
+<p>Double-click on the newly selected server to configure server properties:</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds4.png" alt="jbds4">
+</div>
+<div class="title">Figure 12. Server properties</div>
+</div>
+<div class="paragraph">
+<p>The host name is specified to &#8216;dockerhost&#8217;. Two properties on the left are automatically propagated from the previous dialog. Additional two properties on the right side are required to disable to keep deployment scanners in sync with the server.</p>
+</div>
+</li>
+<li>
+<p>Specify a custom deployment folder on Deployment tab of Server Editor</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds5.png" alt="jbds5">
+</div>
+<div class="title">Figure 13. Custom deployment folder</div>
+</div>
+</li>
+<li>
+<p>Right-click on the newly created server adapter and click &#8216;Start&#8217;.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds6.png" alt="jbds6">
+</div>
+<div class="title">Figure 14. Started server</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_application_using_shared_volumes">7.4. Deploy Application Using Shared Volumes</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Import javaee7-simple-sample application source code using Import &#8594; Existing Maven Projects.</p>
+</li>
+<li>
+<p>Right-click on the project, select &#8216;Run on Server&#8217; and chose the previously created server.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>The project runs and displays the start page of the application.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds7.png" alt="jbds7">
+</div>
+<div class="title">Figure 15. Start Server</div>
+</div>
+<div class="paragraph">
+<p>Congratulations!</p>
+</div>
+<div class="paragraph">
+<p>You&#8217;ve deployed your first application to WildFly running in a Docker container from JBoss Developer Studio.</p>
+</div>
+<div class="paragraph">
+<p>Stop WildFly container when you&#8217;re done.</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker stop wildfly</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_application_using_cli">7.5. Deploy Application Using CLI</h3>
+<div class="paragraph">
+<p>TThe Command Line Interface (CLI) is a tool for connecting to WildFly instances to manage all tasks from command line environment. Some of the tasks that you can do using the CLI are:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deploy/Undeploy web application in standalone/Domain Mode.</p>
+</li>
+<li>
+<p>View all information about the deployed application on runtime.</p>
+</li>
+<li>
+<p>Start/Stop/Restart Nodes in respective mode i.e. Standalone/Domain.</p>
+</li>
+<li>
+<p>Adding/Deleting resource or subsystems to servers.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Lets use the CLI to deploy javaee7-simple-sample to WildFly running in the container.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. <code>/Users/arungupta/tools/</code>). This will create <code>wildfly-9.0.0.Final</code> directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the <code>/Users/arungupta/tools/wildfly-9.0.0.Final/bin</code> to your $PATH.</p>
+</li>
+<li>
+<p>Run the &#8220;wildfly-management&#8221; image with fixed port mapping as explained in <a href="#Management_Fixed_Port_Mapping">Fixed Port Mapping</a>.</p>
+</li>
+<li>
+<p>Run the <code>jboss-cli</code> command and connect to the WildFly instance.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Start WildFly server as:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This command starts a container named &#8220;wildfly-managed&#8221;.</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">jboss-cli.sh --controller=dockerhost:9990  -u=admin -p=docker#admin -c</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+
+This will show the output as:</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">[standalone@dockerhost:9990 /]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>+
+. Deploy the application as:</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">deploy &lt;javaee7-simple-sample PATH&gt;target/javaee7-simple-sample-1.10.war --force</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now you&#8217;ve sucessfully used the CLI to remote deploy the Java EE 7 sample application to WildFly running as docker container.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_application_using_web_console">7.6. Deploy Application Using Web Console</h3>
+<div class="paragraph">
+<p>WildFly comes with a web-based administration console. It also relies on the same management APIs that are used by JBoss Developer Tools and the CLI. It provides a simple and easy to use web-based console to manage WildFly instance. For a Docker image, it needs to be explicitly enabled as explained in <a href="#Enabling_WildFly_Administration">Enabling WildFly Administration</a>. Once enabled, it can be accessed at <a href="http://dockerhost:9990" class="bare">http://dockerhost:9990</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/console1.png" alt="console1">
+</div>
+<div class="title">Figure 16. WildFly Web Console</div>
+</div>
+<div class="paragraph">
+<p>Username and password credentials are shown in <a href="#WildFly_Administration_Credentials">[WildFly_Administration_Credentials]</a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>You may like to stop and remove the Docker container running WildFly. This can be done as <code>docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm -f</code>.</p>
+</div>
+<div class="paragraph">
+<p>Start a new container as <code>docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management</code>.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Deploy the application using the console with the following steps:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Go to &#8216;Deployments&#8217; tab.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/wildfly9-deployments-tab.png" alt="wildfly9 deployments tab">
+</div>
+<div class="title">Figure 17. Deployments tab in WildFly Web Console</div>
+</div>
+</li>
+<li>
+<p>Click on &#8216;Add&#8217; button.</p>
+</li>
+<li>
+<p>On &#8216;Add Deployment&#8217; screen, take the default of &#8216;Upload a new deployment&#8217; and click &#8216;Next&gt;&gt;&#8217;.</p>
+</li>
+<li>
+<p>Click on &#8216;Choose File&#8217;, select <code>&lt;javaee7-simple-sample PATH&gt;/javaee7-simple-sample.war</code> file on your computer. This would be <code>javaee7-simple-sample/target/javaee7-simple-sample.war</code> from <a href="#Build_Application">Build Application</a>.</p>
+</li>
+<li>
+<p>Click on &#8216;Next&gt;&gt;&#8217;.</p>
+</li>
+<li>
+<p>Select &#8216;Enable&#8217; checkbox.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/wildfly9-add-deployments.png" alt="wildfly9 add deployments">
+</div>
+<div class="title">Figure 18. Enable a deployment</div>
+</div>
+</li>
+<li>
+<p>Click &#8216;Finish&#8217;.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/wildfly9-javaee7-simple-sample-deployed.png" alt="wildfly9 javaee7 simple sample deployed">
+</div>
+<div class="title">Figure 19. Java EE 7 Simple Sample Deployed</div>
+</div>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>This will complete the deployment of the Java EE 7 application using Web Console. The output can be seen out <a href="http://dockerhost:8080/javaee7-simple-sample" class="bare">http://dockerhost:8080/javaee7-simple-sample</a> and looks like:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/wildfly9-javaee7-simple-sample-output.png" alt="wildfly9 javaee7 simple sample output">
+</div>
+<div class="title">Figure 20. Java EE 7 Simple Sample Output</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_deploy_application_using_management_api">7.7. Deploy Application Using Management API</h3>
+<div class="paragraph">
+<p>A standalone WildFly process, process can be configured to listen for remote management requests using its &#8220;native management interface&#8221;. The CLI tool that comes with the application server uses this interface, and user can develop custom clients that use it as well. By default, WildFly management interface listens on 127.0.0.1. When running inside a Docker container, the network interface should be bound to all publicly assigned addresses. This can be easily changed by biding to 0.0.0.0 instead of 127.0.0.1.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Start another WildFly instance again:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.</p>
+</div>
+</li>
+<li>
+<p>Create a new server adapter in JBoss Developer Studio and name it &#8220;WildFly 9.0.0-Management&#8221;. Specify the host name as &#8216;dockerhost&#8217;.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds8.png" alt="jbds8">
+</div>
+</div>
+</li>
+<li>
+<p>Click on &#8216;Next&gt;&#8217; and change the values as shown.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds9.png" alt="jbds9">
+</div>
+<div class="title">Figure 21. Create New Server Adapter</div>
+</div>
+</li>
+<li>
+<p>Take the default values in &#8216;Remote System Integration&#8217; and click on &#8216;Finish&#8217;.</p>
+</li>
+<li>
+<p>Change server properties by double clicking on the newly created server adapter. Specify admin credentials (username: docker, password: docker#admin). Note, you need to delete the existing password and use this instead:</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds10.png" alt="jbds10">
+</div>
+<div class="title">Figure 22. Management Login Credentials</div>
+</div>
+</li>
+<li>
+<p>Right-click on the newly created server adapter and click &#8216;Start&#8217;. Status quickly changes to &#8216;Started&#8217; as shown.</p>
+<div class="imageblock">
+<div class="content">
+<img src="chapters/images/jbds11.png" alt="jbds11">
+</div>
+<div class="title">Figure 23. Synchronized WildFly Server</div>
+</div>
+</li>
+<li>
+<p>Right-click on the javaee7-simple-sample project, select &#8216;Run on Server&#8217; and choose this server. The project runs and displays the start page of the application.</p>
+</li>
+<li>
+<p>Stop WildFly when you&#8217;re done.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker stop wildfly</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Docker_Compose">8. Multiple Containers Using Docker Compose</h2>
 <div class="sectionbody">
 <div class="quoteblock">
 <blockquote>
@@ -1951,7 +2394,7 @@ Docker Compose is a tool for defining and running complex applications with Dock
 <p>Docker Compose script is only available for OSX and Linux. <a href="https://github.com/arun-gupta/docker-java/issues/3" class="bare">https://github.com/arun-gupta/docker-java/issues/3</a> is used for tracking Docker Compose on Windows.</p>
 </div>
 <div class="sect2">
-<h3 id="_configuration_file">7.1. Configuration File</h3>
+<h3 id="_configuration_file">8.1. Configuration File</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2000,7 +2443,7 @@ Docker Compose is a tool for defining and running complex applications with Dock
 </div>
 </div>
 <div class="sect2">
-<h3 id="_start_services">7.2. Start Services</h3>
+<h3 id="_start_services">8.2. Start Services</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2096,7 +2539,7 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verify_application">7.3. Verify Application</h3>
+<h3 id="_verify_application">8.3. Verify Application</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2108,11 +2551,11 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 <div class="content">
 <img src="chapters/images/docker-compose-output.png" alt="docker compose output">
 </div>
-<div class="title">Figure 9. Output From Servers Run Using Docker Compose</div>
+<div class="title">Figure 24. Output From Servers Run Using Docker Compose</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stop_services">7.4. Stop Services</h3>
+<h3 id="_stop_services">8.4. Stop Services</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -2154,7 +2597,7 @@ wildfly_1 | ]&quot;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_remove_containers">7.5. Remove Containers</h3>
+<h3 id="_remove_containers">8.5. Remove Containers</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -2168,7 +2611,7 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scale_services">7.6. Scale Services</h3>
+<h3 id="_scale_services">8.6. Scale Services</h3>
 <div class="paragraph">
 <p><a href="https://github.com/arun-gupta/docker-java/issues/51" class="bare">https://github.com/arun-gupta/docker-java/issues/51</a></p>
 </div>
@@ -2176,18 +2619,18 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="Docker_Swarm">8. Java EE Application on Docker Swarm Cluster</h2>
+<h2 id="Docker_Swarm">9. Java EE Application on Docker Swarm Cluster</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Docker Swarm is native clustering for Docker. It allows you create and access to a pool of Docker hosts using the full suite of Docker tools. Because Docker Swarm serves the standard Docker API, any tool that already communicates with a Docker daemon can use Swarm to transparently scale to multiple hosts</p>
 </div>
 <div class="sect2">
-<h3 id="_key_components_of_docker_swarm">8.1. Key Components of Docker Swarm</h3>
+<h3 id="_key_components_of_docker_swarm">9.1. Key Components of Docker Swarm</h3>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/docker-swarm-components.png" alt="docker swarm components">
 </div>
-<div class="title">Figure 10. Key Components of Docker Swarm</div>
+<div class="title">Figure 25. Key Components of Docker Swarm</div>
 </div>
 <div class="paragraph">
 <p><strong>Swarm Manager</strong>: Docker Swarm has a Manager, that is a pre-defined Docker Host, and is a single point for all administration. The swarm manager orchestrates and schedules containers on the entire cluster. Currently only a single instance of manager is allowed in the cluster. This is a SPOF for high availability architectures and additional managers will be allowed in a future version of Swarm with <a href="https://github.com/docker/swarm/issues/598">#598</a>.</p>
@@ -2209,7 +2652,7 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_create_a_docker_swarm_cluster">8.2. Create a Docker Swarm Cluster</h3>
+<h3 id="_create_a_docker_swarm_cluster">9.2. Create a Docker Swarm Cluster</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2445,7 +2888,7 @@ Total Memory: 3.065 GiB</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster">8.3. Deploy Java EE Application to Docker Swarm Cluster</h3>
+<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster">9.3. Deploy Java EE Application to Docker Swarm Cluster</h3>
 <div class="paragraph">
 <p>The complete cluster is in place now, and we need to deploy the Java EE application to it.</p>
 </div>
@@ -2540,7 +2983,7 @@ ababc544df97        mysql                             &quot;/entrypoint.sh mysq 
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">8.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</h3>
+<h3 id="_deploy_java_ee_application_to_docker_swarm_cluster_using_docker_compose">9.4. Deploy Java EE Application to Docker Swarm Cluster using Docker Compose</h3>
 <div class="paragraph">
 <p><a href="#Docker_Compose">Multiple Containers Using Docker Compose</a> explains how multi container applications can be easily started using Docker Compose.</p>
 </div>
@@ -2658,7 +3101,7 @@ ac9c967e4b1d        mysql:latest                      &quot;/entrypoint.sh mysq 
 </div>
 </div>
 <div class="sect1">
-<h2 id="Common_Docker_Commands">9. Common Docker Commands</h2>
+<h2 id="Common_Docker_Commands">10. Common Docker Commands</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>Here is the list of commonly used Docker commands:</p>
@@ -2774,10 +3217,10 @@ ac9c967e4b1d        mysql:latest                      &quot;/entrypoint.sh mysq 
 </div>
 </div>
 <div class="sect1">
-<h2 id="_troubleshooting">10. Troubleshooting</h2>
+<h2 id="_troubleshooting">11. Troubleshooting</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_network_timed_out">10.1. Network Timed Out</h3>
+<h3 id="_network_timed_out">11.1. Network Timed Out</h3>
 <div class="paragraph">
 <p>Depending upon the network speed and restrictions, you may not be able to download Docker images from Docker Hub. The error message may look like:</p>
 </div>
@@ -2793,7 +3236,7 @@ Network timed out while trying to connect to https://index.docker.io/v1/reposito
 <p>This section provide a couple of alternatives to solve this.</p>
 </div>
 <div class="sect3">
-<h4 id="_restart_docker_machine">10.1.1. Restart Docker Machine</h4>
+<h4 id="_restart_docker_machine">11.1.1. Restart Docker Machine</h4>
 <div class="paragraph">
 <p>It seems like Docker Machine gets into a strange state and restarting it fixes that.</p>
 </div>
@@ -2805,7 +3248,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_loading_images_offline">10.1.2. Loading Images Offline</h4>
+<h4 id="_loading_images_offline">11.1.2. Loading Images Offline</h4>
 <div class="paragraph">
 <p>Images can be downloaded from a previously saved <code>.tar</code> file. All images required for this workshop can be downloaded from:</p>
 </div>
@@ -2834,7 +3277,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cannot_create_docker_machine_on_windows">10.2. Cannot create Docker Machine on Windows</h3>
+<h3 id="_cannot_create_docker_machine_on_windows">11.2. Cannot create Docker Machine on Windows</h3>
 <div class="paragraph">
 <p>Are you not able to create Docker Machine on Windows?</p>
 </div>
@@ -2843,7 +3286,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_no_route_to_host">10.3. No route to host</h3>
+<h3 id="_no_route_to_host">11.3. No route to host</h3>
 <div class="paragraph">
 <p>Accessing the WildFly and MySQL sample in Kubernetes gives 404 when you give the command <code>curl <a href="http://10.246.1.23:8080/employees/resources/employees/" class="bare">http://10.246.1.23:8080/employees/resources/employees/</a></code>.</p>
 </div>
@@ -2863,7 +3306,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_references">11. References</h2>
+<h2 id="_references">12. References</h2>
 <div class="sectionbody">
 <div class="olist arabic">
 <ol class="arabic">
@@ -2886,7 +3329,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2015-10-13 15:00:32 EDT
+Last updated 2015-10-13 19:00:17 EDT
 </div>
 </div>
 </body>
