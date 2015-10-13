@@ -99,6 +99,8 @@ If you're executing commands in the Babun bash from here on, make sure to keep i
 
 ### Set up DNS
 
+NOTE: This is one of the most importants steps of the process. The DNS should be working so students can resolve the proper resources.
+
 There is no in-built support for DNS and so this needs to be configured. Currently this works only on Mac and Linux, and need to be fixed for Windows https://github.com/javaee-samples/docker-java/issues/61[#61].
 
 . Edit `/etc/hosts` (Mac OS / Linux)
@@ -158,6 +160,7 @@ sudo yum -­y install dnsmasq
 [source, text]
 ----
 nameserver  <INSTRUCTOR_IP>
+nameserver  8.8.8.8
 ----
 
 Test if DNSMasq is working:
@@ -188,7 +191,7 @@ eval "$(docker-machine env instructor-machine)"
 ----
 
 +
-IMPORTANT: If you change your network, you may need to restart your docker machine:  
+IMPORTANT: If you change your network, you may need to restart your docker machine:
 [source, text]
 ----
 docker-machine restart instructor-machine
@@ -214,8 +217,8 @@ VBoxManage controlvm "instructor-machine" natpf1 "tcp-port10022,tcp,,10022,,1002
 VBoxManage controlvm "instructor-machine" natpf1 "tcp-port10080,tcp,,10080,,10080";
 ----
 
-This is available as a script in https://github.com/javaee-samples/docker-java/blob/master/instructor/virtualbox-ports.sh.
-A Windows version in https://github.com/javaee-samples/docker-java/blob/master/instructor/virtualbox-ports.bat
+This is available as a script in https://github.com/redhat-developer/docker-java/tree/javaone2015/instructor/virtualbox-ports.sh .
+A Windows version in https://github.com/redhat-developer/docker-java/tree/javaone2015/instructor/virtualbox-ports.bat  .
 
 ## Container with Nexus Dependencies
 
@@ -227,8 +230,8 @@ We want to provide an option to run this lab without any Internet access. So, th
 docker run --name="nexusdata" -v $(pwd):/backup sonatype/nexus:oss bash -c "tar xvf  /backup/nexusbackup.tar -C /"
 ----
 
-NOTE: Running Windows, make sure to copy the `nexusbackup.tar` to the following folder `c:/Users/<username>/docker-hol` and make sure to update the docker run command accordingly.
-The folder permissions in Windows don't allow for a location of your choice. 
+IMPORTANT: Running Windows, make sure to copy the `nexusbackup.tar` to the following folder `c:/Users/<username>/docker-hol` and make sure to update the docker run command accordingly.
+The folder permissions in Windows don't allow for a location of your choice.
 
 This will download the Nexus image on Docker host and populate it with the Nexus dependencies.
 
@@ -263,7 +266,7 @@ d9474c2a56d0        sonatype/nexus:oss         "/bin/sh -c 'java      4 minutes 
 
 Test if the servers are running:
 
-. Docker Registry [http://localhost:5000/v2/]
+. Docker Registry [http://localhost:5000/]
 +
 image::images/registry-default-output.png[]
 +

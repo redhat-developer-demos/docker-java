@@ -52,7 +52,8 @@ When the download is done, you can list the images again and will see the follow
 ----
 docker images
 REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-classroom.example.com:5000/wildfly   latest              7688aaf382ab        5 weeks ago         581.4 MB
+classroom.example.com:5000/wildfly   latest              7688aaf382ab        6 weeks ago         581.4 MB
+classroom.example.com:5000/swarm     latest              207e8b983242        9 weeks ago         10.2 MB
 ----
 
 ### Run Container
@@ -83,15 +84,19 @@ This will show the output as:
 =========================================================================
 
 OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
-00:44:43,895 INFO  [org.jboss.modules] (main) JBoss Modules version 1.4.3.Final
-00:44:44,184 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
-00:44:44,267 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 9.0.0.Final (WildFly Core 1.0.0.Final) starting
-
-. . .
-
-00:46:54,241 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
-00:46:54,243 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
-00:46:54,250 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.0.Final (WildFly Core 1.0.0.Final) started in 4256ms - Started 203 of 379 services (210 services are lazy, passive or on-demand)
+17:02:58,000 INFO  [org.jboss.modules] (main) JBoss Modules version 1.4.3.Final
+17:02:58,251 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
+17:02:58,311 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) starting
+17:02:59,558 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 11) WFLYCTL0028: Attribute 'job-repository-type' in the resource at address '/subsystem=batch' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+17:02:59,560 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 3) WFLYCTL0028: Attribute 'enabled' in the resource at address '/subsystem=datasources/data-source=ExampleDS' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+...
+17:03:00,610 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) WFLYUT0006: Undertow HTTP listener default listening on /0.0.0.0:8080
+17:03:00,715 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-2) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+17:03:00,881 INFO  [org.jboss.ws.common.management] (MSC service thread 1-1) JBWS022052: Starting JBoss Web Services - Stack CXF Server 5.0.0.Final
+17:03:00,891 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-2) WFLYDS0013: Started FileSystemDeploymentService for directory /opt/jboss/wildfly/standalone/deployments
+17:03:01,131 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
+17:03:01,133 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+17:03:01,138 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) started in 3431ms - Started 203 of 379 services (210 services are lazy, passive or on-demand)
 ----
 
 This shows that the server started correctly, congratulations!
@@ -106,7 +111,7 @@ Restart the container in detached mode:
 
 [source, text]
 ----
-docker run -d classroom.example.com:5000/wildfly
+docker run --name mywildfly -d classroom.example.com:5000/wildfly
 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 ----
 
@@ -116,7 +121,7 @@ The output is the unique id assigned to the container. Check the logs as:
 
 [source, text]
 ----
-> docker logs 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
+> docker logs mywildfly
 =========================================================================
 
   JBoss Bootstrap Environment
@@ -131,8 +136,8 @@ We can check it by issuing the `docker ps` command which retrieves the images pr
 [source, text]
 ----
 > docker ps
-CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                    NAMES
-922abbb9c63a        classroom.example.com:5000/wildfly       "/opt/jboss/wildfly/   3 seconds ago       Up 2 seconds        8080/tcp            desperate_lovelace
+CONTAINER ID        IMAGE                                COMMAND                CREATED              STATUS              PORTS               NAMES
+7da1c7614edf        classroom.example.com:5000/wildfly   "/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly
 ----
 
 Also try `docker ps -a` to see all the containers on this machine.
@@ -147,14 +152,14 @@ If you want containers to accept incoming connections, you will need to provide 
 
 [source, text]
 ----
-docker stop `docker ps | grep wildfly | awk '{print $1}'`
+docker stop mywildfly
 ----
 
 Restart the container as:
 
 [source, text]
 ----
-docker run -d -P classroom.example.com:5000/wildfly
+docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host. This can be verified as:
@@ -163,7 +168,7 @@ docker run -d -P classroom.example.com:5000/wildfly
 ----
 > docker ps
 CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                     NAMES
-63a69bff9c69        classroom.example.com:5000/wildfly       "/opt/jboss/wildfly/   14 seconds ago      Up 13 seconds       0.0.0.0:32768->8080/tcp   kickass_bohr
+7f41a5a0cfd6        classroom.example.com:5000/wildfly   "/opt/jboss/wildfly/   52 seconds ago      Up 52 seconds       0.0.0.0:32768->8080/tcp   mywildfly-exposed-ports
 ----
 
 The port mapping is shown in the `PORTS` column. Access the WildFly server at http://dockerhost:32768. Make sure to use the correct port number as shown in your case.
@@ -176,14 +181,14 @@ Lets stop the previously running container as:
 
 [source, text]
 ----
-docker stop `docker ps | grep wildfly | awk '{print $1}'`
+docker stop mywildfly-exposed-ports
 ----
 
 Restart the container as:
 
 [source, text]
 ----
-docker run -it -p 8080:8080 classroom.example.com:5000/wildfly
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly
 ----
 
 The format is `-p hostPort:containerPort`. This option maps container ports to host ports and allows other containers on our host to access them.
@@ -196,6 +201,13 @@ See more about networking on the Docker website link:https://docs.docker.com/art
 ===============================
 
 Now we're ready to test http://dockerhost:8080 again. This works with the exposed port, as expected.
+
+Lets stop the previously running container as:
+
+[source, text]
+----
+docker stop mywildfly-mapped-ports
+----
 
 .Welcome WildFly
 image::plain-wildfly1.png[]
@@ -211,14 +223,14 @@ The following command will override the default command in Docker file, start Wi
 
 [source, text]
 ----
-docker run -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
 ----
 
 Accessing WildFly Administration Console require a user in administration realm. A pre-created image, with appropriate username/password credentials, is used to start WildFly as:
 
 [source, text]
 ----
-docker run -P -d classroom.example.com:5000/wildfly-management
+docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host.
@@ -229,7 +241,8 @@ Look at the exposed ports as:
 ----
 docker ps
 CONTAINER ID        IMAGE                                           COMMAND                CREATED             STATUS              PORTS                                              NAMES
-af7d6914a1f9        classroom.example.com:5000/wildfly-management   "/opt/jboss/wildfly/   2 seconds ago       Up 1 seconds        0.0.0.0:32770->8080/tcp, 0.0.0.0:32769->9990/tcp   happy_bardeen
+5fdedef5573b        classroom.example.com:5000/wildfly-management   "/bin/sh -c '/opt/jb   15 seconds ago      Up 15 seconds       0.0.0.0:32772->8080/tcp, 0.0.0.0:32771->9990/tcp   managed-wildfly-from-image
+ee30433b5414        classroom.example.com:5000/wildfly              "/opt/jboss/wildfly/   59 seconds ago      Up 59 seconds       0.0.0.0:32769->8080/tcp                            managed-wildfly
 ----
 
 Look for the host port that is mapped in the container, `32769` in this case. Access the admin console at http://dockerhost:32769.
@@ -259,7 +272,7 @@ The exact mapped port can also be found as:
 +
 [source, text]
 ----
-docker port 6f610b310a46
+docker port managed-wildfly-from-image
 ----
 +
 to see the output as:
@@ -274,7 +287,7 @@ to see the output as:
 +
 [source, text]
 ----
-docker inspect --format='{{(index (index .NetworkSettings.Ports "9990/tcp") 0).HostPort}}' <CONTAINER ID>
+docker inspect --format='{{(index (index .NetworkSettings.Ports "9990/tcp") 0).HostPort}}' managed-wildfly-from-image
 ----
 
 [[Management_Fixed_Port_Mapping]]
@@ -310,7 +323,7 @@ docker stop <CONTAINER ID>
 +
 [source, text]
 ----
-docker stop $(docker ps -aq)
+docker stop `docker ps -aq`
 ----
 +
 . Stop only the exited containers
@@ -340,5 +353,5 @@ docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm
 +
 [source, text]
 ----
-docker rm $(docker ps -aq)
+docker rm `docker ps -aq`
 ----
