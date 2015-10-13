@@ -24,23 +24,22 @@ include::chapters/docker-javaee7.adoc[]
 
 include::chapters/docker-container-linking.adoc[]
 
+////
 include::chapters/docker-deployment-options.adoc[]
 
-////
 include::chapters/docker-ticket-monster.adoc[]
-////
 
 include::chapters/docker-maven.adoc[]
 
 include::chapters/docker-eclipse.adoc[]
 
-////
 include::chapters/docker-netbeans.adoc[]
 
 include::chapters/docker-intellij.adoc[]
-////
 
 include::chapters/docker-testing.adoc[]
+////
+
 
 include::chapters/docker-compose.adoc[]
 
@@ -51,9 +50,9 @@ include::chapters/docker-mod-cluster.adoc[]
 
 include::chapters/docker-swarm.adoc[]
 
-include::chapters/docker-kubernetes.adoc[]
-
 ////
+iinclude::chapters/docker-kubernetes.adoc[]
+
 include::chapters/docker-continuous-delivery.adoc[]
 
 include::chapters/docker-openshift.adoc[]
