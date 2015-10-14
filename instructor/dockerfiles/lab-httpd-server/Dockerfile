@@ -27,13 +27,13 @@ RUN mkdir -p /var/www/html/downloads/virtualbox
 WORKDIR /var/www/html/downloads/virtualbox
 
 #Get VirtualBox for MAC
-RUN curl -L http://download.virtualbox.org/virtualbox/5.0.4/VirtualBox-5.0.4-102546-OSX.dmg -o VirtualBox-5.0.4-102546-OSX.dmg
+RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103037-OSX.dmg -o VirtualBox-5.0.6-103037-OSX.dmg
 
 #Get VirtualBox for Windows
-RUN curl -L http://download.virtualbox.org/virtualbox/5.0.4/VirtualBox-5.0.4-102546-Win.exe -o VirtualBox-5.0.4-102546-Win.exe
+RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103037-Win.exe -o VirtualBox-5.0.6-103037-Win.exe
 
 #Get VirtualBox for Linux (All Distros)
-RUN curl -L http://download.virtualbox.org/virtualbox/5.0.4/VirtualBox-5.0.4-102546-Linux_amd64.run -o VirtualBox-5.0.4-102546-Linux_amd64.run
+RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103037-Linux_amd64.run -o VirtualBox-5.0.6-103037-Linux_amd64.run
 
 WORKDIR /var/www/html/downloads
 

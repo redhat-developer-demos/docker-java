@@ -24,7 +24,7 @@ There are lots of other concepts but these are the main ones.
 
 . The easiest way of using Swarm is, by using the official Docker image:
 
-  docker run swarm create
+  docker run --rm classroom.example.com:5000/swarm create
 +
 This command returns a discovery token, referred as <TOKEN> in this document, and is the unique cluster id. It will be used when creating master and nodes later. This cluster id is returned by the hosted discovery service on Docker Hub.
 +
@@ -32,7 +32,7 @@ It shows the output as:
 +
 [source, text]
 ----
-docker run swarm create
+docker run --rm classroom.example.com:5000/swarm create
 Unable to find image 'swarm:latest' locally
 latest: Pulling from swarm
 55b38848634f: Pull complete 
@@ -56,7 +56,7 @@ NOTE: Make sure to note this cluster id now as there is no means to list it late
 +
 [source, text]
 ----
-docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://<TOKEN> swarm-master
+docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://<token> swarm-master
 ----
 +
 Replace `<TOKEN>` with the cluster id obtained in the previous step. 
@@ -109,14 +109,15 @@ Labels:
 +
 . Create a Swarm node
 
- docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-01
+  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-01
 +
 Replace `<TOKEN>` with the cluster id obtained in an earlier step. 
 +
 Node creation talks to the hosted service at Docker Hub and joins the previously created cluster. This is specified by `--swarm-discovery token://...` and specifying the cluster id obtained earlier.
 . To make it a real cluster, let's create a second node:
 
-  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-02
+  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-02
+  
 +
 Replace `<TOKEN>` with the cluster id obtained in the previous step. 
 
@@ -131,7 +132,6 @@ This shows the output similar to the one below:
 docker-machine ls
 NAME            ACTIVE   DRIVER       STATE     URL                         SWARM
 lab                      virtualbox   Running   tcp://192.168.99.101:2376   
-summit2015               virtualbox   Running   tcp://192.168.99.100:2376   
 swarm-master    *        virtualbox   Running   tcp://192.168.99.102:2376   swarm-master (master)
 swarm-node-01            virtualbox   Running   tcp://192.168.99.103:2376   swarm-master
 swarm-node-02            virtualbox   Running   tcp://192.168.99.104:2376   swarm-master
@@ -203,7 +203,7 @@ Swarm takes care for the distribution of deployments across the nodes. The only 
 +
 [source, text]
 ----
-docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql
 ----
 +
 `-e` define environment variables that are read by the database at startup and allow us to access the database with this user and password.
@@ -212,7 +212,7 @@ docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_D
 +
 [source, text]
 ----
-docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7
 ----
 +
 This is using the https://docs.docker.com/userguide/dockerlinks/[Docker Container Linking] explained earlier.
@@ -253,10 +253,12 @@ Total Memory: 3.065 GiB
 ----
 > eval "$(docker-machine env swarm-node-02)"
 > docker ps -a
-CONTAINER ID        IMAGE                             COMMAND                CREATED              STATUS              PORTS                    NAMES
-805f3587f5df        arungupta/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   About a minute ago   Up About a minute   0.0.0.0:8080->8080/tcp   mywildfly           
-ababc544df97        mysql                             "/entrypoint.sh mysq   5 minutes ago        Up 5 minutes        0.0.0.0:3306->3306/tcp   mysqldb             
-45b015bc79f4        swarm:latest                      "/swarm join --addr    17 minutes ago       Up 17 minutes       2375/tcp                 swarm-agent    
+[source, text]
+----
+CONTAINER ID        IMAGE                                              COMMAND                CREATED             STATUS              PORTS                     NAMES
+35325d730c97        classroom.example.com:5000/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
+dd3525575b12        classroom.example.com:5000/mysql                   "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
+e9f655cbcb4b        swarm:latest                                       "/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent
 ----
 +
 . Access the application as:
@@ -336,10 +338,10 @@ and see the list of running containers as:
 [source, text]
 ----
 docker ps -a
-CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                    NAMES
-b1e7d9bd2c09        arungupta/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   38 seconds ago      Up 37 seconds       0.0.0.0:8080->8080/tcp   wildflymysqljavaee7_mywildfly_1   
-ac9c967e4b1d        mysql:latest                      "/entrypoint.sh mysq   38 seconds ago      Up 38 seconds       3306/tcp                 wildflymysqljavaee7_mysqldb_1     
-45b015bc79f4        swarm:latest                      "/swarm join --addr    20 minutes ago      Up 20 minutes       2375/tcp                 swarm-agent 
+CONTAINER ID        IMAGE                                              COMMAND                CREATED             STATUS              PORTS                     NAMES
+35325d730c97        classroom.example.com:5000/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
+dd3525575b12        classroom.example.com:5000/mysql                   "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
+e9f655cbcb4b        swarm:latest                                       "/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent
 ----
 
 . Application can then be accessed again using:

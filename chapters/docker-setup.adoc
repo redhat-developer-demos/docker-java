@@ -146,21 +146,3 @@ java -jar <JAR FILE NAME>
 ----
 +
 Follow the on-screen instructions to complete the installation process.
-
-### Create Docker Swarm Cluster
-
-Create Docker Swarm cluster as:
-
-[source, text]
-----
-docker run --rm classroom.example.com:5000/swarm create
-----
-
-This will generate a token. Use this token to create a Swarm Master.
-
-[source, text]
-----
-docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://<token> swarm-master
-----
-
-Detailed explanation for this is available in <<Docker_Swarm>>.
