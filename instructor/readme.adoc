@@ -191,7 +191,7 @@ eval "$(docker-machine env instructor-machine)"
 ----
 
 +
-IMPORTANT: If you change your network, you may need to restart your docker machine:
+IMPORTANT: If you change your network, you may need to update your /etc/hosts and restart your dnsmasq server and docker machine:
 [source, text]
 ----
 docker-machine restart instructor-machine
