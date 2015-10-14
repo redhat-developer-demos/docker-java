@@ -26,7 +26,15 @@ An application using Docker containers will typically consist of multiple contai
 | `migrate-to-labels  Recreate containers to add labels
 |====
 
-Docker Compose script is only available for OSX and Linux. https://github.com/arun-gupta/docker-java/issues/3 is used for tracking Docker Compose on Windows.
+NOTE: According to https://docs.docker.com/compose/install/ "You can run Compose on OS X and 64-bit Linux. It is currently not supported on the Windows operating system."
+
+### Install docker compose
+
+[source, txt]
+----
+curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+----
 
 ### Configuration File
 
@@ -35,21 +43,21 @@ Docker Compose script is only available for OSX and Linux. https://github.com/ar
 [source, yml]
 ----
 mysqldb:
-  image: mysql
+  image: classroom.example.com:5000/mysql
   environment:
     MYSQL_DATABASE: sample
     MYSQL_USER: mysql
     MYSQL_PASSWORD: mysql
     MYSQL_ROOT_PASSWORD: supersecret
 mywildfly:
-  image: arungupta/wildfly-mysql-javaee7
+  image: classroom.example.com:5000/wildfly-mysql-javaee7
   links:
     - mysqldb:db
   ports:
-    - 8080:8080
+    - 8080
 ----
 +
-This file is available in https://github.com/javaee-samples/docker-java/raw/master/attendees/docker-compose.yml[] and shows:
+This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/javaone2015/attendees/docker-compose.yml[] and shows:
 +
 .. Two services defined by the name `mysqldb` and `mywildfly`
 .. Image name for each service defined using `image`
@@ -80,7 +88,7 @@ An alternate directory where the compose file exists can be specified using `-p`
         Name                       Command               State                Ports               
 -------------------------------------------------------------------------------------------------
 attendees_mysqldb_1     /entrypoint.sh mysqld            Up      3306/tcp                         
-attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:8080->8080/tcp, 9990/tcp 
+attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32773->8080/tcp
 ----
 +
 This provides a consolidated view of all the services started, and containers within them.
@@ -91,8 +99,8 @@ Alternatively, the containers in this application, and any additional containers
 ----
 > docker ps
 CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                              NAMES
-3598e545bd2f        arungupta/wildfly-mysql-javaee7:latest   "/opt/jboss/wildfly/   59 seconds ago      Up 58 seconds       0.0.0.0:8080->8080/tcp, 9990/tcp   attendees_mywildfly_1   
-b8cf6a3d518b        mysql:latest                             "/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                           attendees_mysqldb_1  
+3598e545bd2f        arungupta/wildfly-mysql-javaee7:latest   "/opt/jboss/wildfly/   59 seconds ago      Up 58 seconds       0.0.0.0:32773->8080/tcp         attendees_mywildfly_1   
+b8cf6a3d518b        mysql:latest                             "/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                      attendees_mysqldb_1  
 ----
 +
 . Service logs can be seen as:
@@ -136,10 +144,50 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 
 ### Verify Application
 
-. Access the application at http://dockerhost:8080/employees/resources/employees/. This is shown in the browser as:
+. Access the application at http://dockerhost:32773/employees/resources/employees/. This is shown in the browser as:
+
+NOTE: Use the port displayed in the `docker-compose ps` command.
 
 .Output From Servers Run Using Docker Compose
 image::docker-compose-output.png[]
+
+### Scale Services
+
+TODO Improve the explanation
+
+You can scale the services up as:
+
+  docker-compose scale mywildfly=4
+  Creating and starting 2... done
+  Creating and starting 3... done
+  Creating and starting 4... done  
+  
+Check the logs...
+
+  docker-compose logs
+  
+Check the running instances:
+
+  docker-compose ps
+  
+[source, text]
+----
+       Name                     Command               State            Ports
+-------------------------------------------------------------------------------------
+rafael_mysqldb_1     /entrypoint.sh mysqld            Up      3306/tcp
+rafael_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32773->8080/tcp
+rafael_mywildfly_2   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32777->8080/tcp
+rafael_mywildfly_3   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32780->8080/tcp
+rafael_mywildfly_4   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32781->8080/tcp
+----
+
+You can also decide to reduce the number of running instances:
+
+  docker-compose scale mywildfly=2
+  Stopping rafael_mywildfly_3... done
+  Stopping rafael_mywildfly_4... done
+  Removing rafael_mywildfly_3... done
+  Removing rafael_mywildfly_4... done
 
 ### Stop Services
 
@@ -147,6 +195,7 @@ Stop the services as:
 
   docker-compose stop
   Stopping attendees_mywildfly_1...
+  Stopping attendees_mywildfly_2...
   Stopping attendees_mysqldb_1...
 
 [WARNING]
@@ -172,12 +221,10 @@ This is expected because the JDBC resource is created during every run of the co
 
 Stop the services as:
 
-  docker-compose rm -f
-  Going to remove attendees_mywildfly_1, attendees_mysqldb_1
-  Removing attendees_mywildfly_1... done
-  Removing attendees_mysqldb_1... done
-
-### Scale Services
-
-https://github.com/arun-gupta/docker-java/issues/51
+  docker-compose rm
+  Going to remove rafael_mywildfly_4, rafael_mywildfly_3, rafael_mywildfly_2, rafael_mywildfly_1, rafael_mysqldb_1
+  Are you sure? [yN] y
+  Removing rafael_mywildfly_2... done
+  Removing rafael_mywildfly_1... done
+  Removing rafael_mysqldb_1... done
 
