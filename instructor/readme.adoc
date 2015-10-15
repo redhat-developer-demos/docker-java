@@ -10,6 +10,7 @@ Instructor needs:
 
 . Docker Registry server
 . Boot2docker served by a local HTTP Server
+. Local DNS Server
 . Nexus Proxy
 
 NOTE: All instructions are to be run from the `instructor` directory.
@@ -36,6 +37,8 @@ NOTE: All instructions are to be run from the `instructor` directory.
 . Webbrowser
 .. https://www.google.com/chrome/browser/desktop/[Chrome]
 .. link:http://www.getfirefox.com[Firefox]
+. DNS
+.. Windows: http://www.simpledns.com/download.aspx[Simple DNS]
 
 
 ## Install Docker Client
