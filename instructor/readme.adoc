@@ -201,6 +201,7 @@ Go to the adapter settings of your classroom pc's and open the Wireless Network 
 [[Figure1-3]]
 image::images/dns-setup-3.png["Attendee DNS Setup"]
 
+ping classroom.example.com and verify it works.
 
 ### Create Machine
 

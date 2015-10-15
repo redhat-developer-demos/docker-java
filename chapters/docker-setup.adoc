@@ -9,15 +9,24 @@ This section describes what, how, and where to install the software needed for t
 
 ### Environment
 
+#### DNS Server setup Linux/Mac OS
+
 . Edit `/etc/resolv.conf` (Mac OS or Linux) and leave it as:
 
-TODO - Add instructions for Windows
-+
 [source, text]
 ----
 nameserver <INSTRUCTOR IP ADDRESS>
 ----
 
+#### DNS Server setup Windows
+
+Go to the adapter settings of your pc's and open the Wireless Network Connection Properties Dialogue. Edit the IPv4 Properties and add the instructor IP (!) as a primary DNS server.
+
+.Attendee DNS setup
+[[Figure1-3]]
+image::images/dns-setup-3.png["Attendee DNS Setup"]
+
+Switch to the cmd and ping classroom.example.com to verify it works.
 
 ### Software
 
