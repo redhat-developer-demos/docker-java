@@ -257,7 +257,7 @@ Create a container with Nexus dependencies.
 We want to provide an option to run this lab without any Internet access. So, the instructor machine will contain everything that the attendees will need to run this lab.
 [source, text]
 ----
-docker run --name="nexusdata" -v $(pwd):/backup sonatype/nexus:oss bash -c "tar xvf  /backup/nexusbackup.tar -C /"
+docker run --name="data-volume" -v $(pwd):/backup -v /var/lib/registry -v /home/git/data -v /var/lib/postgresql sonatype/nexus:oss  bash -c "tar xvf  /backup/nexusbackup.tar -C /"
 ----
 
 IMPORTANT: Running Windows, make sure to copy the `nexusbackup.tar` to the following folder `c:/Users/<username>/docker-hol` and make sure to update the docker run command accordingly.

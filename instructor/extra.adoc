@@ -28,7 +28,7 @@ If you need to update the nexusbackup.tar file, run the following command:
 
 [source, text]
 ----
-docker run --rm --volumes-from nexusdata -v  $(pwd):/backup ubuntu tar cvf /backup/nexusbackup.tar /sonatype-work
+docker run --rm --volumes-from data-volume -v  $(pwd):/backup ubuntu tar cvf /backup/nexusbackup.tar /sonatype-work
 ----
 
 This will compress the contents of /sonatype-work folder from the nexusdata container in to a file called nexusbackup.tar

@@ -7,8 +7,8 @@ registry:
    - SETTINGS_FLAVOR=local
    - SEARCH_BACKEND=sqlalchemy
    - STORAGE_PATH=/var/lib/registry
-  volumes:
-    - /srv/docker/registry_v1:/var/lib/registry
+  volumes_from:
+    - data-volume
   restart: always
 httpserver:
   build: dockerfiles/lab-httpd-server/
@@ -20,16 +20,16 @@ nexus:
   ports:
     - "8081:8081"
   volumes_from:
-    - nexusdata
+    - data-volume
   restart: always
 postgresqlgitlab:
-  image: sameersbn/postgresql:9.4
+  image: quay.io/sameersbn/postgresql:9.4-5
   environment:
     - DB_USER=gitlab
     - DB_PASS=password
     - DB_NAME=gitlabhq_production
-  volumes:
-    - /srv/docker/gitlab/postgresql:/var/lib/postgresql
+  volumes_from:
+    - data-volume
   restart: always
 redisgitlab:
   image: sameersbn/redis:latest
@@ -37,7 +37,7 @@ redisgitlab:
     - /srv/docker/gitlab/redis:/var/lib/redis
   restart: always
 gitlab:
-  image: sameersbn/gitlab:7.10.4
+  image: quay.io/sameersbn/gitlab:8.0.5
   links:
     - redisgitlab:redisio
     - postgresqlgitlab:postgresql
@@ -55,6 +55,7 @@ gitlab:
     - GITLAB_PROJECTS_MERGE_REQUESTS=false
     - GITLAB_PROJECTS_WIKI=false
     - GITLAB_BACKUPS=disable
-  volumes:
-    - /srv/docker/gitlab/gitlab:/home/git/data
+    - GITLAB_SECRETS_DB_KEY_BASE=HQLS2pfZGZBtHlmKJrJw7Tm5QRkCQ3rKlbQBqpJWVXmkRbMRsdGMRNcrDz87zTTf
+  volumes_from:
+    - data-volume
   restart: always
