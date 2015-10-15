@@ -30,7 +30,7 @@ WORKDIR /var/www/html/downloads/virtualbox
 RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103037-OSX.dmg -o VirtualBox-5.0.6-103037-OSX.dmg
 
 #Get VirtualBox for Windows
-RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103037-Win.exe -o VirtualBox-5.0.6-103037-Win.exe
+RUN curl -L http://download.virtualbox.org/virtualbox/5.0.0/VirtualBox-5.0.0-101573-Win.exe -o VirtualBox-5.0.0-101573-Win.exe
 
 #Get VirtualBox for Linux (All Distros)
 RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103037-Linux_amd64.run -o VirtualBox-5.0.6-103037-Linux_amd64.run
@@ -38,7 +38,7 @@ RUN curl -L http://download.virtualbox.org/virtualbox/5.0.6/VirtualBox-5.0.6-103
 WORKDIR /var/www/html/downloads
 
 #Get Git for Windows
-RUN curl -L https://github.com/msysgit/msysgit/releases/download/Git-1.9.5-preview20150319/Git-1.9.5-preview20150319.exe -o Git-1.9.5-preview20150319.exe
+RUN curl -L https://github.com/git-for-windows/git/releases/download/v2.6.1.windows.1/Git-2.6.1-64-bit.exe -o Git-2.6.1-64-bit.exe
 
 RUN mkdir -p /var/www/html/downloads/docker
 WORKDIR /var/www/html/downloads/docker
