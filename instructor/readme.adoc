@@ -73,8 +73,11 @@ curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ----
 
+[IMPORTANT]
+====
 Docker Compose is not natively supported on Windows and thus requires a workaround as specfied at http://blog.eisele.net/2015/06/docker-compose-on-windows-with-python.html.
 You need to install Babun and Python to get further from here on.
+====
 
 ## Install and Configure Docker Machine
 Install the Docker machine client for your environment: https://github.com/docker/machine/releases/[latest releases]
