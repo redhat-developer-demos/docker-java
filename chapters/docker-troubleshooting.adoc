@@ -1,5 +1,10 @@
 == Troubleshooting
 
+=== Can't resolve classroom.example.com
+. Make sure to add the instructor IP as DNS server to your system
+. On Windows temporarily disable IPv6 (we're only supporting IPv4)
+
+
 === Network Timed Out
 
 Depending upon the network speed and restrictions, you may not be able to download Docker images from Docker Hub. The error message may look like:
@@ -47,6 +52,10 @@ docker load -i arungupta-javaee7-hol.tar
 Now `docker images` should show the image.
 
 === Cannot create Docker Machine on Windows
+
+Double check, that you have the correct version of VirtualBox installed.
+Clear all host-adapter interfaces in Virtualbox before creating a new machine.
+Make sure to have git for windows in your path.
 
 Are you not able to create Docker Machine on Windows?
 

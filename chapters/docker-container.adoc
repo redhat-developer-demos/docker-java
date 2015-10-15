@@ -11,14 +11,22 @@ Let's first check, if any images are available:
 docker images
 ----
 
-At first, this list is empty. Now, let's get a vanilla `jboss/wildfly` image:
+At first, this list only contains the Docker swarm image, we used earlier.
+
+[source, text]
+----
+REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+classroom.example.com:5000/swarm     latest              556c60f87888        33 hours ago        10.2 MB----
+----
+
+Now, let's get a vanilla `jboss/wildfly` image:
 
 [source, text]
 ----
 docker pull classroom.example.com:5000/wildfly:latest
 ----
 
-By default, docker images are retrieved from https://hub.docker.com/[Docker Hub].
+By default, docker images are retrieved from https://hub.docker.com/[Docker Hub]. In our case, we're providing a so called private registry via the instructor laptop.
 
 You can see, that Docker is downloading the image with it's different layers.
 
@@ -57,10 +65,12 @@ classroom.example.com:5000/swarm     latest              207e8b983242        9 w
 ----
 
 ### Run Container
+For now, all we did is pull the container description (aka image) down to our local laptops. Now we want to actually run an instance of the image as a so called "container".
 
 #### Interactive Container
-
-Run WildFly container in an interactive mode.
+Typically container run in the background. They are launched and forgotten. And this is the default behaviour for Docker.
+But there is a way we can make them behave like an instance with an interactive console.
+To run the WildFly container in an interactive mode.
 
 [source, text]
 ----
@@ -101,7 +111,7 @@ OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was 
 
 This shows that the server started correctly, congratulations!
 
-By default, Docker runs in the foreground. `-i` allows to interact with the STDIN and `-t` attach a TTY to the process. Switches can be combined together and used as `-it`.
+The switches do the following: `-i` allows to interact with the STDIN and `-t` attach a TTY to the process. Switches can be combined together and used as `-it`.
 
 Hit Ctrl+C to stop the container.
 
@@ -117,11 +127,11 @@ docker run --name mywildfly -d classroom.example.com:5000/wildfly
 
 `-d`, instead of `-it`, runs the container in detached mode.
 
-The output is the unique id assigned to the container. Check the logs as:
+The output is the unique id assigned to the container. You can use it to refer to the container in various contexts. Check the logs as:
 
 [source, text]
 ----
-> docker logs mywildfly
+> docker logs 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 =========================================================================
 
   JBoss Bootstrap Environment
@@ -139,6 +149,15 @@ We can check it by issuing the `docker ps` command which retrieves the images pr
 CONTAINER ID        IMAGE                                COMMAND                CREATED              STATUS              PORTS               NAMES
 7da1c7614edf        classroom.example.com:5000/wildfly   "/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly
 ----
+
+Noticed the "NAMES" column? This is a quick way of refering to your container. Let's try to look at the logs again:
+
+[source, text]
+----
+docker logs mywildfly
+----
+
+That looks easier.
 
 Also try `docker ps -a` to see all the containers on this machine.
 
@@ -162,7 +181,7 @@ Restart the container as:
 docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly
 ----
 
-`-P` map any exposed ports inside the image to a random port on Docker host. This can be verified as:
+`-P` map any exposed ports inside the image to a random port on the Docker host. This can be verified as:
 
 [source, text]
 ----
@@ -210,7 +229,7 @@ docker stop mywildfly-mapped-ports
 ----
 
 .Welcome WildFly
-image::plain-wildfly1.png[]
+image::images/plain-wildfly1.png[]
 
 [[Enabling_WildFly_Administration]]
 ### Enabling WildFly Administration
