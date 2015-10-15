@@ -281,7 +281,7 @@ The username/password credentials are:
 This shows the admin console as:
 
 .Welcome WildFly
-image::wildfly-admin-console.png[]
+image::images/wildfly-admin-console.png[]
 
 ##### Additional Ways To Find Port Mapping
 
