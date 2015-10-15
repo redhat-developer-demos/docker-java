@@ -38,7 +38,7 @@ NOTE: All instructions are to be run from the `instructor` directory.
 .. https://www.google.com/chrome/browser/desktop/[Chrome]
 .. link:http://www.getfirefox.com[Firefox]
 . DNS
-.. Windows: http://www.simpledns.com/download.aspx[Simple DNS]
+.. Windows: http://www.simpledns.com/download.aspx[Simple DNS - trial license!]
 
 
 ## Install Docker Client
@@ -103,7 +103,7 @@ For Windows, make sure to add `c:\Users\<username>\docker` to your `%PATH%` vari
 If you're executing commands in the Babun bash from here on, make sure to keep in mind, that the Path variable is set in Linux/Unix style:
 `PATH=$PATH\:/d/Program\ Files\ \(x86\)/docker ; export PATH`. You have to escape all special characters with a backslash.
 
-### Set up DNS
+### Set up DNS Linux/Mac OS
 
 NOTE: This is one of the most importants steps of the process. The DNS should be working so students can resolve the proper resources.
 
@@ -177,6 +177,29 @@ dig classroom.example.com @127.0.0.1
 
 
 . Make sure that dnsmasq starts automatically follow the instructions from brew or yum.
+
+### Set up DNS Windows
+Windows 7 doesn't provide a DNS server. Install Simple DNS and follow these simple steps to configure it:
+
+Open the Options and navigate to General => DNS => Local Zones => Super Master/Slave to add your ISP's DNS server as ann entry to the Super Slaves box. Close the Options after that.
+
+.Add ISP DNS Server as Super Slave:
+[[Figure1-1]]
+image::images/dns-setup-1.png["Added Super Slave"]
+
+
+Add the classroom.example.com domain as a local zone DNS entry by opening the Records and clicking the new button. Select "Forward Zone" in the wizard, click next. Enter the Zone Name: "example.com" and click finish.
+Right click on the zone example.com and add an "New A-Record": classroom.example.com with your own host ip address.
+
+.DNS classroom entry
+[[Figure1-2]]
+image::images/dns-setup-2.png["DNS Classroom Entry"]
+
+Go to the adapter settings of your classroom pc's and open the Wireless Network Connection Properties Dialogue. Edit the IPv4 Properties and add the instructor IP (!) as a primary DNS server on each of the attendee machines.
+
+.Attendee DNS setup
+[[Figure1-3]]
+image::images/dns-setup-3.png["Attendee DNS Setup"]
 
 
 ### Create Machine
