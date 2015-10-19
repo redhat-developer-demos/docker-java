@@ -134,11 +134,11 @@ Docker Client is used to communicate with Docker Host.
 ----
 # Mac
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-mac -o /usr/local/bin/docker
-chmod +x /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
 
 # Linux
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o docker-latest-linux
-chmod +x /usr/local/bin/docker
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
 
 # Windows
 curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe
