@@ -20,8 +20,8 @@ RUN chmod 644 /var/www/html/downloads/jboss-devstudio-9.0.0.GA-installer-standal
 #Get WildFly 9.0
 RUN curl -L http://download.jboss.org/wildfly/9.0.1.Final/wildfly-9.0.1.Final.zip -o wildfly-9.0.1.Final.zip
 
-#Get Boot2docker 1.8.2
-RUN curl -L https://github.com/boot2docker/boot2docker/releases/download/v1.8.2/boot2docker.iso -o boot2docker.iso
+#Get Boot2docker 1.8.3
+RUN curl -L https://github.com/boot2docker/boot2docker/releases/download/v1.8.3/boot2docker.iso -o boot2docker.iso
 
 RUN mkdir -p /var/www/html/downloads/virtualbox
 WORKDIR /var/www/html/downloads/virtualbox
@@ -59,7 +59,7 @@ RUN curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest -o docker-
 RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o docker-latest-linux
 
 #Get Docker Client Windows
-RUN curl -L http://test.docker.com.s3.amazonaws.com/builds/Windows/x86_64/docker-1.8.2.exe -o docker-1.8.2.exe
+RUN curl -L http://test.docker.com.s3.amazonaws.com/builds/Windows/x86_64/docker-1.8.3.exe -o docker-1.8.3.exe
 
 WORKDIR /var/www/html/downloads
 

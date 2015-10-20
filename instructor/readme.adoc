@@ -47,11 +47,11 @@ Docker Client allows to interact with Docker Host. Download and install by just 
 [source, text]
 ----
 #Linux (Fedora only)
-yum install docker-io
+sudo yum install docker-io
 
 # MacOS / Linux (other distros)
-curl -L  https://get.docker.com/builds/`uname -s`/x86_64/docker-latest > /usr/local/bin/docker
-chmod +x /usr/local/bin/docker
+sudo curl -L  https://get.docker.com/builds/`uname -s`/x86_64/docker-latest -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
 
 #Windows
 Download:
@@ -85,12 +85,12 @@ Install the Docker machine client for your environment: https://github.com/docke
 [source, text]
 ----
 # MacOS
-curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 > /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+sudo curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 
 # Linux
-curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 > /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+sudo curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 
 # Windows
 Download:
@@ -209,7 +209,7 @@ ping classroom.example.com and verify it works.
 +
 [source, text]
 ----
-docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.8.2/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
+docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.8.3/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
 ----
 
 +
@@ -285,13 +285,13 @@ The status of different servers can be verified as:
 [source, text]
 ----
 instructor> docker ps
-CONTAINER ID        IMAGE                          COMMAND                CREATED              STATUS              PORTS                                                   NAMES
-2b546952ebe0        registry:2.1.1             "/bin/registry /etc/   16 seconds ago       Up 14 seconds       0.0.0.0:5000->5000/tcp                                  instructor_registryv2_1
-8002a94bba66        sameersbn/gitlab:7.10.4    "/app/init app:start   About a minute ago   Up 14 seconds       443/tcp, 0.0.0.0:10022->22/tcp, 0.0.0.0:10080->80/tcp   instructor_gitlab_1
-0b3d38f1260a        sameersbn/postgresql:9.4   "/start"               3 minutes ago        Up 14 seconds       5432/tcp                                                instructor_postgresqlgitlab_1
-d9474c2a56d0        sonatype/nexus:oss         "/bin/sh -c 'java      4 minutes ago        Up 14 seconds       0.0.0.0:8081->8081/tcp                                  instructor_nexus_1
-03d18da21234        sameersbn/redis:latest     "/sbin/entrypoint.sh   4 minutes ago        Up 14 seconds       6379/tcp                                                instructor_redisgitlab_1
-78b16649d191        instructor_httpserver      "/run-apache.sh"       4 minutes ago        Up 14 seconds       0.0.0.0:8082->80/tcp                                    instructor_httpserver_1
+CONTAINER ID        IMAGE                                COMMAND                  CREATED             STATUS              PORTS                                                   NAMES
+f3f277aeb757        quay.io/sameersbn/gitlab:8.0.5       "/sbin/entrypoint.sh "   6 hours ago         Up 6 hours          443/tcp, 0.0.0.0:10022->22/tcp, 0.0.0.0:10080->80/tcp   instructor_gitlab_1
+3d6857d98ea9        quay.io/sameersbn/postgresql:9.4-5   "/sbin/entrypoint.sh"    6 hours ago         Up 6 hours          5432/tcp                                                instructor_postgresqlgitlab_1
+58e4aa11f1cf        sonatype/nexus:oss                   "/bin/sh -c 'java   -"   6 hours ago         Up 6 hours          0.0.0.0:8081->8081/tcp                                  instructor_nexus_1
+2b90cf97f618        sameersbn/redis:latest               "/sbin/entrypoint.sh"    6 hours ago         Up 6 hours          6379/tcp                                                instructor_redisgitlab_1
+bd22f0a73ae5        registry:0.9.1                       "docker-registry"        6 hours ago         Up 6 hours          0.0.0.0:5000->5000/tcp                                  instructor_registry_1
+1fff11fa531d        instructor_httpserver                "/run-apache.sh"         6 hours ago         Up 6 hours          0.0.0.0:8082->80/tcp                                    instructor_httpserver_1
 ----
 
 Test if the servers are running:
