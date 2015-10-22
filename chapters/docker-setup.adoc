@@ -9,15 +9,6 @@ This section describes what, how, and where to install the software needed for t
 
 ### Environment
 
-#### DNS Server setup Linux/Mac OS
-
-. Edit `/etc/resolv.conf` (Mac OS or Linux) and leave it as:
-
-[source, text]
-----
-nameserver <INSTRUCTOR IP ADDRESS>
-----
-
 #### DNS Server setup Windows
 
 Go to the adapter settings of your pc's and open the Wireless Network Connection Properties Dialogue. Edit the IPv4 Properties and add the instructor IP (!) as a primary DNS server.
@@ -27,6 +18,16 @@ Go to the adapter settings of your pc's and open the Wireless Network Connection
 image::images/dns-setup-3.png["Attendee DNS Setup"]
 
 Switch to the cmd and ping classroom.example.com to verify it works.
+
+#### DNS Server setup Linux/Mac OS
+
+. Edit `/etc/resolv.conf` (Mac OS or Linux) and leave it as:
+
+[source, text]
+----
+nameserver <INSTRUCTOR IP ADDRESS>
+----
+
 
 ### Software
 
@@ -71,16 +72,16 @@ Docker Machine makes it really easy to create Docker hosts on your computer, on 
 
 [source, text]
 ----
-# Mac
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
-sudo chmod +x /usr/local/bin/docker-machine
+#Windows
+curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe
 
 # Linux (Manual install)
 sudo curl -L  http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
 sudo chmod +x /usr/local/bin/docker-machine
 
-#Windows
-curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe
+# Mac
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 ----
 
 ### Create Lab Docker Host
@@ -132,16 +133,16 @@ Docker Client is used to communicate with Docker Host.
 
 [source, text]
 ----
-# Mac
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-mac -o /usr/local/bin/docker
-sudo chmod +x /usr/local/bin/docker
+# Windows
+curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe
 
 # Linux
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o /usr/local/bin/docker
 sudo chmod +x /usr/local/bin/docker
 
-# Windows
-curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe
+# Mac
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-mac -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
 ----
 
 Check if the client is working by executing:

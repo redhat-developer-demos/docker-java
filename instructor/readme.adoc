@@ -46,18 +46,18 @@ Docker Client allows to interact with Docker Host. Download and install by just 
 
 [source, text]
 ----
+#Windows
+Download:
+https://get.docker.com/builds/Windows/x86_64/docker-latest.exe
+https://get.docker.com/builds/Windows/i386/docker-latest.exe
+And save to c:\Users\<username>\docker\docker.exe
+
 #Linux (Fedora only)
 sudo yum install docker-io
 
 # MacOS / Linux (other distros)
 sudo curl -L  https://get.docker.com/builds/`uname -s`/x86_64/docker-latest -o /usr/local/bin/docker
 sudo chmod +x /usr/local/bin/docker
-
-#Windows
-Download:
-https://get.docker.com/builds/Windows/x86_64/docker-latest.exe
-https://get.docker.com/builds/Windows/i386/docker-latest.exe
-And save to c:\Users\<username>\docker\docker.exe
 ----
 
 ## Install Docker Compose
@@ -84,18 +84,18 @@ Install the Docker machine client for your environment: https://github.com/docke
 
 [source, text]
 ----
-# MacOS
-sudo curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
-sudo chmod +x /usr/local/bin/docker-machine
+# Windows
+Download:
+https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_windows-amd64.exe
+And save to c:\Users\<username>\docker\docker-machine.exe
 
 # Linux
 sudo curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
 sudo chmod +x /usr/local/bin/docker-machine
 
-# Windows
-Download:
-https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_windows-amd64.exe
-And save to c:\Users\<username>\docker\docker-machine.exe
+# MacOS
+sudo curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 ----
 
 For Windows, make sure to add `c:\Users\<username>\docker` to your `%PATH%` variable. This was already done for Linux / MacOs when you downloaded `docker-machine` script to `/usr/local/bin/docker-machine`.
