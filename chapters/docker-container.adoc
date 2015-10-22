@@ -23,8 +23,11 @@ Now, let's get a vanilla `jboss/wildfly` image:
 
 [source, text]
 ----
-docker pull jboss/wildfly:latest #From Internet
-docker pull classroom.example.com:5000/wildfly:latest #From Instructor
+#From Internet
+docker pull jboss/wildfly:latest 
+
+#From Instructor
+docker pull classroom.example.com:5000/wildfly:latest 
 ----
 
 By default, docker images are retrieved from https://hub.docker.com/[Docker Hub]. In our case, we're providing a so called private registry via the instructor laptop.
@@ -75,8 +78,11 @@ To run the WildFly container in an interactive mode.
 
 [source, text]
 ----
-docker run -it jboss/wildfly #From Internet
-docker run -it classroom.example.com:5000/wildfly #From Instructor
+#From Internet
+docker run -it jboss/wildfly 
+
+#From Instructor
+docker run -it classroom.example.com:5000/wildfly 
 ----
 
 This will show the output as:
@@ -123,8 +129,11 @@ Restart the container in detached mode:
 
 [source, text]
 ----
-docker run --name mywildfly -d jboss/wildfly #From Internet
-docker run --name mywildfly -d classroom.example.com:5000/wildfly #From Instructor
+#From Internet
+docker run --name mywildfly -d jboss/wildfly 
+
+#From Instructor
+docker run --name mywildfly -d classroom.example.com:5000/wildfly 
 
 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 ----
@@ -182,8 +191,11 @@ Restart the container as:
 
 [source, text]
 ----
-docker run --name mywildfly-exposed-ports -d -P jboss/wildfly #From Internet
-docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly #From Instructor
+#From Internet
+docker run --name mywildfly-exposed-ports -d -P jboss/wildfly 
+
+#From Instructor
+docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly 
 ----
 
 `-P` map any exposed ports inside the image to a random port on the Docker host. This can be verified as:
@@ -212,8 +224,11 @@ Restart the container as:
 
 [source, text]
 ----
-docker run --name mywildfly-mapped-ports -d -p 8080:8080 jboss/wildfly #From Internet
-docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly #From Instructor
+#From Internet
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 jboss/wildfly 
+
+#From Instructor
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly 
 ----
 
 The format is `-p hostPort:containerPort`. This option maps container ports to host ports and allows other containers on our host to access them.
@@ -248,17 +263,22 @@ The following command will override the default command in Docker file, start Wi
 
 [source, text]
 ----
-docker run --name managed-wildfly -P -d jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 #From Internet
+#From Internet
+docker run --name managed-wildfly -P -d jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 
 
-docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 #From Instructor
+#From Instructor
+docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 
 ----
 
 Accessing WildFly Administration Console require a user in administration realm. A pre-created image, with appropriate username/password credentials, is used to start WildFly as:
 
 [source, text]
 ----
-docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin #From Internet
-docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management #From Instructor
+#From Internet
+docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin 
+
+#From Instructor
+docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host.
@@ -325,8 +345,11 @@ This management image can also be started with a pre-defined port mapping as:
 
 [source, text]
 ----
-docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin #From Internet
-docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management #From Instructor
+#From Internet
+docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin 
+
+#From Instructor
+docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management 
 ----
 
 In this case, Docker port mapping will be shown as:

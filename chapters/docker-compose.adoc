@@ -152,7 +152,7 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 NOTE: Use the port displayed in the `docker-compose ps` command.
 
 .Output From Servers Run Using Docker Compose
-image::docker-compose-output.png[]
+image::images/docker-compose-output.png[]
 
 ### Scale Services
 

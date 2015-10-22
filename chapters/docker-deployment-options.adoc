@@ -9,8 +9,11 @@ We're going to build the application first.
 
 . Clone the repo:
 
-  git clone https://github.com/javaee-samples/javaee7-simple-sample.git #From Internet
-  git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git #From Instructor
+  #From Internet
+  git clone https://github.com/javaee-samples/javaee7-simple-sample.git 
+  
+  #From Instructor
+  git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git 
 
 
 . Build the application:
@@ -42,9 +45,11 @@ Start WildFly server as:
 
 [source, text]
 ----
-docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly #From Internet
+#From Internet
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly 
 
-docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly #From Instructor
+#From Instructor
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly 
 ----
 
 [NOTE]
@@ -145,8 +150,11 @@ Start WildFly server as:
 
 [source, text]
 ----
-docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin #From Internet
-docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management #From Instructor
+#From Internet
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin 
+
+#From Instructor
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management 
 ----
 
 This command starts a container named "`wildfly-managed`".
@@ -223,8 +231,11 @@ A standalone WildFly process, process can be configured to listen for remote man
 +
 [source, text]
 ----
-docker run -d --name wildfly -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin #From Internet
-docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management #From Instructor
+#From Internet
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin 
+
+#From Instructor
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management 
 ----
 +
 In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.

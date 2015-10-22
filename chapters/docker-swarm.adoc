@@ -24,8 +24,11 @@ There are lots of other concepts but these are the main ones.
 
 . The easiest way of using Swarm is, by using the official Docker image:
 
-  docker run --rm swarm create #From Internet
-  docker run --rm classroom.example.com:5000/swarm create #From Instructor
+  #From Internet
+  docker run --rm swarm create 
+  
+  #From Instructor
+  docker run --rm classroom.example.com:5000/swarm create 
 
 This command returns a discovery token, referred as <TOKEN> in this document, and is the unique cluster id. It will be used when creating master and nodes later. This cluster id is returned by the hosted discovery service on Docker Hub.
 
@@ -56,9 +59,11 @@ NOTE: Make sure to note this cluster id now as there is no means to list it late
 +
 [source, text]
 ----
-docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://<token> swarm-master #From Internet
+#From Internet
+docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://<token> swarm-master 
 
-docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://<token> swarm-master #From Instructor
+#From Instructor
+docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://<token> swarm-master 
 ----
 
 Replace `<TOKEN>` with the cluster id obtained in the previous step. 
@@ -111,18 +116,22 @@ Labels:
 
 . Create a Swarm node
 
-  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-01 #From Internet
+  #From Internet
+  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-01 
 
-  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-01 #From Instructor
+  #From Instructor
+  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-01 
 
 Replace `<TOKEN>` with the cluster id obtained in an earlier step. 
 
 Node creation talks to the hosted service at Docker Hub and joins the previously created cluster. This is specified by `--swarm-discovery token://...` and specifying the cluster id obtained earlier.
 . To make it a real cluster, let's create a second node:
 
-  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-02 #From Internet
+  #From Internet
+  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-02 
 
-  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-02 #From Instructor
+  #From Instructor
+  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-02 
   
 
 Replace `<TOKEN>` with the cluster id obtained in the previous step. 
@@ -209,9 +218,11 @@ Swarm takes care for the distribution of deployments across the nodes. The only 
 
 [source, text]
 ----
-docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql #From Internet
+#From Internet
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql 
 
-docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql #From Instructor
+#From Instructor
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql 
 ----
 
 `-e` define environment variables that are read by the database at startup and allow us to access the database with this user and password.
@@ -220,15 +231,16 @@ docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_D
 
 [source, text]
 ----
-docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7 #From Internet
+#From Internet
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7 
 
-docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7 #From Instructor
+#From Instructor
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7 
 ----
-+
+
 This is using the https://docs.docker.com/userguide/dockerlinks/[Docker Container Linking] explained earlier.
-+
+
 . Check state of the cluster as:
-+
 [source, text]
 ----
 > docker info
@@ -256,15 +268,13 @@ Nodes: 3
 CPUs: 3
 Total Memory: 3.065 GiB
 ----
-+
+
 "`swarm-node-02`" is running three containers and so lets look at the list of running containers:
-+
+
 [source, text]
 ----
 > eval "$(docker-machine env swarm-node-02)"
 > docker ps -a
-[source, text]
-----
 CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                     NAMES
 35325d730c97        arungupta/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
 dd3525575b12        mysql                             "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
@@ -308,9 +318,9 @@ to see the output as:
 
   eval "$(docker-machine env --swarm swarm-master)"
   docker info
-+
+
 to see the output as:
-+
+
 [source, text]
 ----
 docker info
@@ -338,13 +348,12 @@ Nodes: 3
 CPUs: 3
 Total Memory: 3.065 GiB
 ----
-+
+
 . Connect to '`swarm-node-02`' again:
 
   eval "$(docker-machine env swarm-node-02)"
-+
+
 and see the list of running containers as:
-+
 [source, text]
 ----
 docker ps -a

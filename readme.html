@@ -522,7 +522,12 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_setup_environments">2. Setup Environments</a>
 <ul class="sectlevel2">
 <li><a href="#_hardware">2.1. Hardware</a></li>
-<li><a href="#_environment">2.2. Environment</a></li>
+<li><a href="#_environment_just_needed_if_you_are_running_with_instructor_support">2.2. Environment (Just needed if you are running with Instructor support)</a>
+<ul class="sectlevel3">
+<li><a href="#_dns_server_setup_windows">2.2.1. DNS Server setup Windows</a></li>
+<li><a href="#_dns_server_setup_linux_mac_os">2.2.2. DNS Server setup Linux/Mac OS</a></li>
+</ul>
+</li>
 <li><a href="#_software">2.3. Software</a></li>
 <li><a href="#_git_client">2.4. Git Client</a></li>
 <li><a href="#_maven">2.5. Maven</a></li>
@@ -533,7 +538,6 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_docker_client">2.10. Docker Client</a></li>
 <li><a href="#_wildfly">2.11. WildFly</a></li>
 <li><a href="#_jboss_developer_studio_9_0_0_ga">2.12. JBoss Developer Studio 9.0.0.GA</a></li>
-<li><a href="#_create_docker_swarm_cluster">2.13. Create Docker Swarm Cluster</a></li>
 </ul>
 </li>
 <li><a href="#_docker_basics">3. Docker Basics</a>
@@ -583,12 +587,13 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#Docker_Compose">8. Multiple Containers Using Docker Compose</a>
 <ul class="sectlevel2">
-<li><a href="#_configuration_file">8.1. Configuration File</a></li>
-<li><a href="#_start_services">8.2. Start Services</a></li>
-<li><a href="#_verify_application">8.3. Verify Application</a></li>
-<li><a href="#_stop_services">8.4. Stop Services</a></li>
-<li><a href="#_remove_containers">8.5. Remove Containers</a></li>
-<li><a href="#_scale_services">8.6. Scale Services</a></li>
+<li><a href="#_install_docker_compose">8.1. Install docker compose</a></li>
+<li><a href="#_configuration_file">8.2. Configuration File</a></li>
+<li><a href="#_start_services">8.3. Start Services</a></li>
+<li><a href="#_verify_application">8.4. Verify Application</a></li>
+<li><a href="#_scale_services">8.5. Scale Services</a></li>
+<li><a href="#_stop_services">8.6. Stop Services</a></li>
+<li><a href="#_remove_containers">8.7. Remove Containers</a></li>
 </ul>
 </li>
 <li><a href="#Docker_Swarm">9. Java EE Application on Docker Swarm Cluster</a>
@@ -602,14 +607,15 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#Common_Docker_Commands">10. Common Docker Commands</a></li>
 <li><a href="#_troubleshooting">11. Troubleshooting</a>
 <ul class="sectlevel2">
-<li><a href="#_network_timed_out">11.1. Network Timed Out</a>
+<li><a href="#_can_t_resolve_classroom_example_com">11.1. Can&#8217;t resolve classroom.example.com</a></li>
+<li><a href="#_network_timed_out">11.2. Network Timed Out</a>
 <ul class="sectlevel3">
-<li><a href="#_restart_docker_machine">11.1.1. Restart Docker Machine</a></li>
-<li><a href="#_loading_images_offline">11.1.2. Loading Images Offline</a></li>
+<li><a href="#_restart_docker_machine">11.2.1. Restart Docker Machine</a></li>
+<li><a href="#_loading_images_offline">11.2.2. Loading Images Offline</a></li>
 </ul>
 </li>
-<li><a href="#_cannot_create_docker_machine_on_windows">11.2. Cannot create Docker Machine on Windows</a></li>
-<li><a href="#_no_route_to_host">11.3. No route to host</a></li>
+<li><a href="#_cannot_create_docker_machine_on_windows">11.3. Cannot create Docker Machine on Windows</a></li>
+<li><a href="#_no_route_to_host">11.4. No route to host</a></li>
 </ul>
 </li>
 <li><a href="#_references">12. References</a></li>
@@ -663,7 +669,24 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 </div>
 </div>
 <div class="sect2">
-<h3 id="_environment">2.2. Environment</h3>
+<h3 id="_environment_just_needed_if_you_are_running_with_instructor_support">2.2. Environment (Just needed if you are running with Instructor support)</h3>
+<div class="sect3">
+<h4 id="_dns_server_setup_windows">2.2.1. DNS Server setup Windows</h4>
+<div class="paragraph">
+<p>Go to the adapter settings of your pc&#8217;s and open the Wireless Network Connection Properties Dialogue. Edit the IPv4 Properties and add the instructor IP (!) as a primary DNS server.</p>
+</div>
+<div id="Figure1-3" class="imageblock">
+<div class="content">
+<img src="chapters/images/dns-setup-3.png" alt="Attendee DNS Setup">
+</div>
+<div class="title">Figure 1. Attendee DNS setup</div>
+</div>
+<div class="paragraph">
+<p>Switch to the cmd and ping classroom.example.com to verify it works.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_dns_server_setup_linux_mac_os">2.2.2. DNS Server setup Linux/Mac OS</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -671,15 +694,10 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 </li>
 </ol>
 </div>
-<div class="paragraph">
-<p>TODO - Add instructions for Windows</p>
-</div>
-<div class="paragraph">
-<p>+</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">nameserver &lt;INSTRUCTOR IP ADDRESS&gt;</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -720,7 +738,17 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download Apache Maven from <a href="http://classroom.example.com:8082/downloads/apache-maven-3.3.3-bin.zip" class="bare">http://classroom.example.com:8082/downloads/apache-maven-3.3.3-bin.zip</a>.</p>
+<p>Download Apache Maven&#8230;&#8203;</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="https://maven.apache.org/download.cgi" class="bare">https://maven.apache.org/download.cgi</a></p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/apache-maven-3.3.3-bin.zip" class="bare">http://classroom.example.com:8082/downloads/apache-maven-3.3.3-bin.zip</a>.</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>Unzip to a directory of your choice and add it to the <code>PATH</code>.</p>
@@ -733,8 +761,22 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 <div class="paragraph">
 <p>Docker currently runs natively on Linux. It can be configured to run in a virtual machine on Mac or Windows. This is why Virtualbox is a requirement for Mac or Windows.</p>
 </div>
-<div class="paragraph">
-<p>Downloads are available from <a href="http://classroom.example.com:8082/downloads/virtualbox/" class="bare">http://classroom.example.com:8082/downloads/virtualbox/</a>.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Downloads are available</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="https://www.virtualbox.org/wiki/Downloads" class="bare">https://www.virtualbox.org/wiki/Downloads</a> .</p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/virtualbox/" class="bare">http://classroom.example.com:8082/downloads/virtualbox/</a> .</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 <div class="admonitionblock warning">
 <table>
@@ -766,8 +808,23 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 </div>
 <div class="sect2">
 <h3 id="_vagrant">2.7. Vagrant</h3>
-<div class="paragraph">
-<p>Download Vagrant from <a href="http://classroom.example.com:8082/downloads/vagrant/" class="bare">http://classroom.example.com:8082/downloads/vagrant/</a> and install.</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download Vagrant</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="https://www.vagrantup.com/downloads.html" class="bare">https://www.vagrantup.com/downloads.html</a></p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/vagrant/" class="bare">http://classroom.example.com:8082/downloads/vagrant/</a>
+and install.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
 </div>
 </div>
 <div class="sect2">
@@ -777,16 +834,27 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text"># Mac
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+<pre class="CodeRay highlight"><code data-lang="text">#Windows - From Internet
+curl https://github.com/docker/machine/releases/download/v0.4.1/docker-machine.exe
 
-# Linux (Manual install)
+#Windows - From Instructor
+curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe
+
+# Linux - From Internet
+sudo curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64  -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
+
+# Linux - From Instructor
 sudo curl -L  http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 
-#Windows
-curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe</code></pre>
+# Mac - From Internet
+sudo curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
+
+# Mac - From Instructor
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine</code></pre>
 </div>
 </div>
 </div>
@@ -795,11 +863,28 @@ curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe</code
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Create Docker Host to be used in the lab:</p>
+<p>If you are running this lab without an Instructor, create the Docker Host using the following command:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker-machine create --driver=virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 lab
-eval &quot;$(docker-machine env lab)&quot;</code></pre>
+<pre>docker-machine create --driver=virtualbox lab
+eval "$(docker-machine env lab)"</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Or Create Docker Host to be used in the lab with an Instructor:</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>docker-machine create --driver=virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 lab
+
+eval "$(docker-machine env lab)"</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -807,15 +892,19 @@ eval &quot;$(docker-machine env lab)&quot;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">(docker-machine env lab --shell cmd</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">docker-machine env lab --shell cmd</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>And then execute all the <code>set</code> commands.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>To make it easier to start/stop the containers, an entry is added into the host mapping table of your operating system. Find out the IP address of your machine:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker-machine ip lab</code></pre>
@@ -824,16 +913,29 @@ eval &quot;$(docker-machine env lab)&quot;</code></pre>
 <div class="paragraph">
 <p>This will provide the IP address associated with the Docker Machine created earlier.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Edit <code>/etc/hosts</code> (Mac OS or Linux) or <code>C:\Windows\System32\drivers\etc\hosts</code> (Windows) and add:</p>
+<p>Edit <code>C:\Windows\System32\drivers\etc\hosts</code> (Windows) or <code>/etc/hosts</code> (Mac OS or Linux) and add:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&lt;IP ADDRESS&gt;  dockerhost</code></pre>
 </div>
 </div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Check if the entry is working:</p>
 </li>
 </ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">ping dockerhost</code></pre>
+</div>
 </div>
 </div>
 <div class="sect2">
@@ -843,17 +945,39 @@ eval &quot;$(docker-machine env lab)&quot;</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text"># Mac
+<pre class="CodeRay highlight"><code data-lang="text"># Windows - From Internet
+curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe
+
+# Windows - From Internet
+curl -L http://test.docker.com.s3.amazonaws.com/builds/Windows/x86_64/docker-1.8.3.exe -o docker.exe
+
+# Linux - From Internet
+sudo curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
+
+# Linux - From Instructor
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
+
+# Mac - From Internet
+sudo curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
+
+# Mac - From Instructor
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-mac -o /usr/local/bin/docker
-chmod +x /usr/local/bin/docker
-
-# Linux
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o docker-latest-linux
-chmod +x /usr/local/bin/docker
-
-# Windows
-curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe</code></pre>
+sudo chmod +x /usr/local/bin/docker</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Check if the client is working by executing:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker ps</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which will return an empty list of containers working. If you get an error message, make sure to have put the docker client into a folder that is contained in your path expression and that you executed the "docker-machine env lab" command according to your operatingsystem.</p>
 </div>
 </div>
 <div class="sect2">
@@ -861,7 +985,17 @@ curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o d
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download WildFly 9.0.1 from <a href="http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip" class="bare">http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip</a>.</p>
+<p>Download WildFly 9.0.1</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="http://download.jboss.org/wildfly/9.0.1.Final/wildfly-9.0.1.Final.zip" class="bare">http://download.jboss.org/wildfly/9.0.1.Final/wildfly-9.0.1.Final.zip</a> .</p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip" class="bare">http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip</a> .</p>
+</li>
+</ol>
+</div>
 </li>
 <li>
 <p>Install it by extracting the archive.</p>
@@ -877,10 +1011,16 @@ curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o d
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download <a href="http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar">JBDS 9.0.0.GA</a>.</p>
+<p>From Internet: <a href="http://www.jboss.org/download-manager/file/jboss-devstudio-9.0.0.GA-standalone_jar.jar" class="bare">http://www.jboss.org/download-manager/file/jboss-devstudio-9.0.0.GA-standalone_jar.jar</a> .</p>
+</li>
+<li>
+<p>From Instructor: <a href="http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar" class="bare">http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar</a> .</p>
 </li>
 <li>
 <p>Start the installer as:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">java -jar &lt;JAR FILE NAME&gt;</code></pre>
@@ -888,31 +1028,6 @@ curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o d
 </div>
 <div class="paragraph">
 <p>Follow the on-screen instructions to complete the installation process.</p>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_create_docker_swarm_cluster">2.13. Create Docker Swarm Cluster</h3>
-<div class="paragraph">
-<p>Create Docker Swarm cluster as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --rm classroom.example.com:5000/swarm create</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>This will generate a token. Use this token to create a Swarm Master.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://&lt;token&gt; swarm-master</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Detailed explanation for this is available in <a href="#Docker_Swarm">Java EE Application on Docker Swarm Cluster</a>.</p>
 </div>
 </div>
 </div>
@@ -969,7 +1084,7 @@ Docker is a platform for developers and sysadmins to develop, ship, and run appl
 <div class="content">
 <img src="chapters/images/docker-architecture.png" alt="docker architecture">
 </div>
-<div class="title">Figure 1. Docker architecture</div>
+<div class="title">Figure 2. Docker architecture</div>
 </div>
 <div class="paragraph">
 <p>Client communicates with Daemon, either co-located on the same host, or on a different host. It requests the Daemon to pull an image from the repository using <code>pull</code> command. The Daemon then downloads the image from Docker Hub, or whatever registry is configured. Multiple images can be downloaded from the registry and installed on Daemon host. Images are run using <code>run</code> command to create containers on demand.</p>
@@ -1226,15 +1341,28 @@ PING dockerhost (192.168.99.101): 56 data bytes
 </div>
 </div>
 <div class="paragraph">
-<p>At first, this list is empty. Now, let&#8217;s get a vanilla <code>jboss/wildfly</code> image:</p>
+<p>At first, this list only contains the Docker swarm image, we used earlier.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker pull classroom.example.com:5000/wildfly:latest</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+swarm     latest              556c60f87888        33 hours ago        10.2 MB</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>By default, docker images are retrieved from <a href="https://hub.docker.com/">Docker Hub</a>.</p>
+<p>Now, let&#8217;s get a vanilla <code>jboss/wildfly</code> image:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker pull jboss/wildfly:latest
+
+#From Instructor
+docker pull classroom.example.com:5000/wildfly:latest</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, docker images are retrieved from <a href="https://hub.docker.com/">Docker Hub</a>. In our case, we&#8217;re providing a so called private registry via the instructor laptop.</p>
 </div>
 <div class="paragraph">
 <p>You can see, that Docker is downloading the image with it&#8217;s different layers.</p>
@@ -1260,7 +1388,7 @@ When Docker mounts the rootfs, it starts read-only, as in a traditional Linux bo
 <div class="content">
 <img src="chapters/images/plain-wildfly0.png" alt="plain wildfly0">
 </div>
-<div class="title">Figure 2. Docker Layers</div>
+<div class="title">Figure 3. Docker Layers</div>
 </div>
 </td>
 </tr>
@@ -1299,22 +1427,31 @@ The base image is used for all JBoss community images. It provides a base layer 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker images
-REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-classroom.example.com:5000/wildfly   latest              7688aaf382ab        6 weeks ago         581.4 MB
-classroom.example.com:5000/swarm     latest              207e8b983242        9 weeks ago         10.2 MB</code></pre>
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+jboss/wildfly       latest              7688aaf382ab        6 weeks ago         581.4 MB
+swarm               latest              207e8b983242        9 weeks ago         10.2 MB</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_run_container_2">4.2. Run Container</h3>
+<div class="paragraph">
+<p>For now, all we did is pull the container description (aka image) down to our local laptops. Now we want to actually run an instance of the image as a so called "container".</p>
+</div>
 <div class="sect3">
 <h4 id="_interactive_container">4.2.1. Interactive Container</h4>
 <div class="paragraph">
-<p>Run WildFly container in an interactive mode.</p>
+<p>Typically container run in the background. They are launched and forgotten. And this is the default behaviour for Docker.
+But there is a way we can make them behave like an instance with an interactive console.
+To run the WildFly container in an interactive mode.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -it classroom.example.com:5000/wildfly</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run -it jboss/wildfly
+
+#From Instructor
+docker run -it classroom.example.com:5000/wildfly</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1354,7 +1491,7 @@ OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was 
 <p>This shows that the server started correctly, congratulations!</p>
 </div>
 <div class="paragraph">
-<p>By default, Docker runs in the foreground. <code>-i</code> allows to interact with the STDIN and <code>-t</code> attach a TTY to the process. Switches can be combined together and used as <code>-it</code>.</p>
+<p>The switches do the following: <code>-i</code> allows to interact with the STDIN and <code>-t</code> attach a TTY to the process. Switches can be combined together and used as <code>-it</code>.</p>
 </div>
 <div class="paragraph">
 <p>Hit Ctrl+C to stop the container.</p>
@@ -1367,7 +1504,12 @@ OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was 
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name mywildfly -d classroom.example.com:5000/wildfly
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name mywildfly -d jboss/wildfly
+
+#From Instructor
+docker run --name mywildfly -d classroom.example.com:5000/wildfly
+
 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a</code></pre>
 </div>
 </div>
@@ -1375,11 +1517,11 @@ OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was 
 <p><code>-d</code>, instead of <code>-it</code>, runs the container in detached mode.</p>
 </div>
 <div class="paragraph">
-<p>The output is the unique id assigned to the container. Check the logs as:</p>
+<p>The output is the unique id assigned to the container. You can use it to refer to the container in various contexts. Check the logs as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">&gt; docker logs mywildfly
+<pre class="CodeRay highlight"><code data-lang="text">&gt; docker logs 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 =========================================================================
 
   JBoss Bootstrap Environment
@@ -1395,9 +1537,20 @@ OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was 
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&gt; docker ps
-CONTAINER ID        IMAGE                                COMMAND                CREATED              STATUS              PORTS               NAMES
-7da1c7614edf        classroom.example.com:5000/wildfly   &quot;/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly</code></pre>
+CONTAINER ID        IMAGE               COMMAND                CREATED              STATUS              PORTS               NAMES
+7da1c7614edf        jboss/wildfly       &quot;/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Noticed the "NAMES" column? This is a quick way of refering to your container. Let&#8217;s try to look at the logs again:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">docker logs mywildfly</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>That looks easier.</p>
 </div>
 <div class="paragraph">
 <p>Also try <code>docker ps -a</code> to see all the containers on this machine.</p>
@@ -1425,17 +1578,21 @@ CONTAINER ID        IMAGE                                COMMAND                
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name mywildfly-exposed-ports -d -P jboss/wildfly
+
+#From Instructor
+docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p><code>-P</code> map any exposed ports inside the image to a random port on Docker host. This can be verified as:</p>
+<p><code>-P</code> map any exposed ports inside the image to a random port on the Docker host. This can be verified as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&gt; docker ps
-CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                     NAMES
-7f41a5a0cfd6        classroom.example.com:5000/wildfly   &quot;/opt/jboss/wildfly/   52 seconds ago      Up 52 seconds       0.0.0.0:32768-&gt;8080/tcp   mywildfly-exposed-ports</code></pre>
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                     NAMES
+7f41a5a0cfd6        jboss/wildfly      &quot;/opt/jboss/wildfly/   52 seconds ago      Up 52 seconds       0.0.0.0:32768-&gt;8080/tcp   mywildfly-exposed-ports</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1469,7 +1626,11 @@ Exact port number may be different in your case.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 jboss/wildfly
+
+#From Instructor
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1506,7 +1667,7 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 <div class="content">
 <img src="chapters/images/plain-wildfly1.png" alt="plain wildfly1">
 </div>
-<div class="title">Figure 3. Welcome WildFly</div>
+<div class="title">Figure 4. Welcome WildFly</div>
 </div>
 </div>
 <div class="sect2">
@@ -1521,7 +1682,11 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name managed-wildfly -P -d jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+
+#From Instructor
+docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1529,7 +1694,11 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin
+
+#From Instructor
+docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1541,9 +1710,9 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker ps
-CONTAINER ID        IMAGE                                           COMMAND                CREATED             STATUS              PORTS                                              NAMES
-5fdedef5573b        classroom.example.com:5000/wildfly-management   &quot;/bin/sh -c '/opt/jb   15 seconds ago      Up 15 seconds       0.0.0.0:32772-&gt;8080/tcp, 0.0.0.0:32771-&gt;9990/tcp   managed-wildfly-from-image
-ee30433b5414        classroom.example.com:5000/wildfly              &quot;/opt/jboss/wildfly/   59 seconds ago      Up 59 seconds       0.0.0.0:32769-&gt;8080/tcp                            managed-wildfly</code></pre>
+CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                                                       NAMES
+5fdedef5573b        rafabene/wildfly-admin      &quot;/bin/sh -c '/opt/jb   15 seconds ago      Up 15 seconds       0.0.0.0:32772-&gt;8080/tcp, 0.0.0.0:32771-&gt;9990/tcp   managed-wildfly-from-image
+ee30433b5414        jboss/wildfly               &quot;/opt/jboss/wildfly/   59 seconds ago      Up 59 seconds       0.0.0.0:32769-&gt;8080/tcp                            managed-wildfly</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1593,7 +1762,7 @@ Exact port number may be different in your case.
 <div class="content">
 <img src="chapters/images/wildfly-admin-console.png" alt="wildfly admin console">
 </div>
-<div class="title">Figure 4. Welcome WildFly</div>
+<div class="title">Figure 5. Welcome WildFly</div>
 </div>
 <div class="sect4">
 <h5 id="_additional_ways_to_find_port_mapping">Additional Ways To Find Port Mapping</h5>
@@ -1638,7 +1807,11 @@ Exact port number may be different in your case.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin
+
+#From Instructor
+docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1729,14 +1902,18 @@ Exact port number may be different in your case.
 <div class="content">
 <img src="chapters/images/javaee7-hol.png" alt="javaee7 hol">
 </div>
-<div class="title">Figure 5. Java EE 7 Application Architecture</div>
+<div class="title">Figure 6. Java EE 7 Application Architecture</div>
 </div>
 <div class="paragraph">
 <p>Pull the Docker image that contains WildFly and pre-built Java EE 7 application WAR file as shown:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker pull classroom.example.com:5000/javaee7-hol</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker pull arungupta/javaee7-hol
+
+#From Instructor
+docker pull classroom.example.com:5000/javaee7-hol</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1747,17 +1924,33 @@ Exact port number may be different in your case.
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -it -p 8080:8080 classroom.example.com:5000/javaee7-hol</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run -it -p 8080:8080 arungupta/javaee7-hol
+
+#From Instructor
+docker run -it -p 8080:8080 classroom.example.com:5000/javaee7-hol</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>See the application in action at <a href="http://dockerhost:8080/movieplex7/" class="bare">http://dockerhost:8080/movieplex7/</a>. The output is shown:</p>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+It might take a while for the container to come up. Wait for the server to complete the startup.
+</td>
+</tr>
+</table>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/javaee7-movieplex7.png" alt="javaee7 movieplex7">
 </div>
-<div class="title">Figure 6. Java EE 7 Application Output</div>
+<div class="title">Figure 7. Java EE 7 Application Output</div>
 </div>
 <div class="paragraph">
 <p>This uses an in-memory database with WildFly application server as shown in the image:</p>
@@ -1766,7 +1959,7 @@ Exact port number may be different in your case.
 <div class="content">
 <img src="chapters/images/javaee7-hol-in-memory-database.png" alt="javaee7 hol in memory database">
 </div>
-<div class="title">Figure 7. In-memory Database</div>
+<div class="title">Figure 8. In-memory Database</div>
 </div>
 <div class="paragraph">
 <p>Only two changes are required to the standard <code>jboss/wildfly</code> image:</p>
@@ -1803,7 +1996,7 @@ Exact port number may be different in your case.
 <div class="content">
 <img src="chapters/images/javaee7-hol-container-linking.png" alt="javaee7 hol container linking">
 </div>
-<div class="title">Figure 8. Two Containers On Same Docker Host</div>
+<div class="title">Figure 9. Two Containers On Same Docker Host</div>
 </div>
 <div class="paragraph">
 <p>This section will show how <a href="https://docs.docker.com/userguide/dockerlinks/">Docker Container Linking</a> can be used to connect to a service running inside a Docker container via a network port.</p>
@@ -1814,7 +2007,11 @@ Exact port number may be different in your case.
 <p>Start MySQL server as:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql
+
+#From Instructor
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1822,10 +2019,14 @@ Exact port number may be different in your case.
 </div>
 </li>
 <li>
-<p>Start WildFly and deploy Java EE 7 application as:</p>
+<p>Start WildFly with the deployed Java EE 7 application as:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7
+
+#From Instructor
+docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1864,6 +2065,18 @@ Exact port number may be different in your case.
 </li>
 </ol>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If you get a 404 or any other error, wait for a little longer until the containers are started up.
+</td>
+</tr>
+</table>
+</div>
 <div class="paragraph">
 <p>Lets stop the previously running container as:</p>
 </div>
@@ -1878,17 +2091,28 @@ Exact port number may be different in your case.
 <h2 id="_build_and_deploy_java_ee_7_application">7. Build and Deploy Java EE 7 Application</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p><a href="https://github.com/javaee-samples/javaee7-simple-sample">Java EE 7 Simple Sample</a> is a trivial Java EE 7 sample application.</p>
+<p>Now that you learned a lot about images, containers and how to link them together, it is about time to learn about the different deployment options. Let&#8217;s start over with the Java EE 7 sample applications again.
+<a href="https://github.com/javaee-samples/javaee7-simple-sample">Java EE 7 Simple Sample</a> is a trivial Java EE 7 sample application and a perfect way to start.</p>
 </div>
 <div class="sect2">
 <h3 id="Build_Application">7.1. Build Application</h3>
+<div class="paragraph">
+<p>We&#8217;re going to build the application first.</p>
+</div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
 <p>Clone the repo:</p>
 <div class="literalblock">
 <div class="content">
-<pre>git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git</pre>
+<pre>#From Internet
+git clone https://github.com/javaee-samples/javaee7-simple-sample.git</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>#From Instructor
+git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git</pre>
 </div>
 </div>
 </li>
@@ -1900,6 +2124,11 @@ Exact port number may be different in your case.
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">  cd javaee7-simple-sample/
+
+  #From Internet
+  mvn clean package
+
+  #From Instructor
   curl http://classroom.example.com:8082/downloads/lab-settings.xml -o settings.xml
   mvn -s settings.xml clean package</code></pre>
 </div>
@@ -1908,7 +2137,7 @@ Exact port number may be different in your case.
 <div class="sect2">
 <h3 id="_start_application_server">7.2. Start Application Server</h3>
 <div class="paragraph">
-<p>Create a folder to place the deployments and git it write access</p>
+<p>Create a folder to place the deployments and give it write access</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1921,26 +2150,35 @@ chmod a+w deployments</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly
+
+#From Instructor
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly</code></pre>
 </div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Windows users need to tweak this a bit and copy the deployments to c:/Users/&lt;USER&gt;/deployments because the directory mappings for boot2docker work differently on those systems. Please update the docker -v argument accordingly.</p>
+</div>
+<div class="paragraph">
+<p>'docker run --name wildfly -d -p 8080:8080 -v /c/Users/meisele/deployments:/opt/jboss/wildfly/standalone/deployments/:rw [classroom.example.com:5000|jboss]/wildfly'</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>This command starts a container named &#8220;wildfly&#8221;.</p>
 </div>
 <div class="paragraph">
 <p>The <code>-v</code> flag maps a directory from the host into the container. This will be the directory to put the deployments. <code>rw</code> ensures that the Docker container can write to it.</p>
-</div>
-<div class="admonitionblock warning">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Warning</div>
-</td>
-<td class="content">
-Windows users, please make sure to use <code>-v /c/Users/</code> notation for drive letters.
-</td>
-</tr>
-</table>
 </div>
 <div class="paragraph">
 <p>Check logs to verify if the server has started.</p>
@@ -1970,7 +2208,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds1.png" alt="jbds1">
 </div>
-<div class="title">Figure 9. Server adapter</div>
+<div class="title">Figure 10. Server adapter</div>
 </div>
 </li>
 <li>
@@ -1979,7 +2217,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds2.png" alt="jbds2">
 </div>
-<div class="title">Figure 10. WildFly Runtime Properties</div>
+<div class="title">Figure 11. WildFly Runtime Properties</div>
 </div>
 </li>
 <li>
@@ -1988,7 +2226,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds3.png" alt="jbds3">
 </div>
-<div class="title">Figure 11. WildFly 9.0.1.Final Runtime</div>
+<div class="title">Figure 12. WildFly 9.0.1.Final Runtime</div>
 </div>
 <div class="paragraph">
 <p>Click on &#8216;Finish&#8217;.</p>
@@ -2000,7 +2238,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds4.png" alt="jbds4">
 </div>
-<div class="title">Figure 12. Server properties</div>
+<div class="title">Figure 13. Server properties</div>
 </div>
 <div class="paragraph">
 <p>The host name is specified to &#8216;dockerhost&#8217;. Two properties on the left are automatically propagated from the previous dialog. Additional two properties on the right side are required to disable to keep deployment scanners in sync with the server.</p>
@@ -2012,7 +2250,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds5.png" alt="jbds5">
 </div>
-<div class="title">Figure 13. Custom deployment folder</div>
+<div class="title">Figure 14. Custom deployment folder</div>
 </div>
 </li>
 <li>
@@ -2021,7 +2259,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds6.png" alt="jbds6">
 </div>
-<div class="title">Figure 14. Started server</div>
+<div class="title">Figure 15. Started server</div>
 </div>
 </li>
 </ol>
@@ -2046,7 +2284,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="content">
 <img src="chapters/images/jbds7.png" alt="jbds7">
 </div>
-<div class="title">Figure 15. Start Server</div>
+<div class="title">Figure 16. Start Server</div>
 </div>
 <div class="paragraph">
 <p>Congratulations!</p>
@@ -2090,7 +2328,7 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. <code>/Users/arungupta/tools/</code>). This will create <code>wildfly-9.0.0.Final</code> directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the <code>/Users/arungupta/tools/wildfly-9.0.0.Final/bin</code> to your $PATH.</p>
+<p>CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. <code>/Users/&lt;USER&gt;/tools/</code>). This will create <code>wildfly-9.0.0.Final</code> directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the <code>/Users/&lt;USER&gt;/tools/wildfly-9.0.0.Final/bin</code> to your $PATH.</p>
 </li>
 <li>
 <p>Run the &#8220;wildfly-management&#8221; image with fixed port mapping as explained in <a href="#Management_Fixed_Port_Mapping">Fixed Port Mapping</a>.</p>
@@ -2105,14 +2343,15 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin
+
+#From Instructor
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>This command starts a container named &#8220;wildfly-managed&#8221;.</p>
-</div>
-<div class="paragraph">
-<p>+</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2120,23 +2359,19 @@ Windows users, please make sure to use <code>-v /c/Users/</code> notation for dr
 </div>
 </div>
 <div class="paragraph">
-<p>+
-This will show the output as:</p>
-</div>
-<div class="paragraph">
-<p>+</p>
+<p>This will show the output as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">[standalone@dockerhost:9990 /]</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>+
-. Deploy the application as:</p>
-</div>
-<div class="paragraph">
-<p>+</p>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Deploy the application as:</p>
+</li>
+</ol>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2156,7 +2391,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/console1.png" alt="console1">
 </div>
-<div class="title">Figure 16. WildFly Web Console</div>
+<div class="title">Figure 17. WildFly Web Console</div>
 </div>
 <div class="paragraph">
 <p>Username and password credentials are shown in <a href="#WildFly_Administration_Credentials">[WildFly_Administration_Credentials]</a>.</p>
@@ -2189,7 +2424,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/wildfly9-deployments-tab.png" alt="wildfly9 deployments tab">
 </div>
-<div class="title">Figure 17. Deployments tab in WildFly Web Console</div>
+<div class="title">Figure 18. Deployments tab in WildFly Web Console</div>
 </div>
 </li>
 <li>
@@ -2210,7 +2445,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/wildfly9-add-deployments.png" alt="wildfly9 add deployments">
 </div>
-<div class="title">Figure 18. Enable a deployment</div>
+<div class="title">Figure 19. Enable a deployment</div>
 </div>
 </li>
 <li>
@@ -2219,7 +2454,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/wildfly9-javaee7-simple-sample-deployed.png" alt="wildfly9 javaee7 simple sample deployed">
 </div>
-<div class="title">Figure 19. Java EE 7 Simple Sample Deployed</div>
+<div class="title">Figure 20. Java EE 7 Simple Sample Deployed</div>
 </div>
 </li>
 </ol>
@@ -2231,7 +2466,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/wildfly9-javaee7-simple-sample-output.png" alt="wildfly9 javaee7 simple sample output">
 </div>
-<div class="title">Figure 20. Java EE 7 Simple Sample Output</div>
+<div class="title">Figure 21. Java EE 7 Simple Sample Output</div>
 </div>
 </div>
 <div class="sect2">
@@ -2245,7 +2480,11 @@ This will show the output as:</p>
 <p>Start another WildFly instance again:</p>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin
+
+#From Instructor
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2266,7 +2505,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/jbds9.png" alt="jbds9">
 </div>
-<div class="title">Figure 21. Create New Server Adapter</div>
+<div class="title">Figure 22. Create New Server Adapter</div>
 </div>
 </li>
 <li>
@@ -2278,7 +2517,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/jbds10.png" alt="jbds10">
 </div>
-<div class="title">Figure 22. Management Login Credentials</div>
+<div class="title">Figure 23. Management Login Credentials</div>
 </div>
 </li>
 <li>
@@ -2287,7 +2526,7 @@ This will show the output as:</p>
 <div class="content">
 <img src="chapters/images/jbds11.png" alt="jbds11">
 </div>
-<div class="title">Figure 23. Synchronized WildFly Server</div>
+<div class="title">Figure 24. Synchronized WildFly Server</div>
 </div>
 </li>
 <li>
@@ -2390,11 +2629,29 @@ Docker Compose is a tool for defining and running complex applications with Dock
 </tr>
 </tbody>
 </table>
-<div class="paragraph">
-<p>Docker Compose script is only available for OSX and Linux. <a href="https://github.com/arun-gupta/docker-java/issues/3" class="bare">https://github.com/arun-gupta/docker-java/issues/3</a> is used for tracking Docker Compose on Windows.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+According to <a href="https://docs.docker.com/compose/install/" class="bare">https://docs.docker.com/compose/install/</a> "You can run Compose on OS X and 64-bit Linux. It is currently not supported on the Windows operating system."
+</td>
+</tr>
+</table>
 </div>
 <div class="sect2">
-<h3 id="_configuration_file">8.1. Configuration File</h3>
+<h3 id="_install_docker_compose">8.1. Install docker compose</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="txt">curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` &gt; /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_configuration_file">8.2. Configuration File</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2402,22 +2659,22 @@ Docker Compose is a tool for defining and running complex applications with Dock
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="yml"><span class="key">mysqldb</span>:
-  <span class="key">image</span>: <span class="string"><span class="content">mysql</span></span>
+  <span class="key">image</span>: <span class="string"><span class="content">[classroom.example.com:5000/]mysql</span></span>
   <span class="key">environment</span>:
     <span class="key">MYSQL_DATABASE</span>: <span class="string"><span class="content">sample</span></span>
     <span class="key">MYSQL_USER</span>: <span class="string"><span class="content">mysql</span></span>
     <span class="key">MYSQL_PASSWORD</span>: <span class="string"><span class="content">mysql</span></span>
     <span class="key">MYSQL_ROOT_PASSWORD</span>: <span class="string"><span class="content">supersecret</span></span>
 <span class="key">mywildfly</span>:
-  <span class="key">image</span>: <span class="string"><span class="content">arungupta/wildfly-mysql-javaee7</span></span>
+  <span class="key">image</span>: <span class="string"><span class="content">[classroom.example.com:5000|arungupta]/wildfly-mysql-javaee7</span></span>
   <span class="key">links</span>:
     - <span class="string"><span class="content">mysqldb:db</span></span>
   <span class="key">ports</span>:
-    - <span class="string"><span class="content">8080:8080</span></span></code></pre>
+    - <span class="string"><span class="content">8080</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This file is available in <a href="https://github.com/javaee-samples/docker-java/raw/master/attendees/docker-compose.yml" class="bare">https://github.com/javaee-samples/docker-java/raw/master/attendees/docker-compose.yml</a> and shows:</p>
+<p>This file is available in <a href="https://raw.githubusercontent.com/redhat-developer/docker-java/javaone2015/attendees/" class="bare">https://raw.githubusercontent.com/redhat-developer/docker-java/javaone2015/attendees/</a> and shows:</p>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -2443,9 +2700,15 @@ Docker Compose is a tool for defining and running complex applications with Dock
 </div>
 </div>
 <div class="sect2">
-<h3 id="_start_services">8.2. Start Services</h3>
+<h3 id="_start_services">8.3. Start Services</h3>
 <div class="olist arabic">
 <ol class="arabic">
+<li>
+<p>Save the <code>docker-compose-internet.yml</code> as <code>docker-compose.yml</code> if you are running from Internet or</p>
+</li>
+<li>
+<p>Save the <code>docker-compose-instructor.yml</code> as <code>docker-compose.yml</code> if you are using images from Instructor.</p>
+</li>
 <li>
 <p>All services can be started, in detached mode, by giving the command:</p>
 <div class="literalblock">
@@ -2477,7 +2740,7 @@ Creating attendees_mywildfly_1...</pre>
         Name                       Command               State                Ports
 -------------------------------------------------------------------------------------------------
 attendees_mysqldb_1     /entrypoint.sh mysqld            Up      3306/tcp
-attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:8080-&gt;8080/tcp, 9990/tcp</code></pre>
+attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32773-&gt;8080/tcp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2490,8 +2753,8 @@ attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:8080-&g
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&gt; docker ps
 CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                              NAMES
-3598e545bd2f        arungupta/wildfly-mysql-javaee7:latest   &quot;/opt/jboss/wildfly/   59 seconds ago      Up 58 seconds       0.0.0.0:8080-&gt;8080/tcp, 9990/tcp   attendees_mywildfly_1
-b8cf6a3d518b        mysql:latest                             &quot;/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                           attendees_mysqldb_1</code></pre>
+3598e545bd2f        arungupta/wildfly-mysql-javaee7:latest   &quot;/opt/jboss/wildfly/   59 seconds ago      Up 58 seconds       0.0.0.0:32773-&gt;8080/tcp         attendees_mywildfly_1
+b8cf6a3d518b        mysql:latest                             &quot;/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                        attendees_mysqldb_1</code></pre>
 </div>
 </div>
 </li>
@@ -2539,23 +2802,91 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verify_application">8.3. Verify Application</h3>
+<h3 id="_verify_application">8.4. Verify Application</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Access the application at <a href="http://dockerhost:8080/employees/resources/employees/" class="bare">http://dockerhost:8080/employees/resources/employees/</a>. This is shown in the browser as:</p>
+<p>Access the application at <a href="http://dockerhost:32773/employees/resources/employees/" class="bare">http://dockerhost:32773/employees/resources/employees/</a>. This is shown in the browser as:</p>
 </li>
 </ol>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Use the port displayed in the <code>docker-compose ps</code> command.
+</td>
+</tr>
+</table>
 </div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/docker-compose-output.png" alt="docker compose output">
 </div>
-<div class="title">Figure 24. Output From Servers Run Using Docker Compose</div>
+<div class="title">Figure 25. Output From Servers Run Using Docker Compose</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stop_services">8.4. Stop Services</h3>
+<h3 id="_scale_services">8.5. Scale Services</h3>
+<div class="paragraph">
+<p>TODO Improve the explanation</p>
+</div>
+<div class="paragraph">
+<p>You can scale the services up as:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker-compose scale mywildfly=4
+Creating and starting 2... done
+Creating and starting 3... done
+Creating and starting 4... done</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check the logs&#8230;&#8203;</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker-compose logs</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Check the running instances:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker-compose ps</pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="text">       Name                     Command               State            Ports
+-------------------------------------------------------------------------------------
+rafael_mysqldb_1     /entrypoint.sh mysqld            Up      3306/tcp
+rafael_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32773-&gt;8080/tcp
+rafael_mywildfly_2   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32777-&gt;8080/tcp
+rafael_mywildfly_3   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32780-&gt;8080/tcp
+rafael_mywildfly_4   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32781-&gt;8080/tcp</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>You can also decide to reduce the number of running instances:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>docker-compose scale mywildfly=2
+Stopping rafael_mywildfly_3... done
+Stopping rafael_mywildfly_4... done
+Removing rafael_mywildfly_3... done
+Removing rafael_mywildfly_4... done</pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_stop_services">8.6. Stop Services</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -2563,6 +2894,7 @@ mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not
 <div class="content">
 <pre>docker-compose stop
 Stopping attendees_mywildfly_1...
+Stopping attendees_mywildfly_2...
 Stopping attendees_mysqldb_1...</pre>
 </div>
 </div>
@@ -2597,23 +2929,19 @@ wildfly_1 | ]&quot;</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_remove_containers">8.5. Remove Containers</h3>
+<h3 id="_remove_containers">8.7. Remove Containers</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>docker-compose rm -f
-Going to remove attendees_mywildfly_1, attendees_mysqldb_1
-Removing attendees_mywildfly_1... done
-Removing attendees_mysqldb_1... done</pre>
+<pre>docker-compose rm
+Going to remove rafael_mywildfly_4, rafael_mywildfly_3, rafael_mywildfly_2, rafael_mywildfly_1, rafael_mysqldb_1
+Are you sure? [yN] y
+Removing rafael_mywildfly_2... done
+Removing rafael_mywildfly_1... done
+Removing rafael_mysqldb_1... done</pre>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_scale_services">8.6. Scale Services</h3>
-<div class="paragraph">
-<p><a href="https://github.com/arun-gupta/docker-java/issues/51" class="bare">https://github.com/arun-gupta/docker-java/issues/51</a></p>
 </div>
 </div>
 </div>
@@ -2630,7 +2958,7 @@ Removing attendees_mysqldb_1... done</pre>
 <div class="content">
 <img src="chapters/images/docker-swarm-components.png" alt="docker swarm components">
 </div>
-<div class="title">Figure 25. Key Components of Docker Swarm</div>
+<div class="title">Figure 26. Key Components of Docker Swarm</div>
 </div>
 <div class="paragraph">
 <p><strong>Swarm Manager</strong>: Docker Swarm has a Manager, that is a pre-defined Docker Host, and is a single point for all administration. The swarm manager orchestrates and schedules containers on the entire cluster. Currently only a single instance of manager is allowed in the cluster. This is a SPOF for high availability architectures and additional managers will be allowed in a future version of Swarm with <a href="https://github.com/docker/swarm/issues/598">#598</a>.</p>
@@ -2659,8 +2987,18 @@ Removing attendees_mysqldb_1... done</pre>
 <p>The easiest way of using Swarm is, by using the official Docker image:</p>
 <div class="literalblock">
 <div class="content">
-<pre>docker run swarm create</pre>
+<pre>#From Internet
+docker run --rm swarm create</pre>
 </div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>#From Instructor
+docker run --rm classroom.example.com:5000/swarm create</pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>This command returns a discovery token, referred as &lt;TOKEN&gt; in this document, and is the unique cluster id. It will be used when creating master and nodes later. This cluster id is returned by the hosted discovery service on Docker Hub.</p>
@@ -2670,8 +3008,7 @@ Removing attendees_mysqldb_1... done</pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run swarm create
-Unable to find image 'swarm:latest' locally
+<pre class="CodeRay highlight"><code data-lang="text">Unable to find image 'swarm:latest' locally
 latest: Pulling from swarm
 55b38848634f: Pull complete
 fd7bc7d11a30: Pull complete
@@ -2687,26 +3024,27 @@ Status: Downloaded newer image for swarm:latest
 </div>
 </div>
 <div class="paragraph">
-<p>The last line is the &lt;TOKEN&gt;.</p>
+<p>+
+The last line is the &lt;TOKEN&gt;.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Make sure to note this cluster id now as there is no means to list it later. This should be fixed with <a href="https://github.com/docker/swarm/issues/661">#661</a>.
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>+
+NOTE: Make sure to note this cluster id now as there is no means to list it later. This should be fixed with <a href="https://github.com/docker/swarm/issues/661">#661</a>.</p>
 </div>
-</li>
-<li>
-<p>Swarm is fully integrated with Docker Machine, and so is the easiest way to get started. Let&#8217;s create a Swarm Master next:</p>
+<div class="paragraph">
+<p>+
+. Swarm is fully integrated with Docker Machine, and so is the easiest way to get started. Let&#8217;s create a Swarm Master next:</p>
+</div>
+<div class="paragraph">
+<p>+</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://&lt;TOKEN&gt; swarm-master</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://&lt;token&gt; swarm-master
+
+#From Instructor
+docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://&lt;token&gt; swarm-master</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2715,29 +3053,29 @@ Make sure to note this cluster id now as there is no means to list it later. Thi
 <div class="paragraph">
 <p><code>--swarm</code> configures the machine with Swarm, <code>--swarm-master</code> configures the created machine to be Swarm master. Swarm master creation talks to the hosted service on Docker Hub and informs that a master is created in the cluster.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Connect to this newly created master and find some more information about it:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">eval &quot;$(docker-machine env swarm-master)&quot;
 docker info</code></pre>
 </div>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-If you&#8217;re on Windows, use the <code>docker-machine env swarm-master</code> command only and copy the output into an editor to replace all appearances of EXPORT with SET and issue the three commands at your command prompt, remove the quotes and all duplicate appearences of "/".
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>+
+NOTE: If you&#8217;re on Windows, use the <code>docker-machine env swarm-master</code> command only and copy the output into an editor to replace all appearances of EXPORT with SET and issue the three commands at your command prompt, remove the quotes and all duplicate appearences of "/".</p>
 </div>
 <div class="paragraph">
-<p>This will show the output as:</p>
+<p>+
+This will show the output as:</p>
+</div>
+<div class="paragraph">
+<p>+</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2771,32 +3109,49 @@ Labels:
  provider=virtualbox</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Create a Swarm node</p>
 <div class="literalblock">
 <div class="content">
-<pre>docker-machine create -d virtualbox --swarm --swarm-discovery token://&lt;TOKEN&gt; swarm-node-01</pre>
+<pre>#From Internet
+docker-machine create -d virtualbox --swarm --swarm-discovery token://&lt;TOKEN&gt; swarm-node-01</pre>
 </div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>#From Instructor
+docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://&lt;TOKEN&gt; swarm-node-01</pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Replace <code>&lt;TOKEN&gt;</code> with the cluster id obtained in an earlier step.</p>
 </div>
 <div class="paragraph">
-<p>Node creation talks to the hosted service at Docker Hub and joins the previously created cluster. This is specified by <code>--swarm-discovery token://&#8230;&#8203;</code> and specifying the cluster id obtained earlier.</p>
+<p>Node creation talks to the hosted service at Docker Hub and joins the previously created cluster. This is specified by <code>--swarm-discovery token://&#8230;&#8203;</code> and specifying the cluster id obtained earlier.
+. To make it a real cluster, let&#8217;s create a second node:</p>
 </div>
-</li>
-<li>
-<p>To make it a real cluster, let&#8217;s create a second node:</p>
 <div class="literalblock">
 <div class="content">
-<pre>docker-machine create -d virtualbox --swarm --swarm-discovery token://&lt;TOKEN&gt; swarm-node-02</pre>
+<pre>#From Internet
+docker-machine create -d virtualbox --swarm --swarm-discovery token://&lt;TOKEN&gt; swarm-node-02</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>#From Instructor
+docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://&lt;TOKEN&gt; swarm-node-02</pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Replace <code>&lt;TOKEN&gt;</code> with the cluster id obtained in the previous step.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>List all the nodes created so far:</p>
 <div class="literalblock">
@@ -2812,7 +3167,6 @@ Labels:
 <pre class="CodeRay highlight"><code data-lang="text">docker-machine ls
 NAME            ACTIVE   DRIVER       STATE     URL                         SWARM
 lab                      virtualbox   Running   tcp://192.168.99.101:2376
-summit2015               virtualbox   Running   tcp://192.168.99.100:2376
 swarm-master    *        virtualbox   Running   tcp://192.168.99.102:2376   swarm-master (master)
 swarm-node-01            virtualbox   Running   tcp://192.168.99.103:2376   swarm-master
 swarm-node-02            virtualbox   Running   tcp://192.168.99.104:2376   swarm-master</code></pre>
@@ -2899,31 +3253,50 @@ Total Memory: 3.065 GiB</code></pre>
 <ol class="arabic">
 <li>
 <p>Start MySQL server as:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql
+
+#From Instructor
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p><code>-e</code> define environment variables that are read by the database at startup and allow us to access the database with this user and password.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Start WildFly and deploy Java EE 7 application as:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7
+
+#From Instructor
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>This is using the <a href="https://docs.docker.com/userguide/dockerlinks/">Docker Container Linking</a> explained earlier.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Check state of the cluster as:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">&gt; docker info
+<pre>&gt; docker info
 Containers: 7
 Images: 5
 Role: primary
@@ -2946,7 +3319,7 @@ Nodes: 3
   └ Reserved Memory: 0 B / 1.022 GiB
   └ Labels: executiondriver=native-0.2, kernelversion=4.0.5-boot2docker, operatingsystem=Boot2Docker 1.7.0 (TCL 6.3); master : 7960f90 - Thu Jun 18 18:31:45 UTC 2015, provider=virtualbox, storagedriver=aufs
 CPUs: 3
-Total Memory: 3.065 GiB</code></pre>
+Total Memory: 3.065 GiB</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2956,15 +3329,19 @@ Total Memory: 3.065 GiB</code></pre>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&gt; eval &quot;$(docker-machine env swarm-node-02)&quot;
 &gt; docker ps -a
-CONTAINER ID        IMAGE                             COMMAND                CREATED              STATUS              PORTS                    NAMES
-805f3587f5df        arungupta/wildfly-mysql-javaee7   &quot;/opt/jboss/wildfly/   About a minute ago   Up About a minute   0.0.0.0:8080-&gt;8080/tcp   mywildfly
-ababc544df97        mysql                             &quot;/entrypoint.sh mysq   5 minutes ago        Up 5 minutes        0.0.0.0:3306-&gt;3306/tcp   mysqldb
-45b015bc79f4        swarm:latest                      &quot;/swarm join --addr    17 minutes ago       Up 17 minutes       2375/tcp                 swarm-agent</code></pre>
+CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                     NAMES
+35325d730c97        arungupta/wildfly-mysql-javaee7   &quot;/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768-&gt;8080/tcp   rafael_mywildfly_1
+dd3525575b12        mysql                             &quot;/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
+e9f655cbcb4b        swarm:latest                      &quot;/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Access the application as:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">curl http://$(docker-machine ip swarm-node-02):8080/employees/resources/employees</code></pre>
@@ -2977,9 +3354,6 @@ ababc544df97        mysql                             &quot;/entrypoint.sh mysq 
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span><span class="tag">&lt;collection&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>1<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Penny<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>2<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Sheldon<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>3<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Amy<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>4<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Leonard<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>5<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Bernadette<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>6<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Raj<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>7<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Howard<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>8<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Priya<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;/collection&gt;</span></code></pre>
 </div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 <div class="sect2">
@@ -3024,6 +3398,9 @@ Creating wildflymysqljavaee7_mywildfly_1...</pre>
 docker info</pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>to see the output as:</p>
 </div>
@@ -3055,7 +3432,8 @@ CPUs: 3
 Total Memory: 3.065 GiB</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Connect to &#8216;swarm-node-02&#8217; again:</p>
 <div class="literalblock">
@@ -3063,32 +3441,28 @@ Total Memory: 3.065 GiB</code></pre>
 <pre>eval "$(docker-machine env swarm-node-02)"</pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 <div class="paragraph">
 <p>and see the list of running containers as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker ps -a
-CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                    NAMES
-b1e7d9bd2c09        arungupta/wildfly-mysql-javaee7   &quot;/opt/jboss/wildfly/   38 seconds ago      Up 37 seconds       0.0.0.0:8080-&gt;8080/tcp   wildflymysqljavaee7_mywildfly_1
-ac9c967e4b1d        mysql:latest                      &quot;/entrypoint.sh mysq   38 seconds ago      Up 38 seconds       3306/tcp                 wildflymysqljavaee7_mysqldb_1
-45b015bc79f4        swarm:latest                      &quot;/swarm join --addr    20 minutes ago      Up 20 minutes       2375/tcp                 swarm-agent</code></pre>
+CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                     NAMES
+35325d730c97        arungupta/wildfly-mysql-javaee7   &quot;/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768-&gt;8080/tcp   rafael_mywildfly_1
+dd3525575b12        mysql                   &quot;/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
+e9f655cbcb4b        swarm:latest                      &quot;/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
-<p>Application can then be accessed again using:</p>
+<p>Check the logs</p>
 <div class="literalblock">
 <div class="content">
-<pre>curl http://$(docker-machine ip swarm-node-02):8080/employees/resources/employees</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>and shows the output as:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="xml"><span class="preprocessor">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;yes&quot;?&gt;</span><span class="tag">&lt;collection&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>1<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Penny<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>2<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Sheldon<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>3<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Amy<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>4<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Leonard<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>5<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Bernadette<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>6<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Raj<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>7<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Howard<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;employee&gt;</span><span class="tag">&lt;id&gt;</span>8<span class="tag">&lt;/id&gt;</span><span class="tag">&lt;name&gt;</span>Priya<span class="tag">&lt;/name&gt;</span><span class="tag">&lt;/employee&gt;</span><span class="tag">&lt;/collection&gt;</span></code></pre>
+<pre>docker-compose logs</pre>
 </div>
 </div>
 </li>
@@ -3220,7 +3594,20 @@ ac9c967e4b1d        mysql:latest                      &quot;/entrypoint.sh mysq 
 <h2 id="_troubleshooting">11. Troubleshooting</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_network_timed_out">11.1. Network Timed Out</h3>
+<h3 id="_can_t_resolve_classroom_example_com">11.1. Can&#8217;t resolve classroom.example.com</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Make sure to add the instructor IP as DNS server to your system</p>
+</li>
+<li>
+<p>On Windows temporarily disable IPv6 (we&#8217;re only supporting IPv4)</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_network_timed_out">11.2. Network Timed Out</h3>
 <div class="paragraph">
 <p>Depending upon the network speed and restrictions, you may not be able to download Docker images from Docker Hub. The error message may look like:</p>
 </div>
@@ -3236,7 +3623,7 @@ Network timed out while trying to connect to https://index.docker.io/v1/reposito
 <p>This section provide a couple of alternatives to solve this.</p>
 </div>
 <div class="sect3">
-<h4 id="_restart_docker_machine">11.1.1. Restart Docker Machine</h4>
+<h4 id="_restart_docker_machine">11.2.1. Restart Docker Machine</h4>
 <div class="paragraph">
 <p>It seems like Docker Machine gets into a strange state and restarting it fixes that.</p>
 </div>
@@ -3248,7 +3635,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_loading_images_offline">11.1.2. Loading Images Offline</h4>
+<h4 id="_loading_images_offline">11.2.2. Loading Images Offline</h4>
 <div class="paragraph">
 <p>Images can be downloaded from a previously saved <code>.tar</code> file. All images required for this workshop can be downloaded from:</p>
 </div>
@@ -3277,7 +3664,12 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_cannot_create_docker_machine_on_windows">11.2. Cannot create Docker Machine on Windows</h3>
+<h3 id="_cannot_create_docker_machine_on_windows">11.3. Cannot create Docker Machine on Windows</h3>
+<div class="paragraph">
+<p>Double check, that you have the correct version of VirtualBox installed.
+Clear all host-adapter interfaces in Virtualbox before creating a new machine.
+Make sure to have git for windows in your path.</p>
+</div>
 <div class="paragraph">
 <p>Are you not able to create Docker Machine on Windows?</p>
 </div>
@@ -3286,7 +3678,7 @@ eval $(docker-machine env &lt;MACHINE_NAME&gt;)</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_no_route_to_host">11.3. No route to host</h3>
+<h3 id="_no_route_to_host">11.4. No route to host</h3>
 <div class="paragraph">
 <p>Accessing the WildFly and MySQL sample in Kubernetes gives 404 when you give the command <code>curl <a href="http://10.246.1.23:8080/employees/resources/employees/" class="bare">http://10.246.1.23:8080/employees/resources/employees/</a></code>.</p>
 </div>

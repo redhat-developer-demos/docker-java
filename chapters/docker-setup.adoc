@@ -7,7 +7,7 @@ This section describes what, how, and where to install the software needed for t
 . Operating System: Mac OS X (10.8 or later), Windows 7 (SP1), Fedora (21 or later)
 . Memory: At least 4 GB+, preferred 8 GB
 
-### Environment
+### Environment (Just needed if you are running with Instructor support)
 
 #### DNS Server setup Windows
 
@@ -53,9 +53,9 @@ You can find GIT for Windows at: http://classroom.example.com:8082/downloads/Git
 
 Docker currently runs natively on Linux. It can be configured to run in a virtual machine on Mac or Windows. This is why Virtualbox is a requirement for Mac or Windows.
 
-Downloads are available
-. from Internet: https://www.virtualbox.org/wiki/Downloads .
-. from Instructor: http://classroom.example.com:8082/downloads/virtualbox/ .
+. Downloads are available
+.. from Internet: https://www.virtualbox.org/wiki/Downloads .
+.. from Instructor: http://classroom.example.com:8082/downloads/virtualbox/ .
 
 [WARNING]
 ====
@@ -68,9 +68,9 @@ Linux Users
 
 ### Vagrant
 
-Download Vagrant 
-. from Internet: https://www.vagrantup.com/downloads.html
-. from Instructor: http://classroom.example.com:8082/downloads/vagrant/ 
+. Download Vagrant 
+.. from Internet: https://www.vagrantup.com/downloads.html
+.. from Instructor: http://classroom.example.com:8082/downloads/vagrant/ 
 and install.
 
 ### Docker Machine
@@ -111,42 +111,40 @@ docker-machine create --driver=virtualbox lab
 eval "$(docker-machine env lab)"
 ----
 
-
 . Or Create Docker Host to be used in the lab with an Instructor:
-+
 [source, text]
 ----
 docker-machine create --driver=virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 lab
 
 eval "$(docker-machine env lab)"
 ----
-+
+
 Use the following command on Windows:
-+
+
 [source, text]
 ----
 docker-machine env lab --shell cmd
 ----
-+
+
 And then execute all the `set` commands.
-+
+
 . To make it easier to start/stop the containers, an entry is added into the host mapping table of your operating system. Find out the IP address of your machine:
-+
+
 [source, text]
 ----
 docker-machine ip lab
 ----
-+
+
 This will provide the IP address associated with the Docker Machine created earlier.
-+
+
 . Edit `C:\Windows\System32\drivers\etc\hosts` (Windows) or `/etc/hosts` (Mac OS or Linux) and add:
-+
+
 [source, text]
 ----
 <IP ADDRESS>  dockerhost
 ----
 . Check if the entry is working:
-+
+
 [source, text]
 ----
 ping dockerhost
@@ -204,10 +202,10 @@ To install JBoss Developer Studio stand-alone, complete the following steps:
 . From Instructor: http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar .
 
 . Start the installer as:
-+
+
 [source, text]
 ----
 java -jar <JAR FILE NAME>
 ----
-+
+
 Follow the on-screen instructions to complete the installation process.
