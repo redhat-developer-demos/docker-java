@@ -1,3 +1,16 @@
+# Docker hello world
+docker pull hello-world
+docker tag hello-world localhost:5000/hello-world
+docker push localhost:5000/hello-world
+
+# Fedora
+docker pull fedora
+docker pull fedora:21
+docker tag fedora localhost:5000/fedora
+docker tag fedora:21 localhost:5000/fedora:21
+docker push localhost:5000/fedora
+docker push localhost:5000/fedora:21
+
 # Wildfly
 docker pull jboss/wildfly
 docker tag jboss/wildfly localhost:5000/wildfly
