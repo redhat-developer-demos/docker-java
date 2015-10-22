@@ -9,13 +9,20 @@ We're going to build the application first.
 
 . Clone the repo:
 
-  git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git
+  git clone https://github.com/javaee-samples/javaee7-simple-sample.git #From Internet
+  git clone http://root:dockeradmin@classroom.example.com:10080/root/javaee7-simple-sample.git #From Instructor
+
 
 . Build the application:
 
 [source, text]
 ----
   cd javaee7-simple-sample/
+  
+  #From Internet
+  mvn clean package
+    
+  #From Instructor
   curl http://classroom.example.com:8082/downloads/lab-settings.xml -o settings.xml
   mvn -s settings.xml clean package
 ----
@@ -35,14 +42,16 @@ Start WildFly server as:
 
 [source, text]
 ----
-docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly #From Internet
+
+docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly #From Instructor
 ----
 
 [NOTE]
 ====
 Windows users need to tweak this a bit and copy the deployments to c:/Users/<USER>/deployments because the directory mappings for boot2docker work differently on those systems. Please update the docker -v argument accordingly.
 
-'docker run --name wildfly -d -p 8080:8080 -v /c/Users/meisele/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly'
+'docker run --name wildfly -d -p 8080:8080 -v /c/Users/meisele/deployments:/opt/jboss/wildfly/standalone/deployments/:rw [classroom.example.com:5000|jboss]/wildfly'
 ====
 
 This command starts a container named "`wildfly`".
@@ -136,26 +145,27 @@ Start WildFly server as:
 
 [source, text]
 ----
-docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin #From Internet
+docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management #From Instructor
 ----
 
 This command starts a container named "`wildfly-managed`".
 
-+
+
 [source, text]
 ----
 jboss-cli.sh --controller=dockerhost:9990  -u=admin -p=docker#admin -c
 ----
-+
+
 This will show the output as:
-+
+
 [source, text]
 ----
 [standalone@dockerhost:9990 /]
 ----
-+
+
 . Deploy the application as:
-+
+
 [source, text]
 ----
 deploy <javaee7-simple-sample PATH>target/javaee7-simple-sample-1.10.war --force
@@ -213,7 +223,8 @@ A standalone WildFly process, process can be configured to listen for remote man
 +
 [source, text]
 ----
-docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin #From Internet
+docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-management #From Instructor
 ----
 +
 In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.
@@ -225,7 +236,7 @@ image::images/jbds8.png[]
 . Click on '`Next>`' and change the values as shown.
 +
 .Create New Server Adapter
-image::jbds9.png[]
+image::images/jbds9.png[]
 +
 . Take the default values in '`Remote System Integration`' and click on '`Finish`'.
 +

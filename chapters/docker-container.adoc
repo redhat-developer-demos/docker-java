@@ -16,14 +16,15 @@ At first, this list only contains the Docker swarm image, we used earlier.
 [source, text]
 ----
 REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-classroom.example.com:5000/swarm     latest              556c60f87888        33 hours ago        10.2 MB----
+swarm     latest              556c60f87888        33 hours ago        10.2 MB
 ----
 
 Now, let's get a vanilla `jboss/wildfly` image:
 
 [source, text]
 ----
-docker pull classroom.example.com:5000/wildfly:latest
+docker pull jboss/wildfly:latest #From Internet
+docker pull classroom.example.com:5000/wildfly:latest #From Instructor
 ----
 
 By default, docker images are retrieved from https://hub.docker.com/[Docker Hub]. In our case, we're providing a so called private registry via the instructor laptop.
@@ -59,9 +60,9 @@ When the download is done, you can list the images again and will see the follow
 [source, text]
 ----
 docker images
-REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-classroom.example.com:5000/wildfly   latest              7688aaf382ab        6 weeks ago         581.4 MB
-classroom.example.com:5000/swarm     latest              207e8b983242        9 weeks ago         10.2 MB
+REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+jboss/wildfly       latest              7688aaf382ab        6 weeks ago         581.4 MB
+swarm               latest              207e8b983242        9 weeks ago         10.2 MB
 ----
 
 ### Run Container
@@ -74,7 +75,8 @@ To run the WildFly container in an interactive mode.
 
 [source, text]
 ----
-docker run -it classroom.example.com:5000/wildfly
+docker run -it jboss/wildfly #From Internet
+docker run -it classroom.example.com:5000/wildfly #From Instructor
 ----
 
 This will show the output as:
@@ -121,7 +123,9 @@ Restart the container in detached mode:
 
 [source, text]
 ----
-docker run --name mywildfly -d classroom.example.com:5000/wildfly
+docker run --name mywildfly -d jboss/wildfly #From Internet
+docker run --name mywildfly -d classroom.example.com:5000/wildfly #From Instructor
+
 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 ----
 
@@ -146,8 +150,8 @@ We can check it by issuing the `docker ps` command which retrieves the images pr
 [source, text]
 ----
 > docker ps
-CONTAINER ID        IMAGE                                COMMAND                CREATED              STATUS              PORTS               NAMES
-7da1c7614edf        classroom.example.com:5000/wildfly   "/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly
+CONTAINER ID        IMAGE               COMMAND                CREATED              STATUS              PORTS               NAMES
+7da1c7614edf        jboss/wildfly       "/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly
 ----
 
 Noticed the "NAMES" column? This is a quick way of refering to your container. Let's try to look at the logs again:
@@ -178,7 +182,8 @@ Restart the container as:
 
 [source, text]
 ----
-docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly
+docker run --name mywildfly-exposed-ports -d -P jboss/wildfly #From Internet
+docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly #From Instructor
 ----
 
 `-P` map any exposed ports inside the image to a random port on the Docker host. This can be verified as:
@@ -186,8 +191,8 @@ docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildf
 [source, text]
 ----
 > docker ps
-CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                     NAMES
-7f41a5a0cfd6        classroom.example.com:5000/wildfly   "/opt/jboss/wildfly/   52 seconds ago      Up 52 seconds       0.0.0.0:32768->8080/tcp   mywildfly-exposed-ports
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                     NAMES
+7f41a5a0cfd6        jboss/wildfly      "/opt/jboss/wildfly/   52 seconds ago      Up 52 seconds       0.0.0.0:32768->8080/tcp   mywildfly-exposed-ports
 ----
 
 The port mapping is shown in the `PORTS` column. Access the WildFly server at http://dockerhost:32768. Make sure to use the correct port number as shown in your case.
@@ -207,7 +212,8 @@ Restart the container as:
 
 [source, text]
 ----
-docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 jboss/wildfly #From Internet
+docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly #From Instructor
 ----
 
 The format is `-p hostPort:containerPort`. This option maps container ports to host ports and allows other containers on our host to access them.
@@ -242,14 +248,17 @@ The following command will override the default command in Docker file, start Wi
 
 [source, text]
 ----
-docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
+docker run --name managed-wildfly -P -d jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 #From Internet
+
+docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0 #From Instructor
 ----
 
 Accessing WildFly Administration Console require a user in administration realm. A pre-created image, with appropriate username/password credentials, is used to start WildFly as:
 
 [source, text]
 ----
-docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management
+docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin #From Internet
+docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management #From Instructor
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host.
@@ -259,9 +268,9 @@ Look at the exposed ports as:
 [source, text]
 ----
 docker ps
-CONTAINER ID        IMAGE                                           COMMAND                CREATED             STATUS              PORTS                                              NAMES
-5fdedef5573b        classroom.example.com:5000/wildfly-management   "/bin/sh -c '/opt/jb   15 seconds ago      Up 15 seconds       0.0.0.0:32772->8080/tcp, 0.0.0.0:32771->9990/tcp   managed-wildfly-from-image
-ee30433b5414        classroom.example.com:5000/wildfly              "/opt/jboss/wildfly/   59 seconds ago      Up 59 seconds       0.0.0.0:32769->8080/tcp                            managed-wildfly
+CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                                                       NAMES
+5fdedef5573b        rafabene/wildfly-admin      "/bin/sh -c '/opt/jb   15 seconds ago      Up 15 seconds       0.0.0.0:32772->8080/tcp, 0.0.0.0:32771->9990/tcp   managed-wildfly-from-image
+ee30433b5414        jboss/wildfly               "/opt/jboss/wildfly/   59 seconds ago      Up 59 seconds       0.0.0.0:32769->8080/tcp                            managed-wildfly
 ----
 
 Look for the host port that is mapped in the container, `32769` in this case. Access the admin console at http://dockerhost:32769.
@@ -316,7 +325,8 @@ This management image can also be started with a pre-defined port mapping as:
 
 [source, text]
 ----
-docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management
+docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin #From Internet
+docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management #From Instructor
 ----
 
 In this case, Docker port mapping will be shown as:

@@ -6,7 +6,7 @@ Docker Swarm is native clustering for Docker. It allows you create and access to
 ### Key Components of Docker Swarm
 
 .Key Components of Docker Swarm
-image::docker-swarm-components.png[]
+image::images/docker-swarm-components.png[]
 
 *Swarm Manager*: Docker Swarm has a Manager, that is a pre-defined Docker Host, and is a single point for all administration. The swarm manager orchestrates and schedules containers on the entire cluster. Currently only a single instance of manager is allowed in the cluster. This is a SPOF for high availability architectures and additional managers will be allowed in a future version of Swarm with https://github.com/docker/swarm/issues/598[#598].
 
@@ -24,15 +24,15 @@ There are lots of other concepts but these are the main ones.
 
 . The easiest way of using Swarm is, by using the official Docker image:
 
-  docker run --rm classroom.example.com:5000/swarm create
-+
+  docker run --rm swarm create #From Internet
+  docker run --rm classroom.example.com:5000/swarm create #From Instructor
+
 This command returns a discovery token, referred as <TOKEN> in this document, and is the unique cluster id. It will be used when creating master and nodes later. This cluster id is returned by the hosted discovery service on Docker Hub.
-+
+
 It shows the output as:
-+
+
 [source, text]
 ----
-docker run --rm classroom.example.com:5000/swarm create
 Unable to find image 'swarm:latest' locally
 latest: Pulling from swarm
 55b38848634f: Pull complete 
@@ -56,15 +56,17 @@ NOTE: Make sure to note this cluster id now as there is no means to list it late
 +
 [source, text]
 ----
-docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://<token> swarm-master
+docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://<token> swarm-master #From Internet
+
+docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-master --swarm-discovery token://<token> swarm-master #From Instructor
 ----
-+
+
 Replace `<TOKEN>` with the cluster id obtained in the previous step. 
-+
+
 `--swarm` configures the machine with Swarm, `--swarm-master` configures the created machine to be Swarm master. Swarm master creation talks to the hosted service on Docker Hub and informs that a master is created in the cluster.
-+
+
 . Connect to this newly created master and find some more information about it:
-+
+
 [source, text]
 ----
 eval "$(docker-machine env swarm-master)"
@@ -106,19 +108,23 @@ Registry: https://index.docker.io/v1/
 Labels:
  provider=virtualbox
 ----
-+
+
 . Create a Swarm node
 
-  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-01
-+
+  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-01 #From Internet
+
+  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-01 #From Instructor
+
 Replace `<TOKEN>` with the cluster id obtained in an earlier step. 
-+
+
 Node creation talks to the hosted service at Docker Hub and joins the previously created cluster. This is specified by `--swarm-discovery token://...` and specifying the cluster id obtained earlier.
 . To make it a real cluster, let's create a second node:
 
-  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-02
+  docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-02 #From Internet
+
+  docker-machine create -d virtualbox --virtualbox-boot2docker-url=http://classroom.example.com:8082/downloads/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 --swarm --swarm-discovery token://<TOKEN> swarm-node-02 #From Instructor
   
-+
+
 Replace `<TOKEN>` with the cluster id obtained in the previous step. 
 
 . List all the nodes created so far:
@@ -200,19 +206,23 @@ The complete cluster is in place now, and we need to deploy the Java EE applicat
 Swarm takes care for the distribution of deployments across the nodes. The only thing, we need to do is to deploy the application as already explained in <<JavaEE7_Container_Linking>>.
 
 . Start MySQL server as:
-+
+
 [source, text]
 ----
-docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql #From Internet
+
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql #From Instructor
 ----
-+
+
 `-e` define environment variables that are read by the database at startup and allow us to access the database with this user and password.
-+
+
 . Start WildFly and deploy Java EE 7 application as:
-+
+
 [source, text]
 ----
-docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7 #From Internet
+
+docker run -d --name mywildfly --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7 #From Instructor
 ----
 +
 This is using the https://docs.docker.com/userguide/dockerlinks/[Docker Container Linking] explained earlier.
@@ -255,21 +265,21 @@ Total Memory: 3.065 GiB
 > docker ps -a
 [source, text]
 ----
-CONTAINER ID        IMAGE                                              COMMAND                CREATED             STATUS              PORTS                     NAMES
-35325d730c97        classroom.example.com:5000/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
-dd3525575b12        classroom.example.com:5000/mysql                   "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
-e9f655cbcb4b        swarm:latest                                       "/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent
+CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                     NAMES
+35325d730c97        arungupta/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
+dd3525575b12        mysql                             "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
+e9f655cbcb4b        swarm:latest                      "/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent
 ----
-+
+
 . Access the application as:
-+
+
 [source, text]
 ----
 curl http://$(docker-machine ip swarm-node-02):8080/employees/resources/employees
 ----
-+
+
 to see the output as:
-+
+
 [source, xml]
 ----
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><collection><employee><id>1</id><name>Penny</name></employee><employee><id>2</id><name>Sheldon</name></employee><employee><id>3</id><name>Amy</name></employee><employee><id>4</id><name>Leonard</name></employee><employee><id>5</id><name>Bernadette</name></employee><employee><id>6</id><name>Raj</name></employee><employee><id>7</id><name>Howard</name></employee><employee><id>8</id><name>Priya</name></employee></collection>
@@ -338,21 +348,14 @@ and see the list of running containers as:
 [source, text]
 ----
 docker ps -a
-CONTAINER ID        IMAGE                                              COMMAND                CREATED             STATUS              PORTS                     NAMES
-35325d730c97        classroom.example.com:5000/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
-dd3525575b12        classroom.example.com:5000/mysql                   "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
-e9f655cbcb4b        swarm:latest                                       "/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent
+CONTAINER ID        IMAGE                             COMMAND                CREATED             STATUS              PORTS                     NAMES
+35325d730c97        arungupta/wildfly-mysql-javaee7   "/opt/jboss/wildfly/   57 seconds ago      Up 56 seconds       0.0.0.0:32768->8080/tcp   rafael_mywildfly_1
+dd3525575b12        mysql                   "/entrypoint.sh mysq   57 seconds ago      Up 56 seconds       3306/tcp                  rafael_mysqldb_1
+e9f655cbcb4b        swarm:latest                      "/swarm join --adver   27 minutes ago      Up 27 minutes       2375/tcp                  swarm-agent
 ----
 
-. Application can then be accessed again using:
+. Check the logs
 
-  curl http://$(docker-machine ip swarm-node-02):8080/employees/resources/employees
-+
-and shows the output as:
-+
-[source, xml]
-----
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?><collection><employee><id>1</id><name>Penny</name></employee><employee><id>2</id><name>Sheldon</name></employee><employee><id>3</id><name>Amy</name></employee><employee><id>4</id><name>Leonard</name></employee><employee><id>5</id><name>Bernadette</name></employee><employee><id>6</id><name>Raj</name></employee><employee><id>7</id><name>Howard</name></employee><employee><id>8</id><name>Priya</name></employee></collection>
-----
+  docker-compose logs
 
 Add container visualiation using https://github.com/javaee-samples/docker-java/issues/55.

@@ -12,7 +12,9 @@ This section will show how https://docs.docker.com/userguide/dockerlinks/[Docker
 +
 [source, text]
 ----
-docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d mysql #From Internet
+
+docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_DATABASE=sample -e MYSQL_ROOT_PASSWORD=supersecret -p 3306:3306 -d classroom.example.com:5000/mysql #From Instructor
 ----
 +
 `-e` define environment variables that are read by the database at startup and allow us to access the database with this user and password.
@@ -21,7 +23,9 @@ docker run --name mysqldb -e MYSQL_USER=mysql -e MYSQL_PASSWORD=mysql -e MYSQL_D
 +
 [source, text]
 ----
-docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7
+docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 arungupta/wildfly-mysql-javaee7 #From Internet
+
+docker run -d --name mywildfly-mysql --link mysqldb:db -p 8080:8080 classroom.example.com:5000/wildfly-mysql-javaee7 #From Instructor
 ----
 +
 `--link` takes two parameters - first is name of the container we're linking to and second is the alias for the link name.

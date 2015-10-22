@@ -43,21 +43,21 @@ chmod +x /usr/local/bin/docker-compose
 [source, yml]
 ----
 mysqldb:
-  image: classroom.example.com:5000/mysql
+  image: [classroom.example.com:5000/]mysql
   environment:
     MYSQL_DATABASE: sample
     MYSQL_USER: mysql
     MYSQL_PASSWORD: mysql
     MYSQL_ROOT_PASSWORD: supersecret
 mywildfly:
-  image: classroom.example.com:5000/wildfly-mysql-javaee7
+  image: [classroom.example.com:5000|arungupta]/wildfly-mysql-javaee7
   links:
     - mysqldb:db
   ports:
     - 8080
 ----
 +
-This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/javaone2015/attendees/docker-compose.yml[] and shows:
+This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/javaone2015/attendees/[] and shows:
 +
 .. Two services defined by the name `mysqldb` and `mywildfly`
 .. Image name for each service defined using `image`
@@ -66,6 +66,9 @@ This file is available in https://raw.githubusercontent.com/redhat-developer/doc
 .. Port forwarding is achieved using `ports`
 
 ### Start Services
+
+. Save the `docker-compose-internet.yml` as `docker-compose.yml` if you are running from Internet or 
+. Save the `docker-compose-instructor.yml` as `docker-compose.yml` if you are using images from Instructor.
 
 . All services can be started, in detached mode, by giving the command:
 +
@@ -100,7 +103,7 @@ Alternatively, the containers in this application, and any additional containers
 > docker ps
 CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                              NAMES
 3598e545bd2f        arungupta/wildfly-mysql-javaee7:latest   "/opt/jboss/wildfly/   59 seconds ago      Up 58 seconds       0.0.0.0:32773->8080/tcp         attendees_mywildfly_1   
-b8cf6a3d518b        mysql:latest                             "/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                      attendees_mysqldb_1  
+b8cf6a3d518b        mysql:latest                             "/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                        attendees_mysqldb_1  
 ----
 +
 . Service logs can be seen as:

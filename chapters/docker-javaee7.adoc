@@ -10,7 +10,8 @@ Pull the Docker image that contains WildFly and pre-built Java EE 7 application 
 
 [source, text]
 ----
-docker pull classroom.example.com:5000/javaee7-hol
+docker pull arungupta/javaee7-hol #From Internet
+docker pull classroom.example.com:5000/javaee7-hol #From Instructor
 ----
 
 The https://github.com/arun-gupta/docker-images/blob/master/javaee7-hol/Dockerfile[javaee7-hol Dockerfile] is based on `jboss/wildfly` and adds the movieplex7 application as war file.
@@ -19,7 +20,8 @@ Run it:
 
 [source, text]
 ----
-docker run -it -p 8080:8080 classroom.example.com:5000/javaee7-hol
+docker run -it -p 8080:8080 arungupta/javaee7-hol #From Internet
+docker run -it -p 8080:8080 classroom.example.com:5000/javaee7-hol #From Instructor
 ----
 
 See the application in action at http://dockerhost:8080/movieplex7/. The output is shown:

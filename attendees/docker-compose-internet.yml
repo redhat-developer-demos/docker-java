@@ -1,0 +1,14 @@
+mysqldb:
+  image: classroom.example.com:5000/mysql
+  environment:
+    MYSQL_DATABASE: sample
+    MYSQL_USER: mysql
+    MYSQL_PASSWORD: mysql
+    MYSQL_ROOT_PASSWORD: supersecret
+mywildfly:
+  image: classroom.example.com:5000/wildfly-mysql-javaee7
+  links:
+    - mysqldb:db
+  ports:
+    - 8080
+  

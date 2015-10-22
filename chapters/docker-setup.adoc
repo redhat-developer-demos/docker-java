@@ -44,14 +44,18 @@ You can find GIT for Windows at: http://classroom.example.com:8082/downloads/Git
 
 ### Maven
 
-. Download Apache Maven from http://classroom.example.com:8082/downloads/apache-maven-3.3.3-bin.zip.
+. Download Apache Maven...
+.. from Internet: https://maven.apache.org/download.cgi
+.. from Instructor: http://classroom.example.com:8082/downloads/apache-maven-3.3.3-bin.zip.
 . Unzip to a directory of your choice and add it to the `PATH`.
 
 ### VirtualBox
 
 Docker currently runs natively on Linux. It can be configured to run in a virtual machine on Mac or Windows. This is why Virtualbox is a requirement for Mac or Windows.
 
-Downloads are available from http://classroom.example.com:8082/downloads/virtualbox/.
+Downloads are available
+. from Internet: https://www.virtualbox.org/wiki/Downloads .
+. from Instructor: http://classroom.example.com:8082/downloads/virtualbox/ .
 
 [WARNING]
 ====
@@ -64,7 +68,10 @@ Linux Users
 
 ### Vagrant
 
-Download Vagrant from http://classroom.example.com:8082/downloads/vagrant/ and install.
+Download Vagrant 
+. from Internet: https://www.vagrantup.com/downloads.html
+. from Instructor: http://classroom.example.com:8082/downloads/vagrant/ 
+and install.
 
 ### Docker Machine
 
@@ -72,21 +79,40 @@ Docker Machine makes it really easy to create Docker hosts on your computer, on 
 
 [source, text]
 ----
-#Windows
+#Windows - From Internet
+curl https://github.com/docker/machine/releases/download/v0.4.1/docker-machine.exe
+
+#Windows - From Instructor
 curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe
 
-# Linux (Manual install)
+# Linux - From Internet
+sudo curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64  -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
+
+# Linux - From Instructor
 sudo curl -L  http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
 sudo chmod +x /usr/local/bin/docker-machine
 
-# Mac
+# Mac - From Internet
+sudo curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
+
+# Mac - From Instructor
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
 sudo chmod +x /usr/local/bin/docker-machine
 ----
 
 ### Create Lab Docker Host
 
-. Create Docker Host to be used in the lab:
+. If you are running this lab without an Instructor, create the Docker Host using the following command:
+[source, text]
+----
+docker-machine create --driver=virtualbox lab
+eval "$(docker-machine env lab)"
+----
+
+
+. Or Create Docker Host to be used in the lab with an Instructor:
 +
 [source, text]
 ----
@@ -113,7 +139,7 @@ docker-machine ip lab
 +
 This will provide the IP address associated with the Docker Machine created earlier.
 +
-. Edit `/etc/hosts` (Mac OS or Linux) or `C:\Windows\System32\drivers\etc\hosts` (Windows) and add:
+. Edit `C:\Windows\System32\drivers\etc\hosts` (Windows) or `/etc/hosts` (Mac OS or Linux) and add:
 +
 [source, text]
 ----
@@ -133,14 +159,25 @@ Docker Client is used to communicate with Docker Host.
 
 [source, text]
 ----
-# Windows
+# Windows - From Internet
 curl -L http://classroom.example.com:8082/downloads/docker/docker-1.8.2.exe -o docker.exe
 
-# Linux
+# Windows - From Internet
+curl -L http://test.docker.com.s3.amazonaws.com/builds/Windows/x86_64/docker-1.8.3.exe -o docker.exe
+
+# Linux - From Internet
+sudo curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
+
+# Linux - From Instructor
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o /usr/local/bin/docker
 sudo chmod +x /usr/local/bin/docker
 
-# Mac
+# Mac - From Internet
+sudo curl -L https://get.docker.com/builds/Darwin/x86_64/docker-latest -o /usr/local/bin/docker
+sudo chmod +x /usr/local/bin/docker
+
+# Mac - From Instructor
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-mac -o /usr/local/bin/docker
 sudo chmod +x /usr/local/bin/docker
 ----
@@ -154,14 +191,17 @@ Which will return an empty list of containers working. If you get an error messa
 
 ### WildFly
 
-. Download WildFly 9.0.1 from http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip.
+. Download WildFly 9.0.1 
+.. from Internet: http://download.jboss.org/wildfly/9.0.1.Final/wildfly-9.0.1.Final.zip .
+.. from Instructor: http://classroom.example.com:8082/downloads/wildfly-9.0.1.Final.zip .
 . Install it by extracting the archive.
 
 ### JBoss Developer Studio 9.0.0.GA
 
 To install JBoss Developer Studio stand-alone, complete the following steps:
 
-. Download http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar[JBDS 9.0.0.GA].
+. From Internet: http://www.jboss.org/download-manager/file/jboss-devstudio-9.0.0.GA-standalone_jar.jar .
+. From Instructor: http://classroom.example.com:8082/downloads/jboss-devstudio-9.0.0.GA-installer-standalone.jar .
 
 . Start the installer as:
 +
