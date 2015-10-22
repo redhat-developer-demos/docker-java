@@ -66,6 +66,9 @@ WORKDIR /var/www/html/downloads
 #Get Maven binaries
 RUN curl -L http://apache.mirrors.tds.net/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.zip -o apache-maven-3.3.3-bin.zip
 
+#Get Kubernetes
+RUN curl -L https://github.com/kubernetes/kubernetes/releases/download/v1.0.6/kubernetes.tar.gz -o kubernetes.tar.gz
+
 RUN mkdir -p /var/www/html/downloads/vagrant
 WORKDIR /var/www/html/downloads/vagrant
 
@@ -80,9 +83,6 @@ RUN curl -L https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb -o
 
 #Get Vagrant Linux 64-bit
 RUN curl -L https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm -o vagrant_1.7.4_x86_64.rpm
-
-#Get Kubernetes
-RUN curl -L https://github.com/kubernetes/kubernetes/releases/download/v1.0.6/kubernetes.tar.gz -o kubernetes.tar.gz
 
 #Add other files to downloads
 ADD downloads/lab-settings.xml /var/www/html/downloads/
