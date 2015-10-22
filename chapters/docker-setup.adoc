@@ -73,11 +73,11 @@ Docker Machine makes it really easy to create Docker hosts on your computer, on 
 ----
 # Mac
 sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 
 # Linux (Manual install)
 sudo curl -L  http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
-chmod +x /usr/local/bin/docker-machine
+sudo chmod +x /usr/local/bin/docker-machine
 
 #Windows
 curl http://classroom.example.com:8082/downloads/docker/docker-machine.exe
