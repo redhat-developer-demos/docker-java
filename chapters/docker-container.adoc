@@ -252,6 +252,51 @@ docker stop mywildfly-mapped-ports
 .Welcome WildFly
 image::images/plain-wildfly1.png[]
 
+### Stop Container
+
+. Stop a specific container:
++
+[source, text]
+----
+docker stop <CONTAINER ID>
+----
++
+. Stop all the running containers
++
+[source, text]
+----
+docker stop $(docker ps -q)
+----
++
+. Stop only the exited containers
++
+[source, text]
+----
+docker ps -a -f "exited=-1"
+----
+
+### Remove Container
+
+. Remove a specific container:
++
+[source, text]
+----
+docker rm 0bc123a8ece0
+----
++
+. Remove containers meeting a regular expression
++
+[source, text]
+----
+docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm
+----
++
+. Remove all containers, without any criteria
++
+[source, text]
+----
+docker rm $(docker ps -aq)
+----
 [[Enabling_WildFly_Administration]]
 ### Enabling WildFly Administration
 
@@ -358,52 +403,4 @@ In this case, Docker port mapping will be shown as:
 ----
 8080/tcp -> 0.0.0.0:8080
 9990/tcp -> 0.0.0.0:9990
-----
-
-### Stop and Remove Container
-
-#### Stop Container
-
-. Stop a specific container:
-+
-[source, text]
-----
-docker stop <CONTAINER ID>
-----
-+
-. Stop all the running containers
-+
-[source, text]
-----
-docker stop `docker ps -aq`
-----
-+
-. Stop only the exited containers
-+
-[source, text]
-----
-docker ps -a -f "exited=-1"
-----
-
-#### Remove Container
-
-. Remove a specific container:
-+
-[source, text]
-----
-docker rm 0bc123a8ece0
-----
-+
-. Remove containers meeting a regular expression
-+
-[source, text]
-----
-docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm
-----
-+
-. Remove all containers, without any criteria
-+
-[source, text]
-----
-docker rm `docker ps -aq`
 ----
