@@ -88,9 +88,9 @@ image::images/jbds1.png[]
 .WildFly Runtime Properties
 image::images/jbds2.png[]
 +
-. If a new runtime needs to be created, pick the directory for WildFly 9.0.1:
+. If a new runtime needs to be created, pick the directory for WildFly 9.0.2:
 +
-.WildFly 9.0.1.Final Runtime
+.WildFly 9.0.2.Final Runtime
 image::images/jbds3.png[]
 +
 Click on '`Finish`'.
@@ -141,7 +141,7 @@ TThe Command Line Interface (CLI) is a tool for connecting to WildFly instances 
 
 Lets use the CLI to deploy javaee7-simple-sample to WildFly running in the container.
 
-. CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. `/Users/<USER>/tools/`). This will create `wildfly-9.0.0.Final` directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the `/Users/<USER>/tools/wildfly-9.0.0.Final/bin` to your $PATH.
+. CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. `/Users/<USER>/tools/`). This will create `wildfly-9.0.2.Final` directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the `/Users/<USER>/tools/wildfly-9.0.2.Final/bin` to your $PATH.
 +
 . Run the "`wildfly-management`" image with fixed port mapping as explained in <<Management_Fixed_Port_Mapping>>.
 . Run the `jboss-cli` command and connect to the WildFly instance.
@@ -240,7 +240,7 @@ docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:500
 +
 In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.
 +
-. Create a new server adapter in JBoss Developer Studio and name it "`WildFly 9.0.0-Management`". Specify the host name as '`dockerhost`'.
+. Create a new server adapter in JBoss Developer Studio and name it "`WildFly 9.0.2-Management`". Specify the host name as '`dockerhost`'.
 +
 image::images/jbds8.png[]
 +

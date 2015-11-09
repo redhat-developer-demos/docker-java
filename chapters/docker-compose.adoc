@@ -28,12 +28,12 @@ An application using Docker containers will typically consist of multiple contai
 
 NOTE: According to https://docs.docker.com/compose/install/ "You can run Compose on OS X and 64-bit Linux. It is currently not supported on the Windows operating system."
 
-### Install docker compose
+### Install docker compose (For Linux users)
 
 [source, txt]
 ----
-curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ----
 
 ### Configuration File
@@ -43,21 +43,27 @@ chmod +x /usr/local/bin/docker-compose
 [source, yml]
 ----
 mysqldb:
-  image: [classroom.example.com:5000/]mysql
+  #From Internet
+  image: mysql
+  #From Instructor
+  image: classroom.example.com:5000/mysql
   environment:
     MYSQL_DATABASE: sample
     MYSQL_USER: mysql
     MYSQL_PASSWORD: mysql
     MYSQL_ROOT_PASSWORD: supersecret
 mywildfly:
-  image: [classroom.example.com:5000|arungupta]/wildfly-mysql-javaee7
+  #From Internet
+  image: arungupta/wildfly-mysql-javaee7
+  #From Instructor
+  image: classroom.example.com:5000/wildfly-mysql-javaee7
   links:
     - mysqldb:db
   ports:
     - 8080
 ----
 +
-This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/javaone2015/attendees/[] and shows:
+This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/devoxxma2015/attendees/[] and shows:
 +
 .. Two services defined by the name `mysqldb` and `mywildfly`
 .. Image name for each service defined using `image`

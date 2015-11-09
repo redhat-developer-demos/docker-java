@@ -29,9 +29,9 @@ NOTE: All instructions are to be run from the `instructor` directory.
 
 . Operating System
 .. Mac OS X (10.8 or later), Windows 7 (SP1), Fedora (21 or later)
-. http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[Oracle JDK 8u45]
+. http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html[Oracle JDK 8u45 or later]
 . http://maven.apache.org/download.cgi[Maven 3.0 or later]
-. https://www.virtualbox.org/[Oracle Virtualbox], include install folder to your PATH.
+. https://www.virtualbox.org/[Oracle Virtualbox 5.0.8 or later], include install folder to your PATH.
 . https://git-scm.com/book/en/v2/Getting-Started-Installing-Git[Git Client]
 . Check out https://github.com/redhat-developer/docker-java/ git repository.
 . Webbrowser
@@ -69,15 +69,9 @@ Learn more about the tool on link:https://docs.docker.com/compose/[Docker Compos
 [source, text]
 ----
 # Linux / MacOS
-curl -L https://github.com/docker/compose/releases/download/1.4.2/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 ----
-
-[IMPORTANT]
-====
-Docker Compose is not natively supported on Windows and thus requires a workaround as specfied at http://blog.eisele.net/2015/06/docker-compose-on-windows-with-python.html.
-You need to install Babun and Python to get further from here on.
-====
 
 ## Install and Configure Docker Machine
 Install the Docker machine client for your environment: https://github.com/docker/machine/releases/[latest releases]
@@ -85,17 +79,23 @@ Install the Docker machine client for your environment: https://github.com/docke
 [source, text]
 ----
 # Windows
-Download:
-https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_windows-amd64.exe
-And save to c:\Users\<username>\docker\docker-machine.exe
-
+if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
+  curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_windows-amd64.zip >machine.zip && \
+  unzip machine.zip && \
+  rm machine.zip && \
+  mv -f docker-machine* "$HOME/bin"
+  
 # Linux
-sudo curl -L https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine
-sudo chmod +x /usr/local/bin/docker-machine
+curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_linux-amd64.zip >machine.zip && \
+  unzip machine.zip && \
+  rm machine.zip && \
+  mv -f docker-machine* /usr/local/bin
 
 # MacOS
-sudo curl -L  https://github.com/docker/machine/releases/download/v0.4.1/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine
-sudo chmod +x /usr/local/bin/docker-machine
+ curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_darwin-amd64.zip >machine.zip && \
+  unzip machine.zip && \
+  rm machine.zip && \
+  mv -f docker-machine* /usr/local/bin
 ----
 
 For Windows, make sure to add `c:\Users\<username>\docker` to your `%PATH%` variable. This was already done for Linux / MacOs when you downloaded `docker-machine` script to `/usr/local/bin/docker-machine`.
@@ -209,7 +209,7 @@ ping classroom.example.com and verify it works.
 +
 [source, text]
 ----
-docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.8.3/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
+docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.9.0/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
 ----
 
 +
@@ -285,13 +285,13 @@ The status of different servers can be verified as:
 [source, text]
 ----
 instructor> docker ps
-CONTAINER ID        IMAGE                                COMMAND                  CREATED             STATUS              PORTS                                                   NAMES
-f3f277aeb757        quay.io/sameersbn/gitlab:8.0.5       "/sbin/entrypoint.sh "   6 hours ago         Up 6 hours          443/tcp, 0.0.0.0:10022->22/tcp, 0.0.0.0:10080->80/tcp   instructor_gitlab_1
-3d6857d98ea9        quay.io/sameersbn/postgresql:9.4-5   "/sbin/entrypoint.sh"    6 hours ago         Up 6 hours          5432/tcp                                                instructor_postgresqlgitlab_1
-58e4aa11f1cf        sonatype/nexus:oss                   "/bin/sh -c 'java   -"   6 hours ago         Up 6 hours          0.0.0.0:8081->8081/tcp                                  instructor_nexus_1
-2b90cf97f618        sameersbn/redis:latest               "/sbin/entrypoint.sh"    6 hours ago         Up 6 hours          6379/tcp                                                instructor_redisgitlab_1
-bd22f0a73ae5        registry:0.9.1                       "docker-registry"        6 hours ago         Up 6 hours          0.0.0.0:5000->5000/tcp                                  instructor_registry_1
-1fff11fa531d        instructor_httpserver                "/run-apache.sh"         6 hours ago         Up 6 hours          0.0.0.0:8082->80/tcp                                    instructor_httpserver_1
+CONTAINER ID        IMAGE                                COMMAND                  CREATED              STATUS              PORTS                                                   NAMES
+73f83816ab96        quay.io/sameersbn/gitlab:8.0.5       "/sbin/entrypoint.sh "   About a minute ago   Up About a minute   443/tcp, 0.0.0.0:10022->22/tcp, 0.0.0.0:10080->80/tcp   instructor_gitlab_1
+6550affd612f        quay.io/sameersbn/postgresql:9.4-5   "/sbin/entrypoint.sh"    3 minutes ago        Up 3 minutes        5432/tcp                                                instructor_postgresqlgitlab_1
+16995a7df028        registry:2.2.0                       "/bin/registry /etc/d"   4 minutes ago        Up 4 minutes        0.0.0.0:5000->5000/tcp                                  instructor_registry_1
+a784996e47ce        sameersbn/redis:latest               "/sbin/entrypoint.sh"    5 minutes ago        Up 5 minutes        6379/tcp                                                instructor_redisgitlab_1
+274b53d49f45        sonatype/nexus:oss                   "/bin/sh -c 'java   -"   5 minutes ago        Up 5 minutes        0.0.0.0:8081->8081/tcp                                  instructor_nexus_1
+56cb8694e8c7        instructor_httpserver                "/run-apache.sh"         5 minutes ago        Up 5 minutes        0.0.0.0:8082->80/tcp                                    instructor_httpserver_1
 ----
 
 Test if the servers are running:

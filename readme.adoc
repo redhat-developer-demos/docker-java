@@ -1,5 +1,5 @@
 # Docker for Java Developers
-v1.4.0, Sep 28, 2015
+v1.4.1, Nov 10, 2015
 :toc:
 :toc-title: Table of Contents
 :toclevels: 3
@@ -8,7 +8,7 @@ v1.4.0, Sep 28, 2015
 :imagesdir: ./chapters/images
 
 Latest HTML:
-https://htmlpreview.github.io/?https://github.com/redhat-developer/docker-java/blob/javaone2015/readme.html
+https://htmlpreview.github.io/?https://github.com/redhat-developer/docker-java/blob/devoxxma2015/readme.html
 
 toc::[]
 
@@ -18,9 +18,9 @@ include::chapters/docker-setup.adoc[]
 
 include::chapters/docker-basics.adoc[]
 
-include::chapters/docker-image.adoc[]
-
 include::chapters/docker-container.adoc[]
+
+include::chapters/docker-image.adoc[]
 
 include::chapters/docker-javaee7.adoc[]
 
@@ -49,13 +49,14 @@ include::chapters/docker-compose.adoc[]
 
 ////
 include::chapters/docker-mod-cluster.adoc[]
-////
 
 include::chapters/docker-swarm.adoc[]
+////
+
+
+include::chapters/docker-kubernetes.adoc[]
 
 ////
-iinclude::chapters/docker-kubernetes.adoc[]
-
 include::chapters/docker-continuous-delivery.adoc[]
 
 include::chapters/docker-openshift.adoc[]

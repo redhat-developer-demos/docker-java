@@ -47,7 +47,7 @@ We call the union of the read-write layer and all the read-only layers a _union 
 image::images/plain-wildfly0.png[]
 ====
 
-In our particular case, the https://github.com/jboss-dockerfiles/wildfly/blob/9.0.1.Final/Dockerfile[jboss/wildfly] image extends the https://github.com/jboss-dockerfiles/base-jdk/blob/jdk8/Dockerfile[jboss/base-jdk:8] image which adds the OpenJDK distribution on top of the https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile[jboss/base] image.
+In our particular case, the https://github.com/jboss-dockerfiles/wildfly/blob/9.0.2.Final/Dockerfile[jboss/wildfly] image extends the https://github.com/jboss-dockerfiles/base-jdk/blob/jdk8/Dockerfile[jboss/base-jdk:8] image which adds the OpenJDK distribution on top of the https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile[jboss/base] image.
 The base image is used for all JBoss community images. It provides a base layer that includes:
 
 . A jboss user (uid/gid 1000) with home directory set to `/opt/jboss`
@@ -65,7 +65,6 @@ When the download is done, you can list the images again and will see the follow
 docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 jboss/wildfly       latest              7688aaf382ab        6 weeks ago         581.4 MB
-swarm               latest              207e8b983242        9 weeks ago         10.2 MB
 ----
 
 ### Run Container
@@ -104,7 +103,7 @@ This will show the output as:
 OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
 17:02:58,000 INFO  [org.jboss.modules] (main) JBoss Modules version 1.4.3.Final
 17:02:58,251 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
-17:02:58,311 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) starting
+17:02:58,311 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 9.0.2.Final (WildFly Core 1.0.2.Final) starting
 17:02:59,558 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 11) WFLYCTL0028: Attribute 'job-repository-type' in the resource at address '/subsystem=batch' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
 17:02:59,560 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 3) WFLYCTL0028: Attribute 'enabled' in the resource at address '/subsystem=datasources/data-source=ExampleDS' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
 ...
@@ -114,7 +113,7 @@ OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was 
 17:03:00,891 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-2) WFLYDS0013: Started FileSystemDeploymentService for directory /opt/jboss/wildfly/standalone/deployments
 17:03:01,131 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
 17:03:01,133 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
-17:03:01,138 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.1.Final (WildFly Core 1.0.1.Final) started in 3431ms - Started 203 of 379 services (210 services are lazy, passive or on-demand)
+17:03:01,138 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.2.Final (WildFly Core 1.0.2.Final) started in 3431ms - Started 203 of 379 services (210 services are lazy, passive or on-demand)
 ----
 
 This shows that the server started correctly, congratulations!

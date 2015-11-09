@@ -24,7 +24,7 @@ At a very high level, there are three key components:
 A picture is always worth a thousand words and so this is a high-level logical block diagram for Kubernetes:
 
 .Kubernetes Key Components
-image::kubernetes-key-components.png[]
+image::images/kubernetes-key-components.png[]
 
 After the 50,000 feet view, lets fly a little lower at 30,000 feet and take a look at how Kubernetes make all of this happen. There are a few key components at Master and Node that make this happen.
 
@@ -41,20 +41,20 @@ Kubernetes cluster can be easily started using Vagrant. There are two options to
 #### Using Previously Downloaded Kubernetes Distribution
 
 . Setup a Kubernetes cluster as:
-+
+
 [source, text]
 ----
 cd kubernetes
 export KUBERNETES_PROVIDER=vagrant
 ./cluster/kube-up.sh
 ----
-+
+
 The `KUBERNETES_PROVIDER` environment variable tells all of the various cluster management scripts which variant to use.
-+
+
 NOTE: This will take a few minutes, so be patience! Vagrant will provision each machine in the cluster with all the necessary components to run Kubernetes.
-+
+
 It shows the output as:
-+
+
 [source, text]
 ----
 Starting cluster using provider: vagrant
@@ -76,7 +76,7 @@ Kubernetes master is running at https://10.245.1.2
 KubeDNS is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/services/kube-dns
 KubeUI is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/services/kube-ui
 ----
-+
+
 Note down the address for Kubernetes master, `https://10.245.1.2` in this case.
 
 #### Download and Start the Kubernetes Cluster
@@ -119,7 +119,7 @@ Installation successful!
 #### Verify the Cluster
 
 . Verify the Kubernetes cluster as:
-+
+
 [source, text]
 ----
 kubernetes> vagrant status
@@ -132,53 +132,53 @@ This environment represents multiple VMs. The VMs are all listed
 above with their current state. For more information about a specific
 VM, run `vagrant status NAME`.
 ----
-+
+
 By default, the Vagrant setup will create a single Master and one node. Each VM will take 1 GB, so make sure you have at least 2GB to 4GB of free memory (plus appropriate free disk space).
-+
+
 NOTE: By default, only one node is created. This can be manipulated by setting an environment variable NUM_MINIONS variable to an integer before invoking `kube-up.sh` script.
-+
+
 .Kubernetes Cluster using Vagrant
-image::kubernetes-cluster-vagrant.png[]
-+
+image::images/kubernetes-cluster-vagrant.png[]
+
 By default, each VM in the cluster is running Fedora, Kubelet is installed into ``systemd'', and all other Kubernetes services are running as containers on Master.
-+
+
 . Access https://10.245.1.2 (or whatever IP address is assigned to your kubernetes cluster start up log). This may present the warning as shown below:
-+
-image::kubernetes-master-default-output-certificate.png[]
-+
+
+image::images/kubernetes-master-default-output-certificate.png[]
+
 Click on '`Advanced`', on '`Proceed to 10.245.1.2`', enter the username as '`vagrant`' and password as '`vagrant`' to see the output as:
-+
+
 .Kubernetes Output from Master
-image::kubernetes-master-default-output.png[]
-+
+image::images/kubernetes-master-default-output.png[]
+
 Check the list of nodes as:
-+
+
 [source, text]
 ----
 > ./cluster/kubectl.sh get nodes
 NAME         LABELS                              STATUS
 10.245.1.3   kubernetes.io/hostname=10.245.1.3   Ready
 ----
-+
+
 . Check the list of pods:
-+
+
 [source, text]
 ----
 kubernetes> ./cluster/kubectl.sh get po
 NAME      READY     STATUS    RESTARTS   AGE
 ----
-+
+
 . Check the list of services running:
-+
+
 [source, text]
 ----
 kubernetes> ./cluster/kubectl.sh get se
 NAME         LABELS                                    SELECTOR   IP(S)        PORT(S)
 kubernetes   component=apiserver,provider=kubernetes   <none>     10.247.0.1   443/TCP
 ----
-+
+
 . Check the list of replication controllers:
-+
+
 [source, text]
 ----
 kubernetes> ./cluster/kubectl.sh get rc
@@ -193,7 +193,7 @@ Pods, and the IP addresses assigned to them, are ephemeral. If a pod dies then K
 Kubernetes services is an abstraction which defines a logical set of pods. A service is typically back-ended by one or more physical pods (associated using labels), and it has a permanent IP address that can be used by other pods/applications. For example, WildFly pod can not directly connect to a MySQL pod but can connect to MySQL service. In essence, Kubernetes service offers clients an IP and port pair which, when accessed, redirects to the appropriate backends.
 
 .Kubernetes Service
-image::kubernetes-service.png[]
+image::images/kubernetes-service.png[]
 
 NOTE: In this case, all the pods are running on a single node. This is because, that is the default number for a Kubernetes cluster. The pod can be on another node if more number of nodes are configured to start in the cluster.
 
@@ -204,15 +204,15 @@ The order of Service and the targeted Pods does not matter. However Service need
 #### Start MySQL Pod
 
 . Start MySQL Pod:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-mysql-pod.yaml
 pods/mysql-pod
 ----
-+
+
 It uses the following configuration file:
-+
+
 [source, yaml]
 ----
 apiVersion: v1
@@ -244,9 +244,9 @@ spec:
         -
           containerPort: 3306
 ----
-+
+
 . Get status of the Pod:
-+
+
 [source, text]
 ----
 kubernetes> ./cluster/kubectl.sh get -w po
@@ -256,21 +256,21 @@ NAME        READY     STATUS    RESTARTS   AGE
 mysql-pod   0/1       Running   0          44s
 mysql-pod   1/1       Running   0         44s
 ----
-+
+
 `-w` watches for changes to the requested object. Wait for the MySQL pod to be in Running status.
 
 #### Start MySQL service
 
 . Start MySQL Service:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-mysql-service.yaml
 services/mysql-service
 ----
-+
+
 It uses the following configuration file:
-+
+
 [source, yaml]
 ----
 apiVersion: v1
@@ -289,11 +289,11 @@ spec:
     name: mysql-pod
     context: docker-k8s-lab
 ----
-+
+
 Once again, the label "`context: docker-k8s-lab`" is used. This simplifies querying the created pods later on.
-+
+
 . Get status of the Service:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get -w se
@@ -301,20 +301,20 @@ NAME            LABELS                                    SELECTOR              
 kubernetes      component=apiserver,provider=kubernetes   <none>                                  10.247.0.1     443/TCP
 mysql-service   context=docker-k8s-lab,name=mysql-pod     context=docker-k8s-lab,name=mysql-pod   10.247.63.43   3306/TCP
 ----
-+
+
 If multiple services are running, then it can be narrowed by specifying the labels:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh  get -w po -l context=docker-k8s-lab,name=mysql-pod
 NAME        READY     STATUS    RESTARTS   AGE
 mysql-pod   1/1       Running   0          4m
 ----
-+
+
 This is also the selector label used by Service to target Pods.
-+
+
 When a Service is run on a node, the kubelet adds a set of environment variables for each active Service. It supports both Docker links compatible variables and simpler `{SVCNAME}_SERVICE_HOST` and `{SVCNAME}_SERVICE_PORT` variables, where the Service name is upper-cased and dashes are converted to underscores.
-+
+
 Our service name is "`mysql-service`" and so `MYSQL_SERVICE_SERVICE_HOST` and `MYSQL_SERVICE_SERVICE_PORT` variables are available to other pods.
 
 Kubernetes also allows services to be resolved using DNS configuration. Send a Pull Request for adding this functionality to the lab as explained in https://github.com/javaee-samples/docker-java/issues/62[#62].
@@ -328,9 +328,9 @@ Kubernetes also allows services to be resolved using DNS configuration. Send a P
 ./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-wildfly-rc.yaml
 replicationcontrollers/wildfly-rc
 ----
-+
+
 It uses the following configuration file:
-+
+
 [source, yaml]
 ----
 apiVersion: v1
@@ -353,9 +353,9 @@ spec:
         ports:
         - containerPort: 8080
 ----
-+
+
 . Check status of the Pod inside Replication Controller:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get po
@@ -363,9 +363,9 @@ NAME               READY     STATUS    RESTARTS   AGE
 mysql-pod          1/1       Running   0          1h
 wildfly-rc-w2kk5   1/1       Running   0          6m
 ----
-+
+
 . Get IP address of the Pod:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get -o template po wildfly-rc-w2kk5 --template={{.status.podIP}}
@@ -376,14 +376,14 @@ wildfly-rc-w2kk5   1/1       Running   0          6m
 #### Access the application (using node)
 
 . Log in to node:
-+
+
 [source, text]
 ----
 vagrant ssh minion-1
 ----
-+
+
 . Access the application using `curl http://10.246.1.23:8080/employees/resources/employees/` and replace IP address with the one obtained earlier:
-+
+
 [source, text]
 ----
 Last login: Thu Jul 16 00:24:36 2015 from 10.0.2.2
@@ -403,7 +403,7 @@ Kubernetes allow multiple resources to be specified in a single configuration fi
 <<Deploy_JavaEE_Kubernetes_Multiple_Config>> showed how to deploy the Java EE application using multiple configuration files. This application can be delpoyed using a single configuration file as well.
 
 . Start the application using the configuration file:
-+
+
 [source, yaml]
 ....
 apiVersion: v1
@@ -471,11 +471,11 @@ spec:
         ports:
         - containerPort: 8080
 ....
-+
+
 Notice that each section, one each for MySQL Pod, MySQL Service, and WildFly Replication Controller, is separated by `----`.
-+
+
 . Start the application:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh create -f ../../attendees/kubernetes/app.yaml
@@ -483,7 +483,7 @@ pods/mysql-pod
 services/mysql-service
 replicationcontrollers/wildfly-rc
 ----
-+
+
 . Access the application using <<Access_Kubernetes_Application_Node>> or <<Access_Kubernetes_Application_Proxy>>.
 
 ### Rescheduling Pods
@@ -493,24 +493,24 @@ Replication Controller ensures that specified number of pod "`replicas`" are run
 WildFly Replication Controller is already running with one Pod. Lets delete this Pod and see how a new Pod is automatically rescheduled.
 
 . Find the Pod's name:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get po
 NAME               READY     STATUS    RESTARTS   AGE
 wildfly-rc-w2kk5   1/1       Running   0          6m
 ----
-+
+
 . Delete the Pod:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh delete po wildfly-rc-w2kk5
 pods/wildfly-rc-w2kk5
 ----
-+
+
 Status of the Pods can be seen in another shell:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get -w po
@@ -523,7 +523,7 @@ wildfly-rc-xz6wu   0/1       Pending   0         12s
 wildfly-rc-xz6wu   0/1       Running   0         14s
 wildfly-rc-xz6wu   1/1       Running   0         22s
 ----
-+
+
 Notice how Pod with name "`wildfly-rc-w2kk5`" was deleted and a new Pod with the name "`wildfly-rc-xz6wu`" was created.
 
 ### Scaling Pods
@@ -531,15 +531,15 @@ Notice how Pod with name "`wildfly-rc-w2kk5`" was deleted and a new Pod with the
 Replication Controller allows dynamic scaling up and down of Pods.
 
 . Scale up the number of Pods:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh scale --replicas=2 rc wildfly-rc
 scaled
 ----
-+
+
 . Status of the Pods can be seen in another shell:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get -w po
@@ -552,32 +552,32 @@ wildfly-rc-bymu7   0/1       Pending   0         2s
 wildfly-rc-bymu7   0/1       Running   0         3s
 wildfly-rc-bymu7   1/1       Running   0         12s
 ----
-+
+
 Notice a new Pod with the name "`wildfly-rc-bymu7`" is created.
-+
+
 . Scale down the number of Pods:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh scale --replicas=1 rc wildfly-rc
 scaled
 ----
-+
+
 . Status of the Pods using `-w` is not shown correctly https://github.com/GoogleCloudPlatform/kubernetes/issues/11338[#11338]. But status of the Pods can be seen correctly as:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get po
 NAME               READY     STATUS    RESTARTS   AGE
 wildfly-rc-bgtkg   1/1       Running   0          9m
 ----
-+
+
 Notice only one Pod is running now.
 
 ### Application Logs
 
 . Get a list of the Pods:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh get po
@@ -585,9 +585,9 @@ NAME               READY     STATUS    RESTARTS   AGE
 mysql-pod          1/1       Running   0          18h
 wildfly-rc-w2kk5   1/1       Running   0          16h
 ----
-+
+
 . Get logs for the WildFly Pod:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh logs wildfly-rc-w2kk5
@@ -605,41 +605,41 @@ wildfly-rc-w2kk5   1/1       Running   0          16h
 Logs can be obtained for any Kubernetes resources using this way. Alternatively, the logs can also be seen by logging into the node:
 
 . Log in to the node VM:
-+
+
 [source, text]
 ----
 > vagrant ssh minion-1
 Last login: Fri Jun  5 23:01:36 2015 from 10.0.2.2
 [vagrant@kubernetes-minion-1 ~]$
 ----
-+
+
 . Log in as root:
-+
+
 [source, text]
 ----
 [vagrant@kubernetes-minion-1 ~]$ su -
 Password: 
 [root@kubernetes-minion-1 ~]# 
 ----
-+
+
 Default root password for VM images created by Vagrant is '`vagrant`'.
-+
+
 . See the list of Docker containers running on this VM:
-+
+
 [source, text]
 ----
 docker ps
 ----
-+
+
 . View WildFly log as:
-+
+
 [source, text]
 ----
 docker logs $(docker ps | grep arungupta/wildfly | awk '{print $1}')
 ----
-+
+
 . View MySQL log as:
-+
+
 [source, text]
 ----
 docker logs <CID>
@@ -670,27 +670,27 @@ Done
 ### Debug Kubernetes Master
 
 . Log in to the master as:
-+
+
 [source, text]
 ----
 vagrant ssh master
 Last login: Wed Jul 15 20:36:32 2015 from 10.0.2.2
 [vagrant@kubernetes-master ~]$ 
 ----
-+
+
 . Log in as root:
-+
+
 [source, text]
 ----
 [vagrant@kubernetes-master ~]$ su - 
 Password: 
 [root@kubernetes-master ~]#
 ----
-+
+
 Default root password for VM images created by Vagrant is '`vagrant`'.
-+
+
 . Check the containers running on master:
-+
+
 [source, text]
 ----
 CONTAINER ID        IMAGE                                                                               COMMAND                CREATED             STATUS              PORTS               NAMES
