@@ -209,7 +209,7 @@ ping classroom.example.com and verify it works.
 
 [source, text]
 ----
-docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.9.0/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
+docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-cpu-count=4 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.9.0/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
 ----
 
 

@@ -23,7 +23,7 @@ nexus:
     - data-volume
   restart: always
 postgresqlgitlab:
-  image: quay.io/sameersbn/postgresql:9.4-5
+  image: sameersbn/postgresql:9.4-5
   environment:
     - DB_USER=gitlab
     - DB_PASS=password
@@ -37,7 +37,7 @@ redisgitlab:
     - /srv/docker/gitlab/redis:/var/lib/redis
   restart: always
 gitlab:
-  image: quay.io/sameersbn/gitlab:8.0.5
+  image: sameersbn/gitlab:8.0.5
   links:
     - redisgitlab:redisio
     - postgresqlgitlab:postgresql
