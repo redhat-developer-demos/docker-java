@@ -232,6 +232,7 @@ The order of Service and the targeted Pods does not matter. However Service need
 pods/mysql-pod
 ----
 
+
 It uses the following configuration file:
 
 [source, yaml]
@@ -280,6 +281,7 @@ mysql-pod   1/1       Running   0         44s
 
 `-w` watches for changes to the requested object. Wait for the MySQL pod to be in Running status.
 
+[[Mysql_service_file]]
 #### Start MySQL service
 
 . Start MySQL Service:
@@ -343,7 +345,7 @@ Kubernetes also allows services to be resolved using DNS configuration. Send a P
 #### Start WildFly Replication Controller
 
 . Start WildFly replication controller:
-+
+
 [source, text]
 ----
 ./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-wildfly-rc.yaml
@@ -394,7 +396,7 @@ wildfly-rc-w2kk5   1/1       Running   0          6m
 ----
 
 [[Access_Kubernetes_Application_Node]]
-#### Access the application (using node)
+#### Access the application (from inside a node)
 
 . Log in to node:
 
@@ -412,10 +414,71 @@ Last login: Thu Jul 16 00:24:36 2015 from 10.0.2.2
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?><collection><employee><id>1</id><name>Penny</name></employee><employee><id>2</id><name>Sheldon</name></employee><employee><id>3</id><name>Amy</name></employee><employee><id>4</id><name>Leonard</name></employee><employee><id>5</id><name>Bernadette</name></employee><employee><id>6</id><name>Raj</name></employee><employee><id>7</id><name>Howard</name></employee><employee><id>8</id><name>Priya</name></employee></collection>
 ----
 
-[[Access_Kubernetes_Application_Proxy]]
-#### Access the application (using proxy)
+[[Access_Kubernetes_Application_Service]]
+#### Access the application (using Services)
 
-Send a PR for https://github.com/javaee-samples/docker-java/issues/80
+For some parts of your application (e.g. frontends) you may want to expose a Service onto an external (outside of your cluster, maybe public internet) IP address, other services should be visible only from inside of the cluster.
+
+Kubernetes ServiceTypes allow you to specify what kind of service you want. The default and base type is ClusterIP, which exposes a service to connection from inside the cluster. NodePort and LoadBalancer are two types that expose services to external traffic.
+
+Valid values for the ServiceType field are:
+
+- *ClusterIP*: use a cluster-internal IP only - this is the default and is discussed above. Choosing this value means that you want this service to be reachable only from inside of the cluster.
+- *NodePort*: on top of having a cluster-internal IP, expose the service on a port on each node of the cluster (the same port on each node). You'll be able to contact the service on any <NodeIP>:NodePort address.
+- *LoadBalancer*: on top of having a cluster-internal IP and exposing service on a NodePort also, ask the cloud provider for a load balancer which forwards to the Service exposed as a <NodeIP>:NodePort for each Node.
+
+As you could see on <<Mysql_service_file>> section, the MySql service file doesn't contain any ServiceType field. For that reason, the default value is *ClusterIP* which means that the MySql service can be accessed inside the Cluster.
+
+In the other hand, not all Kubernetes Provider supports the *LoadBalancer* type. On cloud providers which support external load balancers, setting the type field to "LoadBalancer" will provision a load balancer for your Service.
+
+Do show how to access WildFly outside Kubernetes, we will need to use *NodePort* type which exposes your service on an external port on all nodes in your cluster.
+
+Let's see how it works.
+
+
+. Create a WildFly service of NodePort type 
+
+[source, text]
+----
+./cluster/kubectl.sh create -f ../../attendees/kubernetes/app-wildfly-service.yaml
+You have exposed your service on an external port on all nodes in your
+cluster.  If you want to expose this service to the external internet, you may
+need to set up firewall rules for the service port(s) (tcp:30140) to serve traffic.
+
+See http://releases.k8s.io/HEAD/docs/user-guide/services-firewalls.md for more details.
+services/wildfly-service
+----
+
+Note that it will reply with the port that was opened on each node of the cluster. Now you can use the combination between the node ip and the service port to access the service.
+
+. Get the IP of the node
+
+[source, text]
+----
+cluster/kubectl.sh get nodes
+NAME         LABELS                              STATUS
+10.245.1.3   kubernetes.io/hostname=10.245.1.3   Ready
+----
+
+. Get the PORT of the service
+
+[source, text]
+----
+cluster/kubectl.sh describe se wildfly-service
+Name:			wildfly-service
+Namespace:		default
+Labels:			context=docker-k8s-lab,name=wildfly
+Selector:		context=docker-k8s-lab,name=wildfly
+Type:			NodePort
+IP:			10.247.39.239
+Port:			<unnamed>	8080/TCP
+NodePort:		<unnamed>	30140/TCP
+Endpoints:		10.246.88.7:8080
+Session Affinity:	None
+No events.
+----
+
+Note the _NodePort_ value and now you can access the URL: http://10.245.1.3:30140/employees/
 
 ### Deploy Java EE Application (one configuration file)
 
@@ -485,6 +548,7 @@ spec:
     metadata:
       labels:
         name: wildfly
+        context: docker-k8s-lab
     spec:
       containers:
       - name: wildfly-rc-pod
@@ -505,7 +569,7 @@ services/mysql-service
 replicationcontrollers/wildfly-rc
 ----
 
-. Access the application using <<Access_Kubernetes_Application_Node>> or <<Access_Kubernetes_Application_Proxy>>.
+. Access the application using <<Access_Kubernetes_Application_Node>> or <<Access_Kubernetes_Application_Service>>.
 
 ### Rescheduling Pods
 
