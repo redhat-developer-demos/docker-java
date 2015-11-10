@@ -31,10 +31,10 @@ _Dockerfile_ is usually called _Dockerfile_. The complete list of commands that 
 
 [source, text]
 ----
-#From Internet
+#From Internet (use only one FROM instruction)
 FROM fedora
 
-#From Instructor
+#From Instructor (use only one FROM instruction)
 FROM classroom.example.com:5000/fedora
 
 CMD ["/bin/echo", "hello world"]
@@ -102,10 +102,10 @@ busybox             latest              c51f86c28340        8 days ago          
 
 [source, text]
 ----
-#From Internet
+#From Internet (use only one FROM instruction)
 FROM jboss/wildfly
 
-#From Instructor
+#From Instructor (use only one FROM instruction)
 FROM classroom.example.com:5000/wildfly
 ----
 

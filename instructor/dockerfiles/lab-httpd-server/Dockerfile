@@ -4,7 +4,6 @@ MAINTAINER Rafael Benevides <benevides@redhat.com>
 
 #Install wget and Apache HTTPD
 RUN dnf -y update && dnf -y install httpd && dnf clean all
-ADD index.html  /var/www/html/
 
 RUN mkdir -p /var/www/html/downloads
 
@@ -77,6 +76,8 @@ RUN curl -L https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.rpm -o
 
 #Add other files to downloads
 ADD downloads/lab-settings.xml /var/www/html/downloads/
+
+ADD index.html  /var/www/html/
 
 EXPOSE 80
 

@@ -43,9 +43,9 @@ sudo chmod +x /usr/local/bin/docker-compose
 [source, yml]
 ----
 mysqldb:
-  #From Internet
+  #From Internet (use only one image instruction)
   image: mysql
-  #From Instructor
+  #From Instructor (use only one image instruction)
   image: classroom.example.com:5000/mysql
   environment:
     MYSQL_DATABASE: sample
@@ -53,9 +53,9 @@ mysqldb:
     MYSQL_PASSWORD: mysql
     MYSQL_ROOT_PASSWORD: supersecret
 mywildfly:
-  #From Internet
+  #From Internet (use only one image instruction)
   image: arungupta/wildfly-mysql-javaee7
-  #From Instructor
+  #From Instructor (use only one image instruction)
   image: classroom.example.com:5000/wildfly-mysql-javaee7
   links:
     - mysqldb:db

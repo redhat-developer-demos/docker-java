@@ -11,12 +11,12 @@ Let's first check, if any images are available:
 docker images
 ----
 
-At first, this list only contains the Docker swarm image, we used earlier.
+At first, this list is empty.
 
 [source, text]
 ----
-REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-swarm     latest              556c60f87888        33 hours ago        10.2 MB
+REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
+
 ----
 
 Now, let's get a vanilla `jboss/wildfly` image:
@@ -254,21 +254,21 @@ image::images/plain-wildfly1.png[]
 ### Stop Container
 
 . Stop a specific container:
-+
+
 [source, text]
 ----
 docker stop <CONTAINER ID>
 ----
-+
+
 . Stop all the running containers
-+
+
 [source, text]
 ----
 docker stop $(docker ps -q)
 ----
-+
+
 . Stop only the exited containers
-+
+
 [source, text]
 ----
 docker ps -a -f "exited=-1"
@@ -277,25 +277,26 @@ docker ps -a -f "exited=-1"
 ### Remove Container
 
 . Remove a specific container:
-+
+
 [source, text]
 ----
 docker rm 0bc123a8ece0
 ----
-+
+
 . Remove containers meeting a regular expression
-+
+
 [source, text]
 ----
 docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm
 ----
-+
+
 . Remove all containers, without any criteria
-+
+
 [source, text]
 ----
 docker rm $(docker ps -aq)
 ----
+
 [[Enabling_WildFly_Administration]]
 ### Enabling WildFly Administration
 

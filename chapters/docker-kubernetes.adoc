@@ -1,5 +1,23 @@
 ## Deploy Application on Kubernetes Cluster
 
+[[Kubernetes_Setup]]
+### Install Kubernetes
+
+. Download Vagrant and install it.
+.. from Internet: https://www.vagrantup.com/downloads.html 
+.. from Instructor: http://classroom.example.com:8082/downloads/vagrant/ 
+
++
+Kubernetes requires Vagrant >= 1.6.2. So if you have an older version then make sure you install the latest one.
++
+. If you've not installed Docker Toolbox, then you need to additionally download Virtual Box 5.0.8 
+.. from Internet: https://www.virtualbox.org/wiki/Downloads.
+.. from Instructor: http://classroom.example.com:8082/downloads/virtualbox/
+
+. Download Kubernetes (1.0.7) 
+.. from Internet: https://github.com/kubernetes/kubernetes/releases/download/v1.0.7/kubernetes.tar.gz 
+.. from Instructor: http://classroom.example.com:8082/downloads/kubernetes.tar.gz.
+
 [quote, github.com/GoogleCloudPlatform/kubernetes/]
 Kubernetes is an open source system for managing containerized applications across multiple hosts, providing basic mechanisms for deployment, maintenance, and scaling of applications.
 
@@ -45,11 +63,14 @@ Kubernetes cluster can be easily started using Vagrant. There are two options to
 [source, text]
 ----
 cd kubernetes
+export NUM_MINIONS=2
 export KUBERNETES_PROVIDER=vagrant
 ./cluster/kube-up.sh
 ----
 
 The `KUBERNETES_PROVIDER` environment variable tells all of the various cluster management scripts which variant to use.
+
+The `NUM_MINIONS`environment variable controls the number of nodes that are instantiated 
 
 NOTE: This will take a few minutes, so be patience! Vagrant will provision each machine in the cluster with all the necessary components to run Kubernetes.
 
@@ -651,7 +672,7 @@ Individual resources (service, replication controller, or pod) can be deleted by
 
 [source, text]
 ----
-kubectl delete -l se,po context=docker-k8s-lab
+kubectl delete all -l context=docker-k8s-lab
 ----
 
 ### Stop Kubernetes Cluster

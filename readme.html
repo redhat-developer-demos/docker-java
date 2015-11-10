@@ -560,10 +560,11 @@ table.CodeRay td.code>pre{padding:0}
 <li><a href="#_run_container_with_default_port">4.3. Run Container with Default Port</a></li>
 <li><a href="#_run_container_with_specified_port">4.4. Run Container with Specified Port</a></li>
 <li><a href="#_stop_container">4.5. Stop Container</a></li>
-<li><a href="#_remove_container">4.6. Remove Container</a>
+<li><a href="#_remove_container">4.6. Remove Container</a></li>
+<li><a href="#Enabling_WildFly_Administration">4.7. Enabling WildFly Administration</a>
 <ul class="sectlevel3">
-<li><a href="#_default_port_mapping">4.6.1. Default Port Mapping</a></li>
-<li><a href="#Management_Fixed_Port_Mapping">4.6.2. Fixed Port Mapping</a></li>
+<li><a href="#_default_port_mapping">4.7.1. Default Port Mapping</a></li>
+<li><a href="#Management_Fixed_Port_Mapping">4.7.2. Fixed Port Mapping</a></li>
 </ul>
 </li>
 </ul>
@@ -602,30 +603,31 @@ table.CodeRay td.code>pre{padding:0}
 </li>
 <li><a href="#_deploy_application_on_kubernetes_cluster">10. Deploy Application on Kubernetes Cluster</a>
 <ul class="sectlevel2">
-<li><a href="#_key_components">10.1. Key Components</a></li>
-<li><a href="#_start_kubernetes_cluster">10.2. Start Kubernetes Cluster</a>
+<li><a href="#Kubernetes_Setup">10.1. Install Kubernetes</a></li>
+<li><a href="#_key_components">10.2. Key Components</a></li>
+<li><a href="#_start_kubernetes_cluster">10.3. Start Kubernetes Cluster</a>
 <ul class="sectlevel3">
-<li><a href="#_using_previously_downloaded_kubernetes_distribution">10.2.1. Using Previously Downloaded Kubernetes Distribution</a></li>
-<li><a href="#_download_and_start_the_kubernetes_cluster">10.2.2. Download and Start the Kubernetes Cluster</a></li>
-<li><a href="#_verify_the_cluster">10.2.3. Verify the Cluster</a></li>
+<li><a href="#_using_previously_downloaded_kubernetes_distribution">10.3.1. Using Previously Downloaded Kubernetes Distribution</a></li>
+<li><a href="#_download_and_start_the_kubernetes_cluster">10.3.2. Download and Start the Kubernetes Cluster</a></li>
+<li><a href="#_verify_the_cluster">10.3.3. Verify the Cluster</a></li>
 </ul>
 </li>
-<li><a href="#Deploy_JavaEE_Kubernetes_Multiple_Config">10.3. Deploy Java EE Application (multiple configuration files)</a>
+<li><a href="#Deploy_JavaEE_Kubernetes_Multiple_Config">10.4. Deploy Java EE Application (multiple configuration files)</a>
 <ul class="sectlevel3">
-<li><a href="#_start_mysql_pod">10.3.1. Start MySQL Pod</a></li>
-<li><a href="#_start_mysql_service">10.3.2. Start MySQL service</a></li>
-<li><a href="#_start_wildfly_replication_controller">10.3.3. Start WildFly Replication Controller</a></li>
-<li><a href="#Access_Kubernetes_Application_Node">10.3.4. Access the application (using node)</a></li>
-<li><a href="#Access_Kubernetes_Application_Proxy">10.3.5. Access the application (using proxy)</a></li>
+<li><a href="#_start_mysql_pod">10.4.1. Start MySQL Pod</a></li>
+<li><a href="#_start_mysql_service">10.4.2. Start MySQL service</a></li>
+<li><a href="#_start_wildfly_replication_controller">10.4.3. Start WildFly Replication Controller</a></li>
+<li><a href="#Access_Kubernetes_Application_Node">10.4.4. Access the application (using node)</a></li>
+<li><a href="#Access_Kubernetes_Application_Proxy">10.4.5. Access the application (using proxy)</a></li>
 </ul>
 </li>
-<li><a href="#_deploy_java_ee_application_one_configuration_file">10.4. Deploy Java EE Application (one configuration file)</a></li>
-<li><a href="#_rescheduling_pods">10.5. Rescheduling Pods</a></li>
-<li><a href="#_scaling_pods">10.6. Scaling Pods</a></li>
-<li><a href="#_application_logs">10.7. Application Logs</a></li>
-<li><a href="#_delete_kubernetes_resources">10.8. Delete Kubernetes Resources</a></li>
-<li><a href="#_stop_kubernetes_cluster">10.9. Stop Kubernetes Cluster</a></li>
-<li><a href="#_debug_kubernetes_master">10.10. Debug Kubernetes Master</a></li>
+<li><a href="#_deploy_java_ee_application_one_configuration_file">10.5. Deploy Java EE Application (one configuration file)</a></li>
+<li><a href="#_rescheduling_pods">10.6. Rescheduling Pods</a></li>
+<li><a href="#_scaling_pods">10.7. Scaling Pods</a></li>
+<li><a href="#_application_logs">10.8. Application Logs</a></li>
+<li><a href="#_delete_kubernetes_resources">10.9. Delete Kubernetes Resources</a></li>
+<li><a href="#_stop_kubernetes_cluster">10.10. Stop Kubernetes Cluster</a></li>
+<li><a href="#_debug_kubernetes_master">10.11. Debug Kubernetes Master</a></li>
 </ul>
 </li>
 <li><a href="#Common_Docker_Commands">11. Common Docker Commands</a></li>
@@ -1384,12 +1386,11 @@ PING dockerhost (192.168.99.101): 56 data bytes
 </div>
 </div>
 <div class="paragraph">
-<p>At first, this list only contains the Docker swarm image, we used earlier.</p>
+<p>At first, this list is empty.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">REPOSITORY                           TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
-swarm     latest              556c60f87888        33 hours ago        10.2 MB</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">REPOSITORY              TAG                 IMAGE ID            CREATED             VIRTUAL SIZE</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1718,29 +1719,37 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 <ol class="arabic">
 <li>
 <p>Stop a specific container:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker stop &lt;CONTAINER ID&gt;</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Stop all the running containers</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker stop $(docker ps -q)</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Stop only the exited containers</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker ps -a -f &quot;exited=-1&quot;</code></pre>
 </div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 <div class="sect2">
@@ -1749,38 +1758,46 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 <ol class="arabic">
 <li>
 <p>Remove a specific container:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker rm 0bc123a8ece0</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Remove containers meeting a regular expression</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm</code></pre>
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Remove all containers, without any criteria</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker rm $(docker ps -aq)</code></pre>
 </div>
 </div>
-<div id="Enabling_WildFly_Administration" class="paragraph">
-<p><mark>#</mark> Enabling WildFly Administration</p>
 </div>
-</li>
-</ol>
-</div>
+<div class="sect2">
+<h3 id="Enabling_WildFly_Administration">4.7. Enabling WildFly Administration</h3>
 <div class="paragraph">
 <p>Default WildFly image exposes only port 8080 and thus is not available for administration using either the CLI or Admin Console. Lets expose the ports in different ways.</p>
 </div>
 <div class="sect3">
-<h4 id="_default_port_mapping">4.6.1. Default Port Mapping</h4>
+<h4 id="_default_port_mapping">4.7.1. Default Port Mapping</h4>
 <div class="paragraph">
 <p>The following command will override the default command in Docker file, start WildFly, and bind application and management port to all network interfaces.</p>
 </div>
@@ -1905,7 +1922,7 @@ Exact port number may be different in your case.
 </div>
 </div>
 <div class="sect3">
-<h4 id="Management_Fixed_Port_Mapping">4.6.2. Fixed Port Mapping</h4>
+<h4 id="Management_Fixed_Port_Mapping">4.7.2. Fixed Port Mapping</h4>
 <div class="paragraph">
 <p>This management image can also be started with a pre-defined port mapping as:</p>
 </div>
@@ -2013,10 +2030,10 @@ docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-manag
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet (use only one FROM instruction)
 FROM fedora
 
-#From Instructor
+#From Instructor (use only one FROM instruction)
 FROM classroom.example.com:5000/fedora
 
 CMD [&quot;/bin/echo&quot;, &quot;hello world&quot;]</code></pre>
@@ -2128,10 +2145,10 @@ busybox             latest              c51f86c28340        8 days ago          
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">#From Internet
+<pre class="CodeRay highlight"><code data-lang="text">#From Internet (use only one FROM instruction)
 FROM jboss/wildfly
 
-#From Instructor
+#From Instructor (use only one FROM instruction)
 FROM classroom.example.com:5000/wildfly</code></pre>
 </div>
 </div>
@@ -2489,24 +2506,35 @@ docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfl
 <ol class="arabic">
 <li>
 <p>Select &#8216;Servers&#8217; tab, create a new server adapter</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds1.png" alt="jbds1">
 </div>
 <div class="title">Figure 10. Server adapter</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Assign an existing or create a new WildFly 9.0.0 runtime (changed properties are highlighted.)</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds2.png" alt="jbds2">
 </div>
 <div class="title">Figure 11. WildFly Runtime Properties</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>If a new runtime needs to be created, pick the directory for WildFly 9.0.2:</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds3.png" alt="jbds3">
@@ -2516,9 +2544,13 @@ docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfl
 <div class="paragraph">
 <p>Click on &#8216;Finish&#8217;.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Double-click on the newly selected server to configure server properties:</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds4.png" alt="jbds4">
@@ -2528,26 +2560,31 @@ docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfl
 <div class="paragraph">
 <p>The host name is specified to &#8216;dockerhost&#8217;. Two properties on the left are automatically propagated from the previous dialog. Additional two properties on the right side are required to disable to keep deployment scanners in sync with the server.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Specify a custom deployment folder on Deployment tab of Server Editor</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds5.png" alt="jbds5">
 </div>
 <div class="title">Figure 14. Custom deployment folder</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Right-click on the newly created server adapter and click &#8216;Start&#8217;.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds6.png" alt="jbds6">
 </div>
 <div class="title">Figure 15. Started server</div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 <div class="sect2">
@@ -2670,7 +2707,7 @@ docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example
 <div class="sect2">
 <h3 id="_deploy_application_using_web_console">8.6. Deploy Application Using Web Console</h3>
 <div class="paragraph">
-<p>WildFly comes with a web-based administration console. It also relies on the same management APIs that are used by JBoss Developer Tools and the CLI. It provides a simple and easy to use web-based console to manage WildFly instance. For a Docker image, it needs to be explicitly enabled as explained in <a href="#Enabling_WildFly_Administration">[Enabling_WildFly_Administration]</a>. Once enabled, it can be accessed at <a href="http://dockerhost:9990" class="bare">http://dockerhost:9990</a>.</p>
+<p>WildFly comes with a web-based administration console. It also relies on the same management APIs that are used by JBoss Developer Tools and the CLI. It provides a simple and easy to use web-based console to manage WildFly instance. For a Docker image, it needs to be explicitly enabled as explained in <a href="#Enabling_WildFly_Administration">Enabling WildFly Administration</a>. Once enabled, it can be accessed at <a href="http://dockerhost:9990" class="bare">http://dockerhost:9990</a>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -2705,13 +2742,17 @@ docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example
 <ol class="arabic">
 <li>
 <p>Go to &#8216;Deployments&#8217; tab.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/wildfly9-deployments-tab.png" alt="wildfly9 deployments tab">
 </div>
 <div class="title">Figure 18. Deployments tab in WildFly Web Console</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Click on &#8216;Add&#8217; button.</p>
 </li>
@@ -2726,23 +2767,27 @@ docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example
 </li>
 <li>
 <p>Select &#8216;Enable&#8217; checkbox.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/wildfly9-add-deployments.png" alt="wildfly9 add deployments">
 </div>
 <div class="title">Figure 19. Enable a deployment</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Click &#8216;Finish&#8217;.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/wildfly9-javaee7-simple-sample-deployed.png" alt="wildfly9 javaee7 simple sample deployed">
 </div>
 <div class="title">Figure 20. Java EE 7 Simple Sample Deployed</div>
-</div>
-</li>
-</ol>
 </div>
 <div class="paragraph">
 <p>This will complete the deployment of the Java EE 7 application using Web Console. The output can be seen out <a href="http://dockerhost:8080/javaee7-simple-sample" class="bare">http://dockerhost:8080/javaee7-simple-sample</a> and looks like:</p>
@@ -2763,6 +2808,9 @@ docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example
 <ol class="arabic">
 <li>
 <p>Start another WildFly instance again:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">#From Internet
@@ -2775,57 +2823,74 @@ docker run -d --name wildfly -p 8080:8080 -p 9990:9990 classroom.example.com:500
 <div class="paragraph">
 <p>In addition to application port 8080, the administration port 9990 is exposed as well. The WildFly image that is used has tweaked the start script such that the management interface is bound to 0.0.0.0.</p>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Create a new server adapter in JBoss Developer Studio and name it &#8220;WildFly 9.0.2-Management&#8221;. Specify the host name as &#8216;dockerhost&#8217;.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds8.png" alt="jbds8">
 </div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Click on &#8216;Next&gt;&#8217; and change the values as shown.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds9.png" alt="jbds9">
 </div>
 <div class="title">Figure 22. Create New Server Adapter</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Take the default values in &#8216;Remote System Integration&#8217; and click on &#8216;Finish&#8217;.</p>
 </li>
 <li>
 <p>Change server properties by double clicking on the newly created server adapter. Specify admin credentials (username: docker, password: docker#admin). Note, you need to delete the existing password and use this instead:</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds10.png" alt="jbds10">
 </div>
 <div class="title">Figure 23. Management Login Credentials</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Right-click on the newly created server adapter and click &#8216;Start&#8217;. Status quickly changes to &#8216;Started&#8217; as shown.</p>
+</li>
+</ol>
+</div>
 <div class="imageblock">
 <div class="content">
 <img src="chapters/images/jbds11.png" alt="jbds11">
 </div>
 <div class="title">Figure 24. Synchronized WildFly Server</div>
 </div>
-</li>
+<div class="olist arabic">
+<ol class="arabic">
 <li>
 <p>Right-click on the javaee7-simple-sample project, select &#8216;Run on Server&#8217; and choose this server. The project runs and displays the start page of the application.</p>
 </li>
 <li>
 <p>Stop WildFly when you&#8217;re done.</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">docker stop wildfly</code></pre>
 </div>
-</div>
-</li>
-</ol>
 </div>
 </div>
 </div>
@@ -2944,9 +3009,9 @@ sudo chmod +x /usr/local/bin/docker-compose</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="yml"><span class="key">mysqldb</span>:
-  <span class="comment">#From Internet</span>
+  <span class="comment">#From Internet (use only one image instruction)</span>
   <span class="key">image</span>: <span class="string"><span class="content">mysql</span></span>
-  <span class="comment">#From Instructor</span>
+  <span class="comment">#From Instructor (use only one image instruction)</span>
   <span class="key">image</span>: <span class="string"><span class="content">classroom.example.com:5000/mysql</span></span>
   <span class="key">environment</span>:
     <span class="key">MYSQL_DATABASE</span>: <span class="string"><span class="content">sample</span></span>
@@ -2954,9 +3019,9 @@ sudo chmod +x /usr/local/bin/docker-compose</code></pre>
     <span class="key">MYSQL_PASSWORD</span>: <span class="string"><span class="content">mysql</span></span>
     <span class="key">MYSQL_ROOT_PASSWORD</span>: <span class="string"><span class="content">supersecret</span></span>
 <span class="key">mywildfly</span>:
-  <span class="comment">#From Internet</span>
+  <span class="comment">#From Internet (use only one image instruction)</span>
   <span class="key">image</span>: <span class="string"><span class="content">arungupta/wildfly-mysql-javaee7</span></span>
-  <span class="comment">#From Instructor</span>
+  <span class="comment">#From Instructor (use only one image instruction)</span>
   <span class="key">image</span>: <span class="string"><span class="content">classroom.example.com:5000/wildfly-mysql-javaee7</span></span>
   <span class="key">links</span>:
     - <span class="string"><span class="content">mysqldb:db</span></span>
@@ -3240,6 +3305,54 @@ Removing rafael_mysqldb_1... done</pre>
 <div class="sect1">
 <h2 id="_deploy_application_on_kubernetes_cluster">10. Deploy Application on Kubernetes Cluster</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="Kubernetes_Setup">10.1. Install Kubernetes</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Download Vagrant and install it.</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="https://www.vagrantup.com/downloads.html" class="bare">https://www.vagrantup.com/downloads.html</a></p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/vagrant/" class="bare">http://classroom.example.com:8082/downloads/vagrant/</a></p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Kubernetes requires Vagrant &gt;= 1.6.2. So if you have an older version then make sure you install the latest one.</p>
+</div>
+</li>
+<li>
+<p>If you&#8217;ve not installed Docker Toolbox, then you need to additionally download Virtual Box 5.0.8</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="https://www.virtualbox.org/wiki/Downloads" class="bare">https://www.virtualbox.org/wiki/Downloads</a>.</p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/virtualbox/" class="bare">http://classroom.example.com:8082/downloads/virtualbox/</a></p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Download Kubernetes (1.0.7)</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>from Internet: <a href="https://github.com/kubernetes/kubernetes/releases/download/v1.0.7/kubernetes.tar.gz" class="bare">https://github.com/kubernetes/kubernetes/releases/download/v1.0.7/kubernetes.tar.gz</a></p>
+</li>
+<li>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/kubernetes.tar.gz" class="bare">http://classroom.example.com:8082/downloads/kubernetes.tar.gz</a>.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
 <div class="quoteblock">
 <blockquote>
 Kubernetes is an open source system for managing containerized applications across multiple hosts, providing basic mechanisms for deployment, maintenance, and scaling of applications.
@@ -3263,8 +3376,9 @@ Kubernetes is an open source system for managing containerized applications acro
 <div class="paragraph">
 <p>A typical application would have a cluster of containers across multiple hosts. For example, your web tier (for example Undertow) might run as a few instances, and likely on a set of containers. Similarly, your application tier (for example, WildFly) would run on a different set of containers. The web tier would need to delegate the request to application tier. The web, application, and database tier would generally run on a separate set of containers. These containers would need to talk to each other. Using any of the solutions mentioned above would require scripting to start the containers, and monitoring/bouncing if something goes down. Kubernetes does all of that for the user after the application state has been defined.</p>
 </div>
+</div>
 <div class="sect2">
-<h3 id="_key_components">10.1. Key Components</h3>
+<h3 id="_key_components">10.2. Key Components</h3>
 <div class="paragraph">
 <p>At a very high level, there are three key components:</p>
 </div>
@@ -3312,12 +3426,12 @@ Label is an arbitrary key/value pair in a distributed watchable storage that the
 </div>
 </div>
 <div class="sect2">
-<h3 id="_start_kubernetes_cluster">10.2. Start Kubernetes Cluster</h3>
+<h3 id="_start_kubernetes_cluster">10.3. Start Kubernetes Cluster</h3>
 <div class="paragraph">
 <p>Kubernetes cluster can be easily started using Vagrant. There are two options to start the cluster - first using a downloaded Kubernetes distribution bundle and second by downloading the latest bundle as part of the install.</p>
 </div>
 <div class="sect3">
-<h4 id="_using_previously_downloaded_kubernetes_distribution">10.2.1. Using Previously Downloaded Kubernetes Distribution</h4>
+<h4 id="_using_previously_downloaded_kubernetes_distribution">10.3.1. Using Previously Downloaded Kubernetes Distribution</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3328,12 +3442,16 @@ Label is an arbitrary key/value pair in a distributed watchable storage that the
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">cd kubernetes
+export NUM_MINIONS=2
 export KUBERNETES_PROVIDER=vagrant
 ./cluster/kube-up.sh</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The <code>KUBERNETES_PROVIDER</code> environment variable tells all of the various cluster management scripts which variant to use.</p>
+</div>
+<div class="paragraph">
+<p>The `NUM_MINIONS`environment variable controls the number of nodes that are instantiated</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -3377,7 +3495,7 @@ KubeUI is running at https://10.245.1.2/api/v1/proxy/namespaces/kube-system/serv
 </div>
 </div>
 <div class="sect3">
-<h4 id="_download_and_start_the_kubernetes_cluster">10.2.2. Download and Start the Kubernetes Cluster</h4>
+<h4 id="_download_and_start_the_kubernetes_cluster">10.3.2. Download and Start the Kubernetes Cluster</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3420,7 +3538,7 @@ Installation successful!</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_verify_the_cluster">10.2.3. Verify the Cluster</h4>
+<h4 id="_verify_the_cluster">10.3.3. Verify the Cluster</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3539,7 +3657,7 @@ CONTROLLER   CONTAINER(S)   IMAGE(S)   SELECTOR   REPLICAS</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="Deploy_JavaEE_Kubernetes_Multiple_Config">10.3. Deploy Java EE Application (multiple configuration files)</h3>
+<h3 id="Deploy_JavaEE_Kubernetes_Multiple_Config">10.4. Deploy Java EE Application (multiple configuration files)</h3>
 <div class="paragraph">
 <p>Pods, and the IP addresses assigned to them, are ephemeral. If a pod dies then Kubernetes will recreate that pod because of its self-healing features, but it might recreate it on a different host. Even if it is on the same host, a different IP address could be assigned to it. And so any application cannot rely upon the IP address of the pod.</p>
 </div>
@@ -3571,7 +3689,7 @@ In this case, all the pods are running on a single node. This is because, that i
 <p>The order of Service and the targeted Pods does not matter. However Service needs to be started before any other Pods consuming the Service are started.</p>
 </div>
 <div class="sect3">
-<h4 id="_start_mysql_pod">10.3.1. Start MySQL Pod</h4>
+<h4 id="_start_mysql_pod">10.4.1. Start MySQL Pod</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3642,7 +3760,7 @@ mysql-pod   1/1       Running   0         44s</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_start_mysql_service">10.3.2. Start MySQL service</h4>
+<h4 id="_start_mysql_service">10.4.2. Start MySQL service</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3720,7 +3838,7 @@ mysql-pod   1/1       Running   0          4m</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_start_wildfly_replication_controller">10.3.3. Start WildFly Replication Controller</h4>
+<h4 id="_start_wildfly_replication_controller">10.4.3. Start WildFly Replication Controller</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3790,7 +3908,7 @@ wildfly-rc-w2kk5   1/1       Running   0          6m</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="Access_Kubernetes_Application_Node">10.3.4. Access the application (using node)</h4>
+<h4 id="Access_Kubernetes_Application_Node">10.4.4. Access the application (using node)</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3819,14 +3937,14 @@ wildfly-rc-w2kk5   1/1       Running   0          6m</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="Access_Kubernetes_Application_Proxy">10.3.5. Access the application (using proxy)</h4>
+<h4 id="Access_Kubernetes_Application_Proxy">10.4.5. Access the application (using proxy)</h4>
 <div class="paragraph">
 <p>Send a PR for <a href="https://github.com/javaee-samples/docker-java/issues/80" class="bare">https://github.com/javaee-samples/docker-java/issues/80</a></p>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_deploy_java_ee_application_one_configuration_file">10.4. Deploy Java EE Application (one configuration file)</h3>
+<h3 id="_deploy_java_ee_application_one_configuration_file">10.5. Deploy Java EE Application (one configuration file)</h3>
 <div class="paragraph">
 <p>Kubernetes allow multiple resources to be specified in a single configuration file. This allows to create a &#8220;Kubernetes Application&#8221; that can consists of multiple resources easily.</p>
 </div>
@@ -3935,7 +4053,7 @@ replicationcontrollers/wildfly-rc</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_rescheduling_pods">10.5. Rescheduling Pods</h3>
+<h3 id="_rescheduling_pods">10.6. Rescheduling Pods</h3>
 <div class="paragraph">
 <p>Replication Controller ensures that specified number of pod &#8220;replicas&#8221; are running at any one time. If there are too many, the replication controller kills some pods. If there are too few, it starts more.</p>
 </div>
@@ -3990,7 +4108,7 @@ wildfly-rc-xz6wu   1/1       Running   0         22s</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scaling_pods">10.6. Scaling Pods</h3>
+<h3 id="_scaling_pods">10.7. Scaling Pods</h3>
 <div class="paragraph">
 <p>Replication Controller allows dynamic scaling up and down of Pods.</p>
 </div>
@@ -4062,7 +4180,7 @@ wildfly-rc-bgtkg   1/1       Running   0          9m</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_application_logs">10.7. Application Logs</h3>
+<h3 id="_application_logs">10.8. Application Logs</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4171,18 +4289,18 @@ Password:
 </div>
 </div>
 <div class="sect2">
-<h3 id="_delete_kubernetes_resources">10.8. Delete Kubernetes Resources</h3>
+<h3 id="_delete_kubernetes_resources">10.9. Delete Kubernetes Resources</h3>
 <div class="paragraph">
 <p>Individual resources (service, replication controller, or pod) can be deleted by using <code>delete</code> command instead of <code>create</code> command. Alternatively, all services and replication controllers can be deleted using a label as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">kubectl delete -l se,po context=docker-k8s-lab</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">kubectl delete all -l context=docker-k8s-lab</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stop_kubernetes_cluster">10.9. Stop Kubernetes Cluster</h3>
+<h3 id="_stop_kubernetes_cluster">10.10. Stop Kubernetes Cluster</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&gt; ./cluster/kube-down.sh
@@ -4196,7 +4314,7 @@ Done</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_debug_kubernetes_master">10.10. Debug Kubernetes Master</h3>
+<h3 id="_debug_kubernetes_master">10.11. Debug Kubernetes Master</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>

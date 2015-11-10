@@ -57,7 +57,7 @@ sudo yum install docker-io
 
 # MacOS / Linux (other distros)
 sudo curl -L  https://get.docker.com/builds/`uname -s`/x86_64/docker-latest -o /usr/local/bin/docker
-sudo chmod +x /usr/local/bin/docker
+sudo chmod x /usr/local/bin/docker
 ----
 
 ## Install Docker Compose
@@ -70,7 +70,7 @@ Learn more about the tool on link:https://docs.docker.com/compose/[Docker Compos
 ----
 # Linux / MacOS
 sudo curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
+chmod x /usr/local/bin/docker-compose
 ----
 
 ## Install and Configure Docker Machine
@@ -110,24 +110,24 @@ NOTE: This is one of the most importants steps of the process. The DNS should be
 There is no in-built support for DNS and so this needs to be configured. Currently this works only on Mac and Linux, and need to be fixed for Windows https://github.com/javaee-samples/docker-java/issues/61[#61].
 
 . Edit `/etc/hosts` (Mac OS / Linux)
-+
+
 [source, text]
 ----
 <INSTRUCTOR_IP>  classroom.example.com
 ----
-+
+
 IMPORTANT: <INSTRUCTOR_IP> is the IP of your public interface eg. `en0, eth0`.
-+
+
 
 . Install a simple dns server such as `dnsmasq` as:
-+
+
 [source, text]
 ----
 brew install dnsmasq
 ----
-+
+
 to see the output as:
-+
+
 [source, text]
 ----
 > brew install dnsmasq
@@ -153,16 +153,16 @@ You may need to restart Dnsmasq to get it to recognise this change:
 sudo launchctl stop homebrew.mxcl.dnsmasq
 sudo launchctl start homebrew.mxcl.dnsmasq
 ----
-+
+
 This can be done on Linux as:
-+
+
 [source, text]
 ----
 sudo yum -­y install dnsmasq
 ----
-+
+
 . Edit `/etc/resolv.conf` (Mac OS / Linux)
-+
+
 [source, text]
 ----
 nameserver  <INSTRUCTOR_IP>
@@ -206,21 +206,21 @@ ping classroom.example.com and verify it works.
 ### Create Machine
 
 . Creates instructor host which will run the complete infrastructure.
-+
+
 [source, text]
 ----
 docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.9.0/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
 ----
 
-+
+
 . Configure Docker client to run the commands on this newly created machine as:
-+
+
 [source, text]
 ----
 eval "$(docker-machine env instructor-machine)"
 ----
 
-+
+
 IMPORTANT: If you change your network, you may need to update your /etc/hosts and restart your dnsmasq server and docker machine:
 [source, text]
 ----
@@ -297,19 +297,19 @@ a784996e47ce        sameersbn/redis:latest               "/sbin/entrypoint.sh"  
 Test if the servers are running:
 
 . Docker Registry [http://localhost:5000/]
-+
+
 image::images/registry-default-output.png[]
-+
+
 . Nexus Console [http://localhost:8081/content/groups/public/]
-+
+
 image::images/nexus-default-output.png[]
-+
+
 . Apache Webserver [http://localhost:8082/]
-+
+
 image::images/webserver-default-output.png[]
-+
+
 . Gitlab server [http://localhost:10080/]
-+
+
 image::images/gitlab-default-output.png[]
 
 
