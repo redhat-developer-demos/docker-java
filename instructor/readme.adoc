@@ -61,7 +61,7 @@ sudo chmod x /usr/local/bin/docker
 ----
 
 ## Install Docker Compose
-Docker Compose simplifies instructor's setup. The link:https://github.com/redhat-developer/docker-java/blob/javaone2015/instructor/docker-compose.yml[docker-compose.yml] contains all the instructions for the tool to setup and start the infrastructure.
+Docker Compose simplifies instructor's setup. The link:https://github.com/redhat-developer/docker-java/blob/devconf2016/instructor/docker-compose.yml[docker-compose.yml] contains all the instructions for the tool to setup and start the infrastructure.
 
 Learn more about the tool on link:https://docs.docker.com/compose/[Docker Compose Website].
 
@@ -69,8 +69,8 @@ Learn more about the tool on link:https://docs.docker.com/compose/[Docker Compos
 [source, text]
 ----
 # Linux / MacOS
-sudo curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-chmod x /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 ----
 
 ## Install and Configure Docker Machine
@@ -80,22 +80,16 @@ Install the Docker machine client for your environment: https://github.com/docke
 ----
 # Windows
 if [[ ! -d "$HOME/bin" ]]; then mkdir -p "$HOME/bin"; fi && \
-  curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_windows-amd64.zip >machine.zip && \
-  unzip machine.zip && \
-  rm machine.zip && \
-  mv -f docker-machine* "$HOME/bin"
+  curl -L https://github.com/docker/machine/releases/download/v0.5.5/docker-machine_windows-amd64.exe > "$HOME/bin/docker-machine.exe" && \
+  chmod +x "$HOME/bin/docker-machine.exe"
   
 # Linux
-curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_linux-amd64.zip >machine.zip && \
-  unzip machine.zip && \
-  rm machine.zip && \
-  mv -f docker-machine* /usr/local/bin
-
+sudo curl -L https://github.com/docker/machine/releases/download/v0.5.5/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine && \
+sudo chmod +x /usr/local/bin/docker-machine
+  
 # MacOS
- curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_darwin-amd64.zip >machine.zip && \
-  unzip machine.zip && \
-  rm machine.zip && \
-  mv -f docker-machine* /usr/local/bin
+sudo curl -L https://github.com/docker/machine/releases/download/v0.5.5/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine && \
+sudo chmod +x /usr/local/bin/docker-machine
 ----
 
 For Windows, make sure to add `c:\Users\<username>\docker` to your `%PATH%` variable. This was already done for Linux / MacOs when you downloaded `docker-machine` script to `/usr/local/bin/docker-machine`.
@@ -209,7 +203,7 @@ ping classroom.example.com and verify it works.
 
 [source, text]
 ----
-docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-cpu-count=4 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.9.0/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
+docker-machine create --driver=virtualbox --virtualbox-memory=4096 --virtualbox-cpu-count=4 --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v1.9.1/boot2docker.iso --engine-insecure-registry=classroom.example.com:5000 instructor-machine
 ----
 
 
@@ -247,8 +241,8 @@ VBoxManage controlvm "instructor-machine" natpf1 "tcp-port10022,tcp,,10022,,1002
 VBoxManage controlvm "instructor-machine" natpf1 "tcp-port10080,tcp,,10080,,10080";
 ----
 
-This is available as a script in https://github.com/redhat-developer/docker-java/tree/javaone2015/instructor/virtualbox-ports.sh .
-A Windows version in https://github.com/redhat-developer/docker-java/tree/javaone2015/instructor/virtualbox-ports.bat  .
+This is available as a script in https://github.com/redhat-developer/docker-java/tree/devconf2016/instructor/virtualbox-ports.sh .
+A Windows version in https://github.com/redhat-developer/docker-java/tree/devconf2016/instructor/virtualbox-ports.bat  .
 
 ## Container with Nexus Dependencies
 
@@ -286,8 +280,8 @@ The status of different servers can be verified as:
 ----
 instructor> docker ps
 CONTAINER ID        IMAGE                                COMMAND                  CREATED              STATUS              PORTS                                                   NAMES
-73f83816ab96        quay.io/sameersbn/gitlab:8.0.5       "/sbin/entrypoint.sh "   About a minute ago   Up About a minute   443/tcp, 0.0.0.0:10022->22/tcp, 0.0.0.0:10080->80/tcp   instructor_gitlab_1
-6550affd612f        quay.io/sameersbn/postgresql:9.4-5   "/sbin/entrypoint.sh"    3 minutes ago        Up 3 minutes        5432/tcp                                                instructor_postgresqlgitlab_1
+73f83816ab96        sameersbn/gitlab:8.0.5               "/sbin/entrypoint.sh "   About a minute ago   Up About a minute   443/tcp, 0.0.0.0:10022->22/tcp, 0.0.0.0:10080->80/tcp   instructor_gitlab_1
+6550affd612f        sameersbn/postgresql:9.4-5          "/sbin/entrypoint.sh"    3 minutes ago        Up 3 minutes        5432/tcp                                                instructor_postgresqlgitlab_1
 16995a7df028        registry:2.2.0                       "/bin/registry /etc/d"   4 minutes ago        Up 4 minutes        0.0.0.0:5000->5000/tcp                                  instructor_registry_1
 a784996e47ce        sameersbn/redis:latest               "/sbin/entrypoint.sh"    5 minutes ago        Up 5 minutes        6379/tcp                                                instructor_redisgitlab_1
 274b53d49f45        sonatype/nexus:oss                   "/bin/sh -c 'java   -"   5 minutes ago        Up 5 minutes        0.0.0.0:8081->8081/tcp                                  instructor_nexus_1
@@ -296,7 +290,7 @@ a784996e47ce        sameersbn/redis:latest               "/sbin/entrypoint.sh"  
 
 Test if the servers are running:
 
-. Docker Registry [http://localhost:5000/]
+. Docker Registry [http://localhost:5000/v2]
 
 image::images/registry-default-output.png[]
 

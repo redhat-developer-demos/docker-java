@@ -1,9 +1,10 @@
-FROM fedora:23
+FROM centos:7
 
 MAINTAINER Rafael Benevides <benevides@redhat.com>
 
 #Install wget and Apache HTTPD
-RUN dnf -y update && dnf -y install httpd && dnf clean all
+#RUN dnf -y update && dnf -y install httpd && dnf clean all
+RUN yum -y update && yum -y install httpd && yum clean all
 
 RUN mkdir -p /var/www/html/downloads
 
@@ -37,19 +38,19 @@ RUN mkdir -p /var/www/html/downloads/docker
 WORKDIR /var/www/html/downloads/docker
 
 #Get Docker Toolbox (Docker, Machine and Compose)  for Windows
-RUN curl -L https://github.com/docker/toolbox/releases/download/v1.9.0b/DockerToolbox-1.9.0b.exe -o DockerToolbox-1.9.0b.exe
+RUN curl -L https://github.com/docker/toolbox/releases/download/v1.9.1g/DockerToolbox-1.9.1g.exe -o DockerToolbox-1.9.1g.exe
 
 #Get Docker Toolbox (Docker, Machine and Compose) for Mac
-RUN curl -L https://github.com/docker/toolbox/releases/download/v1.9.0b/DockerToolbox-1.9.0b.pkg -o DockerToolbox-1.9.0b.pkg
+RUN curl -L https://github.com/docker/toolbox/releases/download/v1.9.1g/DockerToolbox-1.9.1g.pkg -o DockerToolbox-1.9.1g.pkg
 
 #Get Docker Machine Linux
-RUN curl -L https://github.com/docker/machine/releases/download/v0.5.0/docker-machine_linux-amd64.zip -o docker-machine_linux-amd64.zip
+RUN curl -L https://github.com/docker/machine/releases/download/v0.5.5/docker-machine_linux-amd64.zip -o docker-machine_linux-amd64.zip
 
 #Get Docker Client Linux
 RUN curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o docker-latest-linux
 
 #Get Docker Compose for Linux
-RUN curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-Linux-x86_64 -o docker-compose-Linux-x86_64
+RUN curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-Linux-x86_64 -o docker-compose-Linux-x86_64
 
 WORKDIR /var/www/html/downloads
 
@@ -57,7 +58,7 @@ WORKDIR /var/www/html/downloads
 RUN curl -L http://apache.mirrors.tds.net/maven/maven-3/3.3.3/binaries/apache-maven-3.3.3-bin.zip -o apache-maven-3.3.3-bin.zip
 
 #Get Kubernetes
-RUN curl -L https://github.com/kubernetes/kubernetes/releases/download/v1.0.7/kubernetes.tar.gz -o kubernetes.tar.gz
+RUN curl -L https://github.com/kubernetes/kubernetes/releases/download/v1.1.3/kubernetes.tar.gz -o kubernetes.tar.gz
 
 RUN mkdir -p /var/www/html/downloads/vagrant
 WORKDIR /var/www/html/downloads/vagrant

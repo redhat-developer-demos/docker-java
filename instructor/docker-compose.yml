@@ -1,12 +1,13 @@
 registry:
-  image: registry:0.9.1
+  #image: registry:0.9.1
+  image: registry:2
   ports:
    - "5000:5000"
-  environment:
-   - DISABLE_TOKEN_AUTH=true
-   - SETTINGS_FLAVOR=local
-   - SEARCH_BACKEND=sqlalchemy
-   - STORAGE_PATH=/var/lib/registry
+#  environment:
+#   - DISABLE_TOKEN_AUTH=true
+#   - SETTINGS_FLAVOR=local
+#   - SEARCH_BACKEND=sqlalchemy
+#   - STORAGE_PATH=/var/lib/registry
   volumes_from:
     - data-volume
   restart: always

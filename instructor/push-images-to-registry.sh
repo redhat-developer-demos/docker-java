@@ -5,9 +5,9 @@ docker push classroom.example.com:5000/hello-world
 
 # Fedora
 docker pull fedora
-docker pull fedora:22
+docker pull fedora:23
 docker tag fedora classroom.example.com:5000/fedora
-docker tag fedora:22 classroom.example.com:5000/fedora:22
+docker tag fedora:23 classroom.example.com:5000/fedora:23
 docker push classroom.example.com:5000/fedora
 docker push classroom.example.com:5000/fedora:22
 
@@ -30,8 +30,8 @@ docker tag postgres classroom.example.com:5000/postgres
 docker push classroom.example.com:5000/postgres
 
 # Modcluster
-docker pull goldmann/mod_cluster
-docker tag goldmann/mod_cluster classroom.example.com:5000/mod_cluster
+docker pull rafabene/mod_cluster
+docker tag rafabene/mod_cluster classroom.example.com:5000/mod_cluster
 docker push classroom.example.com:5000/mod_cluster
 
 #Java EE 7 hol
