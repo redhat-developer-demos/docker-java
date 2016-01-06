@@ -50,13 +50,14 @@ include::chapters/docker-compose.adoc[]
 ////
 include::chapters/docker-mod-cluster.adoc[]
 
-include::chapters/docker-swarm.adoc[]
 ////
 
+include::chapters/docker-swarm.adoc[]
 
+
+////
 include::chapters/docker-kubernetes.adoc[]
 
-////
 include::chapters/docker-continuous-delivery.adoc[]
 
 include::chapters/docker-openshift.adoc[]

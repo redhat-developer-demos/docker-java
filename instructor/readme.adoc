@@ -251,7 +251,7 @@ Create a container with Nexus dependencies.
 We want to provide an option to run this lab without any Internet access. So, the instructor machine will contain everything that the attendees will need to run this lab.
 [source, text]
 ----
-docker run --name="data-volume" -v $(pwd):/backup -v /var/lib/registry -v /home/git/data -v /var/lib/postgresql sonatype/nexus:oss  bash -c "tar xvf  /backup/nexusbackup.tar -C /"
+docker run --name="data-volume" -v $(pwd):/backup -v /var/lib/registry -v /home/git/data -v /var/lib/postgresql -v /var/lib/redis sonatype/nexus:oss  bash -c "tar xvf  /backup/nexusbackup.tar -C /"
 ----
 
 IMPORTANT: Running Windows, make sure to copy the `nexusbackup.tar` to the following folder `c:/Users/<username>/docker-hol` and make sure to update the docker run command accordingly.
@@ -262,6 +262,14 @@ This will download the Nexus image on Docker host and populate it with the Nexus
 ## Download JBoss Developer Studio 9.0.0.GA
 
 Download http://www.jboss.org/download-manager/file/jboss-devstudio-9.0.0.GA-standalone_jar.jar[JBoss Developer Studio 9.0.0.GA - 489MB - (Stand-alone Installer) JAR File] and place it inside `dockerfiles/lab-httpd-server/downloads` folder.
+
+
+## Download the Binaries
+
+The instructor will provide a HTTP Web server with some binaries for download. To avoid downloading the binaries every time during the image construction, you should pre-download these binaries.
+
+To do it, execute the script in https://github.com/redhat-developer/docker-java/tree/devconf2016/instructor/download-binaries.sh 
+
 
 ## Start the Instructor Environment
 
@@ -290,7 +298,7 @@ a784996e47ce        sameersbn/redis:latest               "/sbin/entrypoint.sh"  
 
 Test if the servers are running:
 
-. Docker Registry [http://localhost:5000/v2]
+. Docker Registry [http://localhost:5000/v2/_catalog]
 
 image::images/registry-default-output.png[]
 
@@ -316,47 +324,18 @@ Execute:
 
 [source,text]
 ----
-docker exec instructor_gitlab_1 bash -c "cd /home/git/data/repositories/root; git clone --bare https://github.com/javaee-samples/javaee7-simple-sample.git; git clone --bare https://github.com/rafabene/ticket-monster.git; chown git:git -R /home/git/data/repositories; cd /home/git/gitlab; sudo -u git -H bundle exec rake -v gitlab:import:repos RAILS_ENV=production"
+docker exec instructor_gitlab_1 bash -c "cd /home/git/data/repositories/root; git clone --bare https://github.com/rafabene/ticket-monster.git; chown git:git -R /home/git/data/repositories; cd /home/git/gitlab; sudo -u git -H bundle exec rake -v gitlab:import:repos RAILS_ENV=production"
 ----
 
 This will show the output as:
 
 [source, text]
 ----
-Cloning into bare repository 'javaee7-simple-sample.git'...
 Cloning into bare repository 'ticket-monster.git'...
 Processing root/ticket-monster.git
  * ticket-monster (root/ticket-monster.git) exists
-Processing root/javaee7-simple-sample.git
- * javaee7-simple-sample (root/javaee7-simple-sample.git) exists
 Done!
 ----
-
-## Build TicketMonster from Source Code
-
-1. Clone TicketMonster from the existing gitlab container
-
-  git clone -b WildFly-docker-test http://root:dockeradmin@localhost:10080/root/ticket-monster.git
-
-2. Build TicketMonster
-
-  mvn -s settings.xml -f ticket-monster/demo/pom.xml -Ppostgresql clean package
-
-3. Copy TicketMonster war to the Docker ticketmonster-pgsql-widlfly image folder
-
-  cp ticket-monster/demo/target/ticket-monster.war dockerfiles/ticketmonster-pgsql-wildfly/
-
-## Build Images
-
-Build ``managed-widlfly'' and ``ticketmonster-pgsql-widlfly'' images
-
-[source, text]
-----
-docker build -t "instructor/wildfly-management" dockerfiles/wildfly-management/
-docker build -t "instructor/ticketmonster-pgsql-wildfly" dockerfiles/ticketmonster-pgsql-wildfly/
-----
-
-This is available as a script in https://github.com/javaee-samples/docker-java/blob/master/instructor/buid-images.sh
 
 ## Push Images to Registry
 

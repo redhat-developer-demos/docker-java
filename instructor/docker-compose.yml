@@ -24,7 +24,7 @@ nexus:
     - data-volume
   restart: always
 postgresqlgitlab:
-  image: sameersbn/postgresql:9.4-5
+  image: sameersbn/postgresql:9.4-11
   environment:
     - DB_USER=gitlab
     - DB_PASS=password
@@ -34,11 +34,11 @@ postgresqlgitlab:
   restart: always
 redisgitlab:
   image: sameersbn/redis:latest
-  volumes:
-    - /srv/docker/gitlab/redis:/var/lib/redis
+  volumes_from:
+    - data-volume
   restart: always
 gitlab:
-  image: sameersbn/gitlab:8.0.5
+  image: sameersbn/gitlab:8.3.2
   links:
     - redisgitlab:redisio
     - postgresqlgitlab:postgresql
@@ -46,7 +46,7 @@ gitlab:
     - "10080:80"
     - "10022:22"
   environment:
-    - GITLAB_HOST=localhost
+    - GITLAB_HOST=classroom.example.com
     - GITLAB_PORT=10080
     - GITLAB_SSH_PORT=10022
     - GITLAB_ROOT_PASSWORD=dockeradmin
