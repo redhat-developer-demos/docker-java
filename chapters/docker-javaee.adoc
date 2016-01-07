@@ -1,0 +1,52 @@
+[[JavaEE_PreBuilt_WAR]]
+## Deploy Java EE Application (Pre-Built WAR)
+
+https://github.com/jboss-developer/ticket-monster[Ticket Monster] is a moderately complex application that demonstrates how to build modern applications using JBoss web technologies..
+
+.Ticket Monster Architecture
+image::images/ticketmonster-architecture.png[]
+
+Pull the Docker image that contains WildFly and pre-built Java EE application WAR file as shown:
+
+[source, text]
+----
+#From Internet
+docker pull rafabene/wildfly-ticketmonster-h2
+
+#From Instructor
+docker pull classroom.example.com:5000/wildfly-ticketmonster-h2
+----
+
+The https://github.com/redhat-developer/docker-java/blob/devconf2016/instructor/dockerfiles/wildfly-ticketmonster-h2/Dockerfile[wildfly-ticketmonster-h2 Dockerfile] is based on `jboss/wildfly` and adds the Ticket Monster application as war file.
+
+Run it:
+
+[source, text]
+----
+#From Internet
+docker run -it -p 8080:8080 rafabene/wildfly-ticketmonster-h2
+
+#From Instructor
+docker run -it -p 8080:8080 classroom.example.com:5000/wildfly-ticketmonster-h2
+----
+
+See the application in action at http://dockerhost:8080/ticket-monster/. The output is shown:
+
+NOTE: It might take a while for the container to come up. Wait for the server to complete the startup.
+
+.Java EE Application Output
+image::images/javaee-ticketmonster.png[]
+
+This uses an in-memory database with WildFly application server as shown in the image:
+
+.In-memory Database
+image::images/javaee7-hol-in-memory-database.png[]
+
+Only one change were required to the standard `jboss/wildfly` image:
+
+. WAR file is copied to the `standalone/deployments` directory as:
++
+[source, text]
+----
+ADD ticket-monster.war /opt/jboss/wildfly/standalone/deployments/
+----

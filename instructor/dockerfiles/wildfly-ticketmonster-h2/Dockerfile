@@ -1,5 +1,5 @@
 # Use latest jboss/wildfly
-FROM rafabene/wildfly-admin
+FROM jboss/wildfly
 
 MAINTAINER "Rafael Benevides" <benevides@redhat.com>
 
