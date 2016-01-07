@@ -24,7 +24,7 @@ include::chapters/docker-image.adoc[]
 
 include::chapters/docker-javaee.adoc[]
 
-include::chapters/docker-container-linking.adoc[]
+include::chapters/docker-network.adoc[]
 
 include::chapters/docker-deployment-options.adoc[]
 

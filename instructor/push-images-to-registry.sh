@@ -1,7 +1,3 @@
-# WildFly + Ticket-monster+H2
-docker tag instructor/wildfly-ticketmonster-h2 classroom.example.com:5000/wildfly-ticketmonster-h2
-docker push classroom.example.com:5000/wildfly-ticketmonster-h2
-
 # Docker hello world
 docker pull hello-world
 docker tag hello-world classroom.example.com:5000/hello-world
@@ -24,6 +20,10 @@ docker push classroom.example.com:5000/wildfly
 docker pull rafabene/wildfly-admin
 docker tag rafabene/wildfly-admin classroom.example.com:5000/wildfly-admin
 docker push classroom.example.com:5000/wildfly-admin
+
+# WildFly + Ticket-monster+H2
+docker tag instructor/wildfly-ticketmonster-h2 classroom.example.com:5000/wildfly-ticketmonster-h2
+docker push classroom.example.com:5000/wildfly-ticketmonster-h2
 
 # Ticket-monster+PGSQ+WildFly
 docker pull rafabene/wildfly-ticketmonster

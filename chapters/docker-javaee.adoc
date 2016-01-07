@@ -1,7 +1,7 @@
 [[JavaEE_PreBuilt_WAR]]
 ## Deploy Java EE Application (Pre-Built WAR)
 
-https://github.com/jboss-developer/ticket-monster[Ticket Monster] is a moderately complex application that demonstrates how to build modern applications using JBoss web technologies..
+https://github.com/jboss-developer/ticket-monster[Ticket Monster] is a moderately complex application that demonstrates how to build modern applications using JBoss web technologies.
 
 .Ticket Monster Architecture
 image::images/ticketmonster-architecture.png[]
