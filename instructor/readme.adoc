@@ -298,19 +298,19 @@ a784996e47ce        sameersbn/redis:latest               "/sbin/entrypoint.sh"  
 
 Test if the servers are running:
 
-. Docker Registry [http://localhost:5000/v2/_catalog]
+. Docker Registry [http://classroom.example.com:5000/v2/_catalog]
 
 image::images/registry-default-output.png[]
 
-. Nexus Console [http://localhost:8081/content/groups/public/]
+. Nexus Console [http://classroom.example.com:8081/content/groups/public/]
 
 image::images/nexus-default-output.png[]
 
-. Apache Webserver [http://localhost:8082/]
+. Apache Webserver [http://classroom.example.com:8082/]
 
 image::images/webserver-default-output.png[]
 
-. Gitlab server [http://localhost:10080/]
+. Gitlab server [http://classroom.example.com:10080/]
 
 image::images/gitlab-default-output.png[]
 
@@ -335,6 +335,29 @@ Cloning into bare repository 'ticket-monster.git'...
 Processing root/ticket-monster.git
  * ticket-monster (root/ticket-monster.git) exists
 Done!
+----
+
+## Build TicketMonster from Source Code
+
+1. Clone TicketMonster from the existing gitlab container
+
+  git clone -b WildFly-docker-test http://root:dockeradmin@classroom.example.com:10080/root/ticket-monster.git
+
+2. Build TicketMonster
+
+  mvn -s settings.xml -f ticket-monster/demo/pom.xml -Ppostgresql clean package
+
+3. Copy TicketMonster war to the Docker ticketmonster-pgsql-widlfly image folder
+
+  cp ticket-monster/demo/target/ticket-monster.war dockerfiles/wildfly-ticketmonster-h2/
+
+## Build Images
+
+Build ``wildfly-ticket-monster-h2'' images
+
+[source, text]
+----
+docker build -t "instructor/wildfly-ticketmonster-h2" dockerfiles/wildfly-ticketmonster-h2/
 ----
 
 ## Push Images to Registry

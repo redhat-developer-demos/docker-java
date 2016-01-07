@@ -22,7 +22,7 @@ include::chapters/docker-container.adoc[]
 
 include::chapters/docker-image.adoc[]
 
-include::chapters/docker-javaee7.adoc[]
+include::chapters/docker-javaee.adoc[]
 
 include::chapters/docker-container-linking.adoc[]
 

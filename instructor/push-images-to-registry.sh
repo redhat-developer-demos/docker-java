@@ -1,3 +1,7 @@
+# WildFly + Ticket-monster+H2
+docker tag instructor/wildfly-ticketmonster-h2 classroom.example.com:5000/wildfly-ticketmonster-h2
+docker push classroom.example.com:5000/wildfly-ticketmonster-h2
+
 # Docker hello world
 docker pull hello-world
 docker tag hello-world classroom.example.com:5000/hello-world
@@ -35,6 +39,11 @@ docker push classroom.example.com:5000/postgres
 docker pull rafabene/mod_cluster
 docker tag rafabene/mod_cluster classroom.example.com:5000/mod_cluster
 docker push classroom.example.com:5000/mod_cluster
+
+# Docker Swarm
+docker pull busybox
+docker tag swarm classroom.example.com:5000/busybox
+docker push classroom.example.com:5000/busybox
 
 # Docker Swarm
 docker pull swarm

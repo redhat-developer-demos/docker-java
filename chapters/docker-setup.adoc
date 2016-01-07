@@ -101,7 +101,7 @@ sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_l
 . If you are running this lab without an Instructor, create the Docker Host using the following command:
 [source, text]
 ----
-docker-machine create --driver=virtualbox lab
+docker-machine create --driver=virtualbox --engine-insecure-registry=classroom.example.com:5000 lab
 eval "$(docker-machine env lab)"
 ----
 
@@ -156,7 +156,7 @@ sudo curl -L https://get.docker.com/builds/Linux/x86_64/docker-latest -o /usr/lo
 sudo chmod +x /usr/local/bin/docker
 
 # Linux - From Instructor
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest-linux -o /usr/local/bin/docker
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-latest -o /usr/local/bin/docker
 sudo chmod +x /usr/local/bin/docker
 ----
 
@@ -166,6 +166,12 @@ Check if the client is working by executing:
 docker ps
 ----
 Which will return an empty list of containers working. If you get an error message, make sure to have put the docker client into a folder that is contained in your path expression and that you executed the "docker-machine env lab" command according to your operatingsystem.
+
+////
+
+*********** NOTE: This should be installed when we will use IT ******************
+*********************************************************************************
+
 
 ### WildFly
 
@@ -189,3 +195,5 @@ java -jar <JAR FILE NAME>
 ----
 
 Follow the on-screen instructions to complete the installation process.
+
+////

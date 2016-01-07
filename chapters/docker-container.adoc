@@ -323,7 +323,7 @@ Accessing WildFly Administration Console require a user in administration realm.
 docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin 
 
 #From Instructor
-docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-management
+docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-admin
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host.
@@ -394,7 +394,7 @@ This management image can also be started with a pre-defined port mapping as:
 docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin 
 
 #From Instructor
-docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-management 
+docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-admin 
 ----
 
 In this case, Docker port mapping will be shown as:
