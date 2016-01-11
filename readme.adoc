@@ -1,5 +1,5 @@
 # Docker for Java Developers
-v1.4.1, Nov 10, 2015
+v1.4.3-devconf2016, Jan 11, 2016
 :toc:
 :toc-title: Table of Contents
 :toclevels: 3
@@ -50,9 +50,9 @@ include::chapters/docker-compose.adoc[]
 ////
 include::chapters/docker-mod-cluster.adoc[]
 
-////
 
 include::chapters/docker-swarm.adoc[]
+////
 
 
 ////

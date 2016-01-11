@@ -3,4 +3,5 @@
 . Docker Docs: http://docs.docker.com
 . Kubernetes Docs: https://github.com/kubernetes/kubernetes/tree/master/docs
 . JBoss and Docker: http://www.jboss.org/docker/
-. Latest lab content: https://github.com/javaee-samples/docker-java
+. Ticket Monster: http://www.jboss.org/ticket-monster/
+. Latest lab content: https://github.com/redhat-developer/docker-java/

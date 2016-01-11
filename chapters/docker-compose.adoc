@@ -32,7 +32,7 @@ NOTE: According to https://docs.docker.com/compose/install/ "You can run Compose
 
 [source, txt]
 ----
-sudo curl -L https://github.com/docker/compose/releases/download/1.5.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ----
 
@@ -42,123 +42,122 @@ sudo chmod +x /usr/local/bin/docker-compose
 +
 [source, yml]
 ----
-mysqldb:
-  #From Internet (use only one image instruction)
-  image: mysql
-  #From Instructor (use only one image instruction)
-  image: classroom.example.com:5000/mysql
+db:
+  image: postgres
   environment:
-    MYSQL_DATABASE: sample
-    MYSQL_USER: mysql
-    MYSQL_PASSWORD: mysql
-    MYSQL_ROOT_PASSWORD: supersecret
+    POSTGRES_USER: ticketmonster
+    POSTGRES_PASSWORD: ticketmonster-docker
+  net: mynet
 mywildfly:
-  #From Internet (use only one image instruction)
-  image: arungupta/wildfly-mysql-javaee7
-  #From Instructor (use only one image instruction)
-  image: classroom.example.com:5000/wildfly-mysql-javaee7
-  links:
-    - mysqldb:db
+  image: rafabene/wildfly-ticketmonster
+  net: mynet 
   ports:
     - 8080
 ----
 +
 This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/devoxxma2015/attendees/[] and shows:
-+
-.. Two services defined by the name `mysqldb` and `mywildfly`
+
+.. `container_name` forces the container to have a name and hostname = `db`
+.. Two services defined by the name `db` and `mywildfly`
 .. Image name for each service defined using `image`
-.. Environment variables for the MySQL container are defined in `environment`
-.. MySQL container is linked with WildFly container using `links`
+.. Environment variables for the PostgreSQL container are defined in `environment`
 .. Port forwarding is achieved using `ports`
+.. `net` places both containers on the same docker network called `mynetcompose`
+
+
+### Create a Docker Network
+
+As you saw in <<JavaEE_Docker_Network>> section, to allow both containers to communicate, you will need to create a docker network and use it on both containers.
+
+. Create a new docker network
+
+  docker network create mynet
 
 ### Start Services
 
 . Save the `docker-compose-internet.yml` as `docker-compose.yml` if you are running from Internet or 
 . Save the `docker-compose-instructor.yml` as `docker-compose.yml` if you are using images from Instructor.
 
+. Before start the services, pull the images first.
+
+  docker-compose pull
+
 . All services can be started, in detached mode, by giving the command:
-+
+
   docker-compose up -d
-+
+
 And this shows the output as:
-+
-  Creating attendees_mysqldb_1...
+
+  Creating db...
   Creating attendees_mywildfly_1...
-+
+
 An alternate compose file name can be specified using `-f`.
-+
+
 An alternate directory where the compose file exists can be specified using `-p`.
-+
+
 . Started services can be verified as:
-+
+
 [source, text]
 ----
 > docker-compose ps
         Name                       Command               State                Ports               
 -------------------------------------------------------------------------------------------------
-attendees_mysqldb_1     /entrypoint.sh mysqld            Up      3306/tcp                         
-attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32773->8080/tcp
+db                      /docker-entrypoint.sh postgres   Up      5432/tcp                         
+attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32777->8080/tcp
 ----
-+
+
 This provides a consolidated view of all the services started, and containers within them.
-+
+
 Alternatively, the containers in this application, and any additional containers running on this Docker host can be verified by using the usual `docker ps` command:
-+
+
 [source, text]
 ----
 > docker ps
-CONTAINER ID        IMAGE                                    COMMAND                CREATED             STATUS              PORTS                              NAMES
-3598e545bd2f        arungupta/wildfly-mysql-javaee7:latest   "/opt/jboss/wildfly/   59 seconds ago      Up 58 seconds       0.0.0.0:32773->8080/tcp         attendees_mywildfly_1   
-b8cf6a3d518b        mysql:latest                             "/entrypoint.sh mysq   2 minutes ago       Up 2 minutes        3306/tcp                        attendees_mysqldb_1  
+CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS              PORTS                                         NAMES
+18f1933af468        postgres                         "/docker-entrypoint.s"   3 minutes ago       Up 42 seconds       5432/tcp                                      db
+2328c1bdf3fc        rafabene/wildfly-ticketmonster   "/bin/sh -c '/opt/jbo"   4 minutes ago       Up 42 seconds       8009/tcp, 9990/tcp, 0.0.0.0:32777->8080/tcp   attendees_mywildfly_1
 ----
-+
+
 . Service logs can be seen as:
-+
+
 [source, text]
 ----
 > docker-compose logs
-Attaching to attendees_mywildfly_1, attendees_mysqldb_1
-mywildfly_1 | => Starting WildFly server
-mywildfly_1 | => Waiting for the server to boot
+Attaching to attendees_mywildfly_1, db
 mywildfly_1 | =========================================================================
-mywildfly_1 | 
+mywildfly_1 |
 mywildfly_1 |   JBoss Bootstrap Environment
-mywildfly_1 | 
+mywildfly_1 |
 mywildfly_1 |   JBOSS_HOME: /opt/jboss/wildfly
-mywildfly_1 | 
+mywildfly_1 |
 mywildfly_1 |   JAVA: /usr/lib/jvm/java/bin/java
-mywildfly_1 | 
-mywildfly_1 |   JAVA_OPTS:  -server -Xms64m -Xmx512m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true
-mywildfly_1 | 
-
+mywildfly_1 |
+mywildfly_1 |   JAVA_OPTS:  -server -XX:+UseCompressedOops  -server -XX:+UseCompressedOops -Xms64m -Xmx512m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true
+mywildfly_1 |
+mywildfly_1 | =========================================================================
+mywildfly_1 |
+mywildfly_1 | OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
+mywildfly_1 | 13:46:16,836 INFO  [org.jboss.modules] (main) JBoss Modules version 1.4.3.Final
+mywildfly_1 | 13:46:18,007 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
 . . .
 
-mywildfly_1 | 15:40:20,866 INFO  [org.jboss.resteasy.spi.ResteasyDeployment] (MSC service thread 1-2) Deploying javax.ws.rs.core.Application: class org.javaee7.samples.employees.MyApplication
-mywildfly_1 | 15:40:20,914 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) JBAS017534: Registered web context: /employees
-mywildfly_1 | 15:40:21,032 INFO  [org.jboss.as.server] (ServerService Thread Pool -- 28) JBAS018559: Deployed "employees.war" (runtime-name : "employees.war")
-mywildfly_1 | 15:40:21,077 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015961: Http management interface listening on http://127.0.0.1:9990/management
-mywildfly_1 | 15:40:21,077 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015951: Admin console listening on http://127.0.0.1:9990
-mywildfly_1 | 15:40:21,077 INFO  [org.jboss.as] (Controller Boot Thread) JBAS015874: WildFly 8.2.0.Final "Tweek" started in 9572ms - Started 280 of 334 services (92 services are lazy, passive or on-demand)
-mysqldb_1   | Running mysql_install_db
-mysqldb_1   | 2015-06-05 15:38:31 0 [Note] /usr/sbin/mysqld (mysqld 5.6.25) starting as process 27 ...
-mysqldb_1   | 2015-06-05 15:38:31 27 [Note] InnoDB: Using atomics to ref count buffer pool pages
+db          | PostgreSQL init process complete; ready for start up.
+db          |
+db          | LOG:  database system was shut down at 2016-01-08 13:46:20 UTC
+db          | LOG:  MultiXact member wraparound protections are now enabled
+db          | LOG:  database system is ready to accept connections
+db          | LOG:  autovacuum launcher started
 
-. . .
-
-mysqldb_1   | 2015-06-05 15:38:40 1 [Note] Event Scheduler: Loaded 0 events
-mysqldb_1   | 2015-06-05 15:38:40 1 [Note] mysqld: ready for connections.
-mysqldb_1   | Version: '5.6.25'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
-mysqldb_1   | 2015-06-05 15:40:18 1 [Warning] IP address '172.17.0.24' could not be resolved: Name or service not known
 ----
 
 ### Verify Application
 
-. Access the application at http://dockerhost:32773/employees/resources/employees/. This is shown in the browser as:
+. Access the application at http://dockerhost:32777/ticket-monster/. This is shown in the browser as:
 
 NOTE: Use the port displayed in the `docker-compose ps` command.
 
 .Output From Servers Run Using Docker Compose
-image::images/docker-compose-output.png[]
+image::images/wildfly9-ticket-monster-output.png[]
 
 ### Scale Services
 
@@ -183,20 +182,20 @@ Check the running instances:
 ----
        Name                     Command               State            Ports
 -------------------------------------------------------------------------------------
-rafael_mysqldb_1     /entrypoint.sh mysqld            Up      3306/tcp
-rafael_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32773->8080/tcp
-rafael_mywildfly_2   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32777->8080/tcp
-rafael_mywildfly_3   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32780->8080/tcp
-rafael_mywildfly_4   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32781->8080/tcp
+attendees_mywildfly_1   /bin/sh -c /opt/jboss/wild ...   Up      8009/tcp, 0.0.0.0:32777->8080/tcp, 9990/tcp
+attendees_mywildfly_2   /bin/sh -c /opt/jboss/wild ...   Up      8009/tcp, 0.0.0.0:32778->8080/tcp, 9990/tcp
+attendees_mywildfly_3   /bin/sh -c /opt/jboss/wild ...   Up      8009/tcp, 0.0.0.0:32780->8080/tcp, 9990/tcp
+attendees_mywildfly_4   /bin/sh -c /opt/jboss/wild ...   Up      8009/tcp, 0.0.0.0:32779->8080/tcp, 9990/tcp
+db                      /docker-entrypoint.sh postgres   Up      5432/tcp
 ----
 
 You can also decide to reduce the number of running instances:
 
   docker-compose scale mywildfly=2
-  Stopping rafael_mywildfly_3... done
-  Stopping rafael_mywildfly_4... done
-  Removing rafael_mywildfly_3... done
-  Removing rafael_mywildfly_4... done
+  Stopping attendees_mywildfly_3... done
+  Stopping attendees_mywildfly_4... done
+  Removing attendees_mywildfly_3... done
+  Removing attendees_mywildfly_4... done
 
 ### Stop Services
 
@@ -205,35 +204,16 @@ Stop the services as:
   docker-compose stop
   Stopping attendees_mywildfly_1...
   Stopping attendees_mywildfly_2...
-  Stopping attendees_mysqldb_1...
-
-[WARNING]
-====
-Stopping and starting the containers again will give the following error:
-
-[source, text]
-----
-wildfly_1 | 
-wildfly_1 | 09:11:07,802 ERROR [org.jboss.as.controller.management-operation] (management-handler-thread - 4) JBAS014613: Operation ("add") failed - address: ([
-wildfly_1 |     ("subsystem" => "datasources"),
-wildfly_1 |     ("jdbc-driver" => "mysql")
-wildfly_1 | ]) - failure description: "JBAS014803: Duplicate resource [
-wildfly_1 |     (\"subsystem\" => \"datasources\"),
-wildfly_1 |     (\"jdbc-driver\" => \"mysql\")
-wildfly_1 | ]"
-----
-
-This is expected because the JDBC resource is created during every run of the container. In a real-world application, this would be pre-baked in the configuration already.
-====
+  Stopping db...
 
 ### Remove Containers
 
 Stop the services as:
 
   docker-compose rm
-  Going to remove rafael_mywildfly_4, rafael_mywildfly_3, rafael_mywildfly_2, rafael_mywildfly_1, rafael_mysqldb_1
+  Going to remove afael_mywildfly_2, rafael_mywildfly_1, db
   Are you sure? [yN] y
   Removing rafael_mywildfly_2... done
   Removing rafael_mywildfly_1... done
-  Removing rafael_mysqldb_1... done
+  Removing db... done
 

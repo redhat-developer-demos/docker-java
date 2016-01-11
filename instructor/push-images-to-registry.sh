@@ -30,14 +30,19 @@ docker pull rafabene/wildfly-ticketmonster
 docker tag rafabene/wildfly-ticketmonster classroom.example.com:5000/wildfly-ticketmonster
 docker push classroom.example.com:5000/wildfly-ticketmonster
 
+# Ticket-monster+PGSQ+WildFly-HA (mod_cluster)
+docker pull rafabene/wildfly-ticketmonster-ha
+docker tag rafabene/wildfly-ticketmonster classroom.example.com:5000/wildfly-ticketmonster-ha
+docker push classroom.example.com:5000/wildfly-ticketmonster-ha
+
 # Postgres
 docker pull postgres
 docker tag postgres classroom.example.com:5000/postgres
 docker push classroom.example.com:5000/postgres
 
 # Modcluster
-docker pull rafabene/mod_cluster
-docker tag rafabene/mod_cluster classroom.example.com:5000/mod_cluster
+docker pull karm/mod_cluster-master-dockerhub
+docker tag karm/mod_cluster-master-dockerhub classroom.example.com:5000/mod_cluster
 docker push classroom.example.com:5000/mod_cluster
 
 # Docker Swarm

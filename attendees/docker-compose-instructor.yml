@@ -1,14 +1,13 @@
-mysqldb:
-  image: classroom.example.com:5000/mysql
+db:
+  image: classroom.example.com:5000/postgres
+  container_name: "db"
   environment:
-    MYSQL_DATABASE: sample
-    MYSQL_USER: mysql
-    MYSQL_PASSWORD: mysql
-    MYSQL_ROOT_PASSWORD: supersecret
+    POSTGRES_USER: ticketmonster
+    POSTGRES_PASSWORD: ticketmonster-docker
+  net: mynet
 mywildfly:
-  image: classroom.example.com:5000/wildfly-mysql-javaee7
-  links:
-    - mysqldb:db
+  image: classroom.example.com:5000/wildfly-ticketmonster
+  net: mynet
   ports:
     - 8080
   

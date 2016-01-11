@@ -216,9 +216,13 @@ eval "$(docker-machine env instructor-machine)"
 
 
 IMPORTANT: If you change your network, you may need to update your /etc/hosts and restart your dnsmasq server and docker machine:
+
 [source, text]
 ----
-docker-machine restart instructor-machine
+docker-machine stop instructor-machine
+docker-machine start instructor-machine
+
+//docker-machine restart doesn't work. You will have to complete stop and start the container to have the /etc/hosts and /etc/resolv.conf files updated.
 ----
 
 
@@ -353,7 +357,7 @@ Done!
 
 ## Build Images
 
-Build ``wildfly-ticket-monster-h2'' images
+Build `wildfly-ticket-monster-h2' images
 
 [source, text]
 ----
