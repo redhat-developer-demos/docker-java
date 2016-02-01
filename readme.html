@@ -1695,19 +1695,7 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 <div class="sect3">
 <h4 id="_default_port_mapping">4.7.1. Default Port Mapping</h4>
 <div class="paragraph">
-<p>The following command will override the default command in Docker file, start WildFly, and bind application and management port to all network interfaces.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">#From Internet
-docker run --name managed-wildfly -P -d jboss/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0
-
-#From Instructor
-docker run --name managed-wildfly -P -d classroom.example.com:5000/wildfly /opt/jboss/wildfly/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Accessing WildFly Administration Console require a user in administration realm. A pre-created image, with appropriate username/password credentials, is used to start WildFly as:</p>
+<p>Accessing WildFly Administration Console require a user in administration realm. A [pre-created](<a href="https://hub.docker.com/r/rafabene/wildfly-admin/~/dockerfile/" class="bare">https://hub.docker.com/r/rafabene/wildfly-admin/~/dockerfile/</a>) image, with appropriate username/password credentials, is used to start WildFly as:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2238,7 +2226,7 @@ docker run --name db -d -p 5432:5432 --net mynet -e POSTGRES_USER=ticketmonster 
 docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 rafabene/wildfly-ticketmonster
 
 #From Instructor
-docker run -d --name widlfy-ticketmonster --net mynet -p 8080:8080 classroom.example.com:5000/wildfly-ticketmonster</code></pre>
+docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 classroom.example.com:5000/wildfly-ticketmonster</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2322,8 +2310,8 @@ If you get a 404 or any other error, wait for a little longer until the containe
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">docker stop db widlfy-ticketmonster
-docker rm db widlfy-ticketmonster</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">docker stop db wildfly-ticketmonster
+docker rm db wildfly-ticketmonster</code></pre>
 </div>
 </div>
 </div>
@@ -2829,7 +2817,7 @@ sudo chmod +x /usr/local/bin/docker-compose</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This file is available in <a href="https://raw.githubusercontent.com/redhat-developer/docker-java/devoxxma2015/attendees/" class="bare">https://raw.githubusercontent.com/redhat-developer/docker-java/devoxxma2015/attendees/</a> and shows:</p>
+<p>This file is available in <a href="https://github.com/redhat-developer/docker-java/tree/devconf2016/attendees" class="bare">https://github.com/redhat-developer/docker-java/tree/devconf2016/attendees</a> and shows:</p>
 </div>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
@@ -3377,7 +3365,7 @@ Make sure to have git for windows in your path.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-01-11 13:12:04 BRST
+Last updated 2016-01-11 10:12:04 EST
 </div>
 </div>
 </body>

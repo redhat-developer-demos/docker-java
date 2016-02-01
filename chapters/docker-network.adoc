@@ -38,7 +38,7 @@ docker run --name db -d -p 5432:5432 --net mynet -e POSTGRES_USER=ticketmonster 
 docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 rafabene/wildfly-ticketmonster
 
 #From Instructor
-docker run -d --name widlfy-ticketmonster --net mynet -p 8080:8080 classroom.example.com:5000/wildfly-ticketmonster
+docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 classroom.example.com:5000/wildfly-ticketmonster
 ----
 
 `--net` is used again to define the network which the container will use. In this case this container will use the same network of PostgreSQL.
@@ -85,6 +85,6 @@ Lets stop the previously running container as:
 
 [source, text]
 ----
-docker stop db widlfy-ticketmonster
-docker rm db widlfy-ticketmonster
+docker stop db wildfly-ticketmonster
+docker rm db wildfly-ticketmonster
 ----

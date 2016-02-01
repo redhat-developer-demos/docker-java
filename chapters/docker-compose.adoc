@@ -55,7 +55,7 @@ mywildfly:
     - 8080
 ----
 +
-This file is available in https://raw.githubusercontent.com/redhat-developer/docker-java/devoxxma2015/attendees/[] and shows:
+This file is available in https://github.com/redhat-developer/docker-java/tree/devconf2016/attendees[] and shows:
 
 .. `container_name` forces the container to have a name and hostname = `db`
 .. Two services defined by the name `db` and `mywildfly`
