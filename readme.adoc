@@ -1,5 +1,5 @@
 # Docker for Java Developers
-v1.4.3-devconf2016, Jan 11, 2016
+v1.4.4-devnexus2016, Feb 12, 2016
 :toc:
 :toc-title: Table of Contents
 :toclevels: 3
@@ -8,7 +8,7 @@ v1.4.3-devconf2016, Jan 11, 2016
 :imagesdir: ./chapters/images
 
 Latest HTML:
-https://htmlpreview.github.io/?https://github.com/redhat-developer/docker-java/blob/devconf2016/readme.html
+https://htmlpreview.github.io/?https://github.com/redhat-developer/docker-java/blob/devnexus2016/readme.html
 
 toc::[]
 

@@ -17,7 +17,7 @@ docker pull rafabene/wildfly-ticketmonster-h2
 docker pull classroom.example.com:5000/wildfly-ticketmonster-h2
 ----
 
-The https://github.com/redhat-developer/docker-java/blob/devconf2016/instructor/dockerfiles/wildfly-ticketmonster-h2/Dockerfile[wildfly-ticketmonster-h2 Dockerfile] is based on `jboss/wildfly` and adds the Ticket Monster application as war file.
+The https://github.com/redhat-developer/docker-java/blob/devnexus2016/instructor/dockerfiles/wildfly-ticketmonster-h2/Dockerfile[wildfly-ticketmonster-h2 Dockerfile] is based on `jboss/wildfly` and adds the Ticket Monster application as war file.
 
 Run it:
 
