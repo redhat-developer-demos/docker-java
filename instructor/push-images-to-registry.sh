@@ -11,6 +11,16 @@ docker tag fedora:22 classroom.example.com:5000/fedora:22
 docker push classroom.example.com:5000/fedora
 docker push classroom.example.com:5000/fedora:22
 
+#CentOS
+docker pull centos:7
+docker tag  centos:7 classroom.example.com:5000/centos:7
+docker push classroom.example.com:5000/centos:7
+
+#Tomcat
+docker pull tomcat:8.0
+docker tag  tomcat:8.0 classroom.example.com:5000/tomcat:8.0
+docker push classroom.example.com:5000/tomcat:8.0
+
 # Wildfly
 docker pull jboss/wildfly
 docker tag jboss/wildfly classroom.example.com:5000/wildfly
