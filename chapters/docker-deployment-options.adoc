@@ -95,9 +95,9 @@ Stop WildFly container when you're done.
 
 #### WildFly
 
-. Download WildFly 9.0.2 
-.. from Internet: http://download.jboss.org/wildfly/9.0.2.Final/wildfly-9.0.2.Final.zip .
-.. from Instructor: http://classroom.example.com:8082/downloads/wildfly-9.0.2.Final.zip .
+. Download WildFly 10.0.0.Final
+.. from Internet: http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip .
+.. from Instructor: http://classroom.example.com:8082/downloads/wildfly-10.0.0.Final.zip .
 . Install it by extracting the archive.
 
 #### CLI
@@ -111,7 +111,7 @@ The Command Line Interface (CLI) is a tool for connecting to WildFly instances t
 
 Lets use the CLI to deploy ticket-monster to WildFly running in the container.
 
-. CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. `/Users/<USER>/tools/`). This will create `wildfly-9.0.2.Final` directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the `/Users/<USER>/tools/wildfly-9.0.2.Final/bin` to your $PATH.
+. CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. `/Users/<USER>/tools/`). This will create `wildfly-10.0.0.Final` directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the `/Users/<USER>/tools/wildfly-10.0.0.Final/bin` to your $PATH.
 
 . Run the "`wildfly-management`" image with fixed port mapping as explained in <<Management_Fixed_Port_Mapping>>.
 . Run the `jboss-cli` command and connect to the WildFly instance.
@@ -179,14 +179,7 @@ Deploy the application using the console with the following steps:
 . Go to '`Deployments`' tab.
 
 .Deployments tab in WildFly Web Console
-image::images/wildfly9-deployments-tab.png[]
-
-[NOTE]
-====
-There's a an Know issue in Chrome that will give an error "Cannot upload deployment: Unable to parse response with content-type text/html"
-Issue: https://code.google.com/p/chromium/issues/detail?id=567692
-Please, use Firefox for WildFly 9.0.2.Final console
-====
+image::images/wildfly-deployments-tab.png[]
 
 . Click on '`Add`' button.
 . On '`Add Deployment`' screen, take the default of '`Upload a new deployment`' and click '`Next>>`'.
@@ -195,17 +188,17 @@ Please, use Firefox for WildFly 9.0.2.Final console
 . Select '`Enable`' checkbox.
 
 .Enable a deployment
-image::images/wildfly9-add-deployments.png[]
+image::images/wildfly-add-deployments.png[]
 
 . Click '`Finish`'.
 
 .Ticket Monster Deployed
-image::images/wildfly9-javaee7-simple-sample-deployed.png[]
+image::images/wildfly-javaee7-simple-sample-deployed.png[]
 
 This will complete the deployment of the Ticket Monster using Web Console. The output can be seen out http://dockerhost:8080/ticket-monster and looks like:
 
 .Ticket Monster Output
-image::images/wildfly9-ticket-monster-output.png[]
+image::images/wildfly-ticket-monster-output.png[]
 
 . Stop Wildfly
 

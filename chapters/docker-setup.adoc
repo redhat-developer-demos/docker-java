@@ -88,11 +88,11 @@ Docker Machine makes it really easy to create Docker hosts on your computer, on 
 [source, text]
 ----
 # Linux - From Internet
-sudo curl -L https://github.com/docker/machine/releases/download/v0.5.5/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine && \
+sudo curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` -o /usr/local/bin/docker-machine && \
   sudo chmod +x /usr/local/bin/docker-machine
   
 # Linux - From Instructor
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine && \
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine-Linux-x86_64 -o /usr/local/bin/docker-machine && \
   sudo chmod +x /usr/local/bin/docker-machine
 ----
 

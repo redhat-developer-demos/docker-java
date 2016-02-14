@@ -593,12 +593,11 @@ table.CodeRay td.code>pre{padding:0}
 <ul class="sectlevel2">
 <li><a href="#_install_docker_compose_for_linux_users">9.1. Install docker compose (For Linux users)</a></li>
 <li><a href="#_configuration_file">9.2. Configuration File</a></li>
-<li><a href="#_create_a_docker_network">9.3. Create a Docker Network</a></li>
-<li><a href="#_start_services">9.4. Start Services</a></li>
-<li><a href="#_verify_application">9.5. Verify Application</a></li>
-<li><a href="#_scale_services">9.6. Scale Services</a></li>
-<li><a href="#_stop_services">9.7. Stop Services</a></li>
-<li><a href="#_remove_containers">9.8. Remove Containers</a></li>
+<li><a href="#_start_services">9.3. Start Services</a></li>
+<li><a href="#_verify_application">9.4. Verify Application</a></li>
+<li><a href="#_scale_services">9.5. Scale Services</a></li>
+<li><a href="#_stop_services">9.6. Stop Services</a></li>
+<li><a href="#_remove_containers">9.7. Remove Containers</a></li>
 </ul>
 </li>
 <li><a href="#Common_Docker_Commands">10. Common Docker Commands</a></li>
@@ -854,11 +853,11 @@ Latest content of this lab is always at <a href="https://github.com/redhat-devel
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text"># Linux - From Internet
-sudo curl -L https://github.com/docker/machine/releases/download/v0.5.5/docker-machine_darwin-amd64 -o /usr/local/bin/docker-machine &amp;&amp; \
+sudo curl -L https://github.com/docker/machine/releases/download/v0.6.0/docker-machine-`uname -s`-`uname -m` -o /usr/local/bin/docker-machine &amp;&amp; \
   sudo chmod +x /usr/local/bin/docker-machine
 
 # Linux - From Instructor
-sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine_linux-amd64 -o /usr/local/bin/docker-machine &amp;&amp; \
+sudo curl -L http://classroom.example.com:8082/downloads/docker/docker-machine-Linux-x86_64 -o /usr/local/bin/docker-machine &amp;&amp; \
   sudo chmod +x /usr/local/bin/docker-machine</code></pre>
 </div>
 </div>
@@ -1122,7 +1121,7 @@ By default, Docker obtains these base images from Docker Hub.
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>docker-machine version 0.5.5, build 02c4254</pre>
+<pre>docker-machine version 0.6.0, build e27fb87</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1156,7 +1155,7 @@ The exact version may differ based upon how recently the installation was perfor
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>Docker version 1.9.1, build a34a1d5</pre>
+<pre>Docker version 1.10.0, build 590d510</pre>
 </div>
 </div>
 <div class="admonitionblock note">
@@ -1335,7 +1334,7 @@ When Docker mounts the rootfs, it starts read-only, as in a traditional Linux bo
 </table>
 </div>
 <div class="paragraph">
-<p>In our particular case, the <a href="https://github.com/jboss-dockerfiles/wildfly/blob/9.0.2.Final/Dockerfile">jboss/wildfly</a> image extends the <a href="https://github.com/jboss-dockerfiles/base-jdk/blob/jdk8/Dockerfile">jboss/base-jdk:8</a> image which adds the OpenJDK distribution on top of the <a href="https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile">jboss/base</a> image.
+<p>In our particular case, the <a href="https://github.com/jboss-dockerfiles/wildfly/blob/10.0.0.Final/Dockerfile">jboss/wildfly</a> image extends the <a href="https://github.com/jboss-dockerfiles/base-jdk/blob/jdk8/Dockerfile">jboss/base-jdk:8</a> image which adds the OpenJDK distribution on top of the <a href="https://github.com/jboss-dockerfiles/base/blob/master/Dockerfile">jboss/base</a> image.
 The base image is used for all JBoss community images. It provides a base layer that includes:</p>
 </div>
 <div class="olist arabic">
@@ -1406,24 +1405,27 @@ docker run -it classroom.example.com:5000/wildfly</code></pre>
 
   JAVA: /usr/lib/jvm/java/bin/java
 
-  JAVA_OPTS:  -server -XX:+UseCompressedOops  -server -XX:+UseCompressedOops -Xms64m -Xmx512m -XX:MaxPermSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true
+  JAVA_OPTS:  -server -Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true -Djboss.modules.system.pkgs=org.jboss.byteman -Djava.awt.headless=true
 
 =========================================================================
 
-OpenJDK 64-Bit Server VM warning: ignoring option MaxPermSize=256m; support was removed in 8.0
-17:02:58,000 INFO  [org.jboss.modules] (main) JBoss Modules version 1.4.3.Final
-17:02:58,251 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
-17:02:58,311 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 9.0.2.Final (WildFly Core 1.0.2.Final) starting
-17:02:59,558 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 11) WFLYCTL0028: Attribute 'job-repository-type' in the resource at address '/subsystem=batch' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
-17:02:59,560 INFO  [org.jboss.as.controller.management-deprecated] (ServerService Thread Pool -- 3) WFLYCTL0028: Attribute 'enabled' in the resource at address '/subsystem=datasources/data-source=ExampleDS' is deprecated, and may be removed in future version. See the attribute description in the output of the read-resource-description operation to learn more about the deprecation.
+00:33:00,156 INFO  [org.jboss.modules] (main) JBoss Modules version 1.5.1.Final
+00:33:00,587 INFO  [org.jboss.msc] (main) JBoss MSC version 1.2.6.Final
+00:33:00,699 INFO  [org.jboss.as] (MSC service thread 1-2) WFLYSRV0049: WildFly Full 10.0.0.Final (WildFly Core 2.0.10.Final) starting
+00:33:03,128 INFO  [org.jboss.as.server] (Controller Boot Thread) WFLYSRV0039: Creating http management service using socket-binding (management-http)
+00:33:03,191 INFO  [org.xnio] (MSC service thread 1-2) XNIO version 3.3.4.Final
+00:33:03,225 INFO  [org.xnio.nio] (MSC service thread 1-2) XNIO NIO Implementation Version 3.3.4.Final
+00:33:03,382 INFO  [org.jboss.as.clustering.infinispan] (ServerService Thread Pool -- 38) WFLYCLINF0001: Activating Infinispan subsystem.
+00:33:03,413 INFO  [org.wildfly.extension.io] (ServerService Thread Pool -- 37) WFLYIO001: Worker 'default' has auto-configured to 2 core threads with 16 task threads based on your 1 available processors
 ...
-17:03:00,610 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) WFLYUT0006: Undertow HTTP listener default listening on /0.0.0.0:8080
-17:03:00,715 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-2) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
-17:03:00,881 INFO  [org.jboss.ws.common.management] (MSC service thread 1-1) JBWS022052: Starting JBoss Web Services - Stack CXF Server 5.0.0.Final
-17:03:00,891 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-2) WFLYDS0013: Started FileSystemDeploymentService for directory /opt/jboss/wildfly/standalone/deployments
-17:03:01,131 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
-17:03:01,133 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
-17:03:01,138 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 9.0.2.Final (WildFly Core 1.0.2.Final) started in 3431ms - Started 203 of 379 services (210 services are lazy, passive or on-demand)</code></pre>
+00:33:05,233 INFO  [org.wildfly.extension.undertow] (MSC service thread 1-2) WFLYUT0006: Undertow HTTP listener default listening on 0.0.0.0:8080
+00:33:05,703 INFO  [org.jboss.ws.common.management] (MSC service thread 1-1) JBWS022052: Starting JBossWS 5.1.3.Final (Apache CXF 3.1.4)
+00:33:05,868 INFO  [org.infinispan.factories.GlobalComponentRegistry] (MSC service thread 1-1) ISPN000128: Infinispan version: Infinispan 'Mahou' 8.1.0.Final
+00:33:06,093 INFO  [org.jboss.as.server.deployment.scanner] (MSC service thread 1-2) WFLYDS0013: Started FileSystemDeploymentService for directory /opt/jboss/wildfly/standalone/deployments
+00:33:06,265 INFO  [org.jboss.as.connector.subsystems.datasources] (MSC service thread 1-1) WFLYJCA0001: Bound data source [java:jboss/datasources/ExampleDS]
+00:33:06,616 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0060: Http management interface listening on http://127.0.0.1:9990/management
+00:33:06,630 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
+00:33:06,630 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0025: WildFly Full 10.0.0.Final (WildFly Core 2.0.10.Final) started in 7052ms - Started 267 of 553 services (371 services are lazy, passive or on-demand)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2454,14 +2456,14 @@ docker rm wildfly</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Download WildFly 9.0.2</p>
+<p>Download WildFly 10.0.0.Final</p>
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>from Internet: <a href="http://download.jboss.org/wildfly/9.0.2.Final/wildfly-9.0.2.Final.zip" class="bare">http://download.jboss.org/wildfly/9.0.2.Final/wildfly-9.0.2.Final.zip</a> .</p>
+<p>from Internet: <a href="http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip" class="bare">http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip</a> .</p>
 </li>
 <li>
-<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/wildfly-9.0.2.Final.zip" class="bare">http://classroom.example.com:8082/downloads/wildfly-9.0.2.Final.zip</a> .</p>
+<p>from Instructor: <a href="http://classroom.example.com:8082/downloads/wildfly-10.0.0.Final.zip" class="bare">http://classroom.example.com:8082/downloads/wildfly-10.0.0.Final.zip</a> .</p>
 </li>
 </ol>
 </div>
@@ -2499,7 +2501,7 @@ docker rm wildfly</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. <code>/Users/&lt;USER&gt;/tools/</code>). This will create <code>wildfly-9.0.2.Final</code> directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the <code>/Users/&lt;USER&gt;/tools/wildfly-9.0.2.Final/bin</code> to your $PATH.</p>
+<p>CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. <code>/Users/&lt;USER&gt;/tools/</code>). This will create <code>wildfly-10.0.0.Final</code> directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the <code>/Users/&lt;USER&gt;/tools/wildfly-10.0.0.Final/bin</code> to your $PATH.</p>
 </li>
 <li>
 <p>Run the &#8220;wildfly-management&#8221; image with fixed port mapping as explained in <a href="#Management_Fixed_Port_Mapping">Fixed Port Mapping</a>.</p>
@@ -2607,25 +2609,9 @@ docker rm wildfly-managed</code></pre>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="chapters/images/wildfly9-deployments-tab.png" alt="wildfly9 deployments tab">
+<img src="chapters/images/wildfly-deployments-tab.png" alt="wildfly deployments tab">
 </div>
 <div class="title">Figure 12. Deployments tab in WildFly Web Console</div>
-</div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-<div class="paragraph">
-<p>There&#8217;s a an Know issue in Chrome that will give an error "Cannot upload deployment: Unable to parse response with content-type text/html"
-Issue: <a href="https://code.google.com/p/chromium/issues/detail?id=567692" class="bare">https://code.google.com/p/chromium/issues/detail?id=567692</a>
-Please, use Firefox for WildFly 9.0.2.Final console</p>
-</div>
-</td>
-</tr>
-</table>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -2648,7 +2634,7 @@ Please, use Firefox for WildFly 9.0.2.Final console</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="chapters/images/wildfly9-add-deployments.png" alt="wildfly9 add deployments">
+<img src="chapters/images/wildfly-add-deployments.png" alt="wildfly add deployments">
 </div>
 <div class="title">Figure 13. Enable a deployment</div>
 </div>
@@ -2661,7 +2647,7 @@ Please, use Firefox for WildFly 9.0.2.Final console</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="chapters/images/wildfly9-javaee7-simple-sample-deployed.png" alt="wildfly9 javaee7 simple sample deployed">
+<img src="chapters/images/wildfly-javaee7-simple-sample-deployed.png" alt="wildfly javaee7 simple sample deployed">
 </div>
 <div class="title">Figure 14. Ticket Monster Deployed</div>
 </div>
@@ -2670,7 +2656,7 @@ Please, use Firefox for WildFly 9.0.2.Final console</p>
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="chapters/images/wildfly9-ticket-monster-output.png" alt="wildfly9 ticket monster output">
+<img src="chapters/images/wildfly-ticket-monster-output.png" alt="wildfly ticket monster output">
 </div>
 <div class="title">Figure 15. Ticket Monster Output</div>
 </div>
@@ -2790,7 +2776,7 @@ According to <a href="https://docs.docker.com/compose/install/" class="bare">htt
 <h3 id="_install_docker_compose_for_linux_users">9.1. Install docker compose (For Linux users)</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="txt">sudo curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+<pre class="CodeRay highlight"><code data-lang="txt">sudo curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose</code></pre>
 </div>
 </div>
@@ -2801,19 +2787,29 @@ sudo chmod +x /usr/local/bin/docker-compose</code></pre>
 <ol class="arabic">
 <li>
 <p>Entry point to Compose is <code>docker-compose.yml</code>. Lets use the following file:</p>
+</li>
+</ol>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="yml"><span class="key">db</span>:
-  <span class="key">image</span>: <span class="string"><span class="content">postgres</span></span>
-  <span class="key">environment</span>:
-    <span class="key">POSTGRES_USER</span>: <span class="string"><span class="content">ticketmonster</span></span>
-    <span class="key">POSTGRES_PASSWORD</span>: <span class="string"><span class="content">ticketmonster-docker</span></span>
-  <span class="key">net</span>: <span class="string"><span class="content">mynet</span></span>
-<span class="key">mywildfly</span>:
-  <span class="key">image</span>: <span class="string"><span class="content">rafabene/wildfly-ticketmonster</span></span>
-  <span class="key">net</span>: <span class="string"><span class="content">mynet</span></span>
-  <span class="key">ports</span>:
-    - <span class="string"><span class="content">8080</span></span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="yml"><span class="key">version</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2</span><span class="delimiter">&quot;</span></span>
+<span class="key">networks</span>:
+  <span class="key">mynet</span>:
+<span class="key">services</span>:
+  <span class="key">db</span>:
+    <span class="key">image</span>: <span class="string"><span class="content">postgres</span></span>
+    <span class="key">container_name</span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">db</span><span class="delimiter">&quot;</span></span>
+    <span class="key">environment</span>:
+      <span class="key">POSTGRES_USER</span>: <span class="string"><span class="content">ticketmonster</span></span>
+      <span class="key">POSTGRES_PASSWORD</span>: <span class="string"><span class="content">ticketmonster-docker</span></span>
+    <span class="key">networks</span>:
+          - <span class="string"><span class="content">mynet</span></span>
+  <span class="key">mywildfly</span>:
+    <span class="key">image</span>: <span class="string"><span class="content">rafabene/wildfly-ticketmonster</span></span>
+    <span class="key">networks</span>:
+          - <span class="string"><span class="content">mynet</span></span>
+    <span class="key">ports</span>:
+      - <span class="string"><span class="content">8080</span></span></code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2841,30 +2837,9 @@ sudo chmod +x /usr/local/bin/docker-compose</code></pre>
 </li>
 </ol>
 </div>
-</li>
-</ol>
-</div>
 </div>
 <div class="sect2">
-<h3 id="_create_a_docker_network">9.3. Create a Docker Network</h3>
-<div class="paragraph">
-<p>As you saw in <a href="#JavaEE_Docker_Network">Deploy Java EE  Application (Docker Network)</a> section, to allow both containers to communicate, you will need to create a docker network and use it on both containers.</p>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Create a new docker network</p>
-<div class="literalblock">
-<div class="content">
-<pre>docker network create mynet</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_start_services">9.4. Start Services</h3>
+<h3 id="_start_services">9.3. Start Services</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2916,10 +2891,10 @@ Creating attendees_mywildfly_1...</pre>
 <div class="listingblock">
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="text">&gt; docker-compose ps
-        Name                       Command               State                Ports
--------------------------------------------------------------------------------------------------
-db                      /docker-entrypoint.sh postgres   Up      5432/tcp
-attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32777-&gt;8080/tcp</code></pre>
+        Name                       Command               State                      Ports
+------------------------------------------------------------------------------------------------------------
+attendees_mywildfly_1   /bin/sh -c /opt/jboss/wild ...   Up      8009/tcp, 0.0.0.0:32772-&gt;8080/tcp, 9990/tcp
+db                      /docker-entrypoint.sh postgres   Up      5432/tcp</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -2974,7 +2949,7 @@ db          | LOG:  autovacuum launcher started</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_verify_application">9.5. Verify Application</h3>
+<h3 id="_verify_application">9.4. Verify Application</h3>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2996,13 +2971,13 @@ Use the port displayed in the <code>docker-compose ps</code> command.
 </div>
 <div class="imageblock">
 <div class="content">
-<img src="chapters/images/wildfly9-ticket-monster-output.png" alt="wildfly9 ticket monster output">
+<img src="chapters/images/wildfly-ticket-monster-output.png" alt="wildfly ticket monster output">
 </div>
 <div class="title">Figure 16. Output From Servers Run Using Docker Compose</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_scale_services">9.6. Scale Services</h3>
+<h3 id="_scale_services">9.5. Scale Services</h3>
 <div class="paragraph">
 <p>TODO Improve the explanation</p>
 </div>
@@ -3058,7 +3033,7 @@ Removing attendees_mywildfly_4... done</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_stop_services">9.7. Stop Services</h3>
+<h3 id="_stop_services">9.6. Stop Services</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -3072,7 +3047,7 @@ Stopping db...</pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_remove_containers">9.8. Remove Containers</h3>
+<h3 id="_remove_containers">9.7. Remove Containers</h3>
 <div class="paragraph">
 <p>Stop the services as:</p>
 </div>
@@ -3365,7 +3340,7 @@ Make sure to have git for windows in your path.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-02-12 10:56:15 CET
+Last updated 2016-02-12 04:56:15 EST
 </div>
 </div>
 </body>

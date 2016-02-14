@@ -1,13 +1,18 @@
-db:
-  image: postgres
-  container_name: "db"
-  environment:
-    POSTGRES_USER: ticketmonster
-    POSTGRES_PASSWORD: ticketmonster-docker
-  net: mynet
-mywildfly:
-  image: rafabene/wildfly-ticketmonster
-  net: mynet
-  ports:
-    - 8080
-  
+version: "2"
+networks:
+  mynet:
+services:    
+  db:
+    image: postgres
+    container_name: "db"
+    environment:
+      POSTGRES_USER: ticketmonster
+      POSTGRES_PASSWORD: ticketmonster-docker
+    networks:
+          - mynet
+  mywildfly:
+    image: rafabene/wildfly-ticketmonster
+    networks:
+          - mynet
+    ports:
+      - 8080

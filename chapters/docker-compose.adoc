@@ -32,29 +32,36 @@ NOTE: According to https://docs.docker.com/compose/install/ "You can run Compose
 
 [source, txt]
 ----
-sudo curl -L https://github.com/docker/compose/releases/download/1.5.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 ----
 
 ### Configuration File
 
 . Entry point to Compose is `docker-compose.yml`. Lets use the following file:
-+
+
 [source, yml]
 ----
-db:
-  image: postgres
-  environment:
-    POSTGRES_USER: ticketmonster
-    POSTGRES_PASSWORD: ticketmonster-docker
-  net: mynet
-mywildfly:
-  image: rafabene/wildfly-ticketmonster
-  net: mynet 
-  ports:
-    - 8080
+version: "2"
+networks:
+  mynet:
+services:    
+  db:
+    image: postgres
+    container_name: "db"
+    environment:
+      POSTGRES_USER: ticketmonster
+      POSTGRES_PASSWORD: ticketmonster-docker
+    networks:
+          - mynet
+  mywildfly:
+    image: rafabene/wildfly-ticketmonster
+    networks:
+          - mynet
+    ports:
+      - 8080
 ----
-+
+
 This file is available in https://github.com/redhat-developer/docker-java/tree/devnexus2016/attendees[] and shows:
 
 .. `container_name` forces the container to have a name and hostname = `db`
@@ -64,14 +71,6 @@ This file is available in https://github.com/redhat-developer/docker-java/tree/d
 .. Port forwarding is achieved using `ports`
 .. `net` places both containers on the same docker network called `mynetcompose`
 
-
-### Create a Docker Network
-
-As you saw in <<JavaEE_Docker_Network>> section, to allow both containers to communicate, you will need to create a docker network and use it on both containers.
-
-. Create a new docker network
-
-  docker network create mynet
 
 ### Start Services
 
@@ -100,10 +99,10 @@ An alternate directory where the compose file exists can be specified using `-p`
 [source, text]
 ----
 > docker-compose ps
-        Name                       Command               State                Ports               
--------------------------------------------------------------------------------------------------
-db                      /docker-entrypoint.sh postgres   Up      5432/tcp                         
-attendees_mywildfly_1   /opt/jboss/wildfly/customi ...   Up      0.0.0.0:32777->8080/tcp
+        Name                       Command               State                      Ports
+------------------------------------------------------------------------------------------------------------
+attendees_mywildfly_1   /bin/sh -c /opt/jboss/wild ...   Up      8009/tcp, 0.0.0.0:32772->8080/tcp, 9990/tcp
+db                      /docker-entrypoint.sh postgres   Up      5432/tcp
 ----
 
 This provides a consolidated view of all the services started, and containers within them.
@@ -157,7 +156,7 @@ db          | LOG:  autovacuum launcher started
 NOTE: Use the port displayed in the `docker-compose ps` command.
 
 .Output From Servers Run Using Docker Compose
-image::images/wildfly9-ticket-monster-output.png[]
+image::images/wildfly-ticket-monster-output.png[]
 
 ### Scale Services
 

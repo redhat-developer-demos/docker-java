@@ -72,7 +72,7 @@ Check if docker machine is working:
 
 It shows the output similar to the one shown below:
 
-  docker-machine version 0.5.5, build 02c4254
+  docker-machine version 0.6.0, build e27fb87
 
 NOTE: The exact version may differ based upon how recently the installation was performed.
 
@@ -86,7 +86,7 @@ Check if your client is working using the following command:
 
 It shows the output similar to the following:
 
-  Docker version 1.9.1, build a34a1d5
+  Docker version 1.10.0, build 590d510
 
 NOTE: The exact version may differ based upon how recently the installation was performed.
 
