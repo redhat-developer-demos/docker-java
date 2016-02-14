@@ -70,7 +70,8 @@ Learn more about the tool on link:https://docs.docker.com/compose/[Docker Compos
 ----
 # Linux / MacOS
 sudo curl -L https://github.com/docker/compose/releases/download/1.6.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose----
+chmod +x /usr/local/bin/docker-compose
+----
 
 ## Install and Configure Docker Machine
 Install the Docker machine client for your environment: https://github.com/docker/machine/releases/[latest releases]
