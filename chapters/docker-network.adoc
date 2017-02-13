@@ -12,18 +12,14 @@ This section will show how https://docs.docker.com/engine/userguide/networking/d
 
 [source, text]
 ----
-docker network create mynet
+$ docker network create mynet
 ----
 
 . Start PostgreSQL server as:
 
 [source, text]
 ----
-#From Internet
-docker run --name db -d -p 5432:5432 --net mynet -e POSTGRES_USER=ticketmonster -e POSTGRES_PASSWORD=ticketmonster-docker postgres
-
-#From Instructor
-docker run --name db -d -p 5432:5432 --net mynet -e POSTGRES_USER=ticketmonster -e POSTGRES_PASSWORD=ticketmonster-docker classroom.example.com:5000/postgres
+$ docker run --name db -d -p 5432:5432 --net mynet -e POSTGRES_USER=ticketmonster -e POSTGRES_PASSWORD=ticketmonster-docker postgres
 ----
 
 `-e` define environment variables that are read by the database at startup and allow us to access the database with this user and password.
@@ -34,11 +30,7 @@ docker run --name db -d -p 5432:5432 --net mynet -e POSTGRES_USER=ticketmonster 
 
 [source, text]
 ----
-#From Internet
-docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 rafabene/wildfly-ticketmonster
-
-#From Instructor
-docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 classroom.example.com:5000/wildfly-ticketmonster
+$ docker run -d --name wildfly-ticketmonster --net mynet -p 8080:8080 rafabene/wildfly-ticketmonster
 ----
 
 `--net` is used again to define the network which the container will use. In this case this container will use the same network of PostgreSQL.
@@ -56,22 +48,8 @@ In our case, the WildFly container can see information about PostgreSQL . Once t
 See more about docker networks on the https://docs.docker.com/engine/userguide/networking/dockernetworks/[Docker Networks] website.
 ===============================
 
-Note that both containers had their `/etc/hosts/` files updated to have the information about the other containers in the same network.
 
-[source, text]
-----
-$ docker exec wildfly-ticketmonster cat /etc/hosts
-...
-172.18.0.2	db.mynet
-172.18.0.2	db
-
-$ docker exec db cat /etc/hosts
-...
-172.18.0.3	wildfly-ticketmonster
-172.18.0.3	wildfly-ticketmonster.mynet
-----
-
-See the application in action at http://dockerhost:8080/ticket-monster/. The output is shown:
+See the application in action at http://<external-ip>:8080/ticket-monster/. The output is shown:
 
 NOTE: It might take a while for the container to come up. Wait for the server to complete the startup.
 

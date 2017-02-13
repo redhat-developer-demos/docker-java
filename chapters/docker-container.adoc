@@ -8,7 +8,7 @@ Let's first check, if any images are available:
 
 [source, text]
 ----
-docker images
+$ docker images
 ----
 
 At first, this list is empty.
@@ -23,11 +23,7 @@ Now, let's get a vanilla `jboss/wildfly` image:
 
 [source, text]
 ----
-#From Internet
-docker pull jboss/wildfly:latest 
-
-#From Instructor
-docker pull classroom.example.com:5000/wildfly:latest 
+$ docker pull jboss/wildfly:latest 
 ----
 
 By default, docker images are retrieved from https://hub.docker.com/[Docker Hub]. In our case, we're providing a so called private registry via the instructor laptop.
@@ -62,7 +58,7 @@ When the download is done, you can list the images again and will see the follow
 
 [source, text]
 ----
-docker images
+$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 jboss/wildfly       latest              7688aaf382ab        6 weeks ago         581.4 MB
 ----
@@ -77,11 +73,7 @@ To run the WildFly container in an interactive mode.
 
 [source, text]
 ----
-#From Internet
-docker run -it jboss/wildfly 
-
-#From Instructor
-docker run -it classroom.example.com:5000/wildfly 
+$ docker run -it jboss/wildfly 
 ----
 
 This will show the output as:
@@ -131,12 +123,7 @@ Restart the container in detached mode:
 
 [source, text]
 ----
-#From Internet
-docker run --name mywildfly -d jboss/wildfly 
-
-#From Instructor
-docker run --name mywildfly -d classroom.example.com:5000/wildfly 
-
+$ docker run --name mywildfly -d jboss/wildfly 
 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 ----
 
@@ -146,7 +133,7 @@ The output is the unique id assigned to the container. You can use it to refer t
 
 [source, text]
 ----
-> docker logs 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
+$ docker logs 972f51cc8422eec0a7ea9a804a55a2827b5537c00a6bfd45f8646cb764bc002a
 =========================================================================
 
   JBoss Bootstrap Environment
@@ -160,7 +147,7 @@ We can check it by issuing the `docker ps` command which retrieves the images pr
 
 [source, text]
 ----
-> docker ps
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND                CREATED              STATUS              PORTS               NAMES
 7da1c7614edf        jboss/wildfly       "/opt/jboss/wildfly/   About a minute ago   Up About a minute   8080/tcp            mywildfly
 ----
@@ -169,7 +156,7 @@ Noticed the "NAMES" column? This is a quick way of refering to your container. L
 
 [source, text]
 ----
-docker logs mywildfly
+$ docker logs mywildfly
 ----
 
 That looks easier.
@@ -186,30 +173,32 @@ If you want containers to accept incoming connections, you will need to provide 
 
 [source, text]
 ----
-docker stop mywildfly
+$ docker stop mywildfly
 ----
 
 Restart the container as:
 
 [source, text]
 ----
-#From Internet
-docker run --name mywildfly-exposed-ports -d -P jboss/wildfly 
-
-#From Instructor
-docker run --name mywildfly-exposed-ports -d -P classroom.example.com:5000/wildfly 
+$ docker run --name mywildfly-exposed-ports -d -P jboss/wildfly 
 ----
 
 `-P` map any exposed ports inside the image to a random port on the Docker host. This can be verified as:
 
 [source, text]
 ----
-> docker ps
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS              PORTS                     NAMES
 7f41a5a0cfd6        jboss/wildfly      "/opt/jboss/wildfly/   52 seconds ago      Up 52 seconds       0.0.0.0:32768->8080/tcp   mywildfly-exposed-ports
 ----
 
-The port mapping is shown in the `PORTS` column. Access the WildFly server at http://dockerhost:32768. Make sure to use the correct port number as shown in your case.
+The port mapping is shown in the `PORTS` column. Access the WildFly server at http://<external-ip>:32768. Make sure to use the correct port number as shown in your case.
+
+.External IP
+[NOTE]
+===============================
+Check the External IP in Compute → Compute Engine → VM Instances
+===============================
 
 NOTE: Exact port number may be different in your case.
 
@@ -219,18 +208,14 @@ Lets stop the previously running container as:
 
 [source, text]
 ----
-docker stop mywildfly-exposed-ports
+$ docker stop mywildfly-exposed-ports
 ----
 
 Restart the container as:
 
 [source, text]
 ----
-#From Internet
-docker run --name mywildfly-mapped-ports -d -p 8080:8080 jboss/wildfly 
-
-#From Instructor
-docker run --name mywildfly-mapped-ports -d -p 8080:8080 classroom.example.com:5000/wildfly 
+$ docker run --name mywildfly-mapped-ports -d -p 8080:8080 jboss/wildfly 
 ----
 
 The format is `-p hostPort:containerPort`. This option maps container ports to host ports and allows other containers on our host to access them.
@@ -248,7 +233,7 @@ Lets stop the previously running container as:
 
 [source, text]
 ----
-docker stop mywildfly-mapped-ports
+$ docker stop mywildfly-mapped-ports
 ----
 
 .Welcome WildFly
@@ -260,21 +245,21 @@ image::images/plain-wildfly1.png[]
 
 [source, text]
 ----
-docker stop <CONTAINER ID>
+$ docker stop <CONTAINER ID>
 ----
 
 . Stop all the running containers
 
 [source, text]
 ----
-docker stop $(docker ps -q)
+$ docker stop $(docker ps -q)
 ----
 
 . Stop only the exited containers
 
 [source, text]
 ----
-docker ps -a -f "exited=-1"
+$ docker ps -a -f "exited=-1"
 ----
 
 ### Remove Container
@@ -283,21 +268,21 @@ docker ps -a -f "exited=-1"
 
 [source, text]
 ----
-docker rm 0bc123a8ece0
+$ docker rm 0bc123a8ece0
 ----
 
 . Remove containers meeting a regular expression
 
 [source, text]
 ----
-docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm
+$ docker ps -a | grep wildfly | awk '{print $1}' | xargs docker rm
 ----
 
 . Remove all containers, without any criteria
 
 [source, text]
 ----
-docker rm $(docker ps -aq)
+$ docker rm $(docker ps -aq)
 ----
 
 [[Enabling_WildFly_Administration]]
@@ -311,11 +296,7 @@ Accessing WildFly Administration Console require a user in administration realm.
 
 [source, text]
 ----
-#From Internet
-docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin 
-
-#From Instructor
-docker run --name managed-wildfly-from-image -P -d classroom.example.com:5000/wildfly-admin
+$ docker run --name managed-wildfly-from-image -P -d rafabene/wildfly-admin 
 ----
 
 `-P` map any exposed ports inside the image to a random port on Docker host.
@@ -324,13 +305,13 @@ Look at the exposed ports as:
 
 [source, text]
 ----
-docker ps
+$ docker ps
 CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                                                       NAMES
 5fdedef5573b        rafabene/wildfly-admin      "/bin/sh -c '/opt/jb   15 seconds ago      Up 15 seconds       0.0.0.0:32772->8080/tcp, 0.0.0.0:32771->9990/tcp   managed-wildfly-from-image
 ee30433b5414        jboss/wildfly               "/opt/jboss/wildfly/   59 seconds ago      Up 59 seconds       0.0.0.0:32769->8080/tcp                            managed-wildfly
 ----
 
-Look for the host port that is mapped in the container, `32769` in this case. Access the admin console at http://dockerhost:32769.
+Look for the host port that is mapped in the container, `32769` in this case. Access the admin console at http://<external-ip>:32769.
 
 NOTE: Exact port number may be different in your case.
 
@@ -354,25 +335,25 @@ image::images/wildfly-admin-console.png[]
 The exact mapped port can also be found as:
 
 . Using `docker port`:
-+
+
 [source, text]
 ----
-docker port managed-wildfly-from-image
+$ docker port managed-wildfly-from-image
 ----
-+
+
 to see the output as:
-+
+
 [source, text]
 ----
 0.0.0.0:32769->8080/tcp
 0.0.0.0:32770->9990/tcp
 ----
-+
+
 . Using `docker inspect`:
-+
+
 [source, text]
 ----
-docker inspect --format='{{(index (index .NetworkSettings.Ports "9990/tcp") 0).HostPort}}' managed-wildfly-from-image
+$ docker inspect --format='{{(index (index .NetworkSettings.Ports "9990/tcp") 0).HostPort}}' managed-wildfly-from-image
 ----
 
 [[Management_Fixed_Port_Mapping]]
@@ -382,11 +363,7 @@ This management image can also be started with a pre-defined port mapping as:
 
 [source, text]
 ----
-#From Internet
-docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin 
-
-#From Instructor
-docker run -p 8080:8080 -p 9990:9990 -d classroom.example.com:5000/wildfly-admin 
+$ docker run -p 8080:8080 -p 9990:9990 -d rafabene/wildfly-admin 
 ----
 
 In this case, Docker port mapping will be shown as:

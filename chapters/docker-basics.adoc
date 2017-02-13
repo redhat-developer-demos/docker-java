@@ -52,29 +52,6 @@ These instructions are stored in a file called a Dockerfile. Docker reads this D
 
 A container consists of an operating system, user-added files, and meta-data. As we've seen, each container is built from an image. That image tells Docker what the container holds, what process to run when the container is launched, and a variety of other configuration data. The Docker image is read-only. When Docker runs a container from an image, it adds a read-write layer on top of the image (using a union file system as we saw earlier) in which your application can then run.
 
-### Docker Machine (For Windows and Mac)
-
-Machine makes it really easy to create Docker hosts on your computer, on cloud providers and inside your own data center. It creates servers, installs Docker on them, then configures the Docker client to talk to them.
-
-Once your Docker host has been created, it then has a number of commands for managing containers:
-
-. Start, stop, restart container
-. Upgrade Docker
-. Configure the Docker client to talk to a host
-
-You used Docker Machine already during the attendee setup. We won't need it too much further on. But if you need to create hosts, it's a very handy tool to know about. From now on we're mostly going to use the docker client.
-
-Find out more about the details at the link:https://docs.docker.com/machine/[Docker Machine Website].
-
-Check if docker machine is working:
-
-  docker-machine -v
-
-It shows the output similar to the one shown below:
-
-  docker-machine version 0.6.0, build e27fb87
-
-NOTE: The exact version may differ based upon how recently the installation was performed.
 
 ### Docker Client
 
@@ -86,7 +63,7 @@ Check if your client is working using the following command:
 
 It shows the output similar to the following:
 
-  Docker version 1.10.0, build 590d510
+  Docker version 1.12.5, build 047e51b/1.12.5
 
 NOTE: The exact version may differ based upon how recently the installation was performed.
 
@@ -103,42 +80,3 @@ Get a full list of available commands with
 
 A more comprehensive list of commands is also available in <<Common_Docker_Commands>>.
 
-### Verify Docker Configuration
-
-Check if your Docker Host is running:
-
-  docker-machine ls
-
-You should see the output similar to:
-
-[source, text]
-----
-NAME        ACTIVE   DRIVER       STATE     URL                         SWARM
-lab                  virtualbox   Running   tcp://192.168.99.101:2376   
-----
-
-This machine is shown in "`Running`" state. If the machine state is stopped, start it with:
-
-  docker-machine start lab
-
-After it is started you can find out IP address of your Docker Host with:
-
-  docker-machine ip lab
-
-We already did this during the setup document, remember? So, this is a good chance to check, if you already added this IP to your hosts file.
-
-Type:
-
-  ping dockerhost
-
-and see if this resolves to the IP address that the docker-machine command printed out. You should see an output as:
-
-[source, text]
-----
-> ping dockerhost
-PING dockerhost (192.168.99.101): 56 data bytes
-64 bytes from 192.168.99.101: icmp_seq=0 ttl=64 time=0.394 ms
-64 bytes from 192.168.99.101: icmp_seq=1 ttl=64 time=0.387 ms
-----
-
-If it does, you're ready to start with the lab.

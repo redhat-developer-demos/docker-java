@@ -26,16 +26,12 @@ _Dockerfile_ is usually called _Dockerfile_. The complete list of commands that 
 
 === Create your first Docker image
 
-. Create a new directory.
+. Create a new directory 'helloworld' and "cd" into it.
 . Create a new text file, name it _Dockerfile_, and use the following contents:
 
 [source, text]
 ----
-#From Internet (use only one FROM instruction)
 FROM fedora
-
-#From Instructor (use only one FROM instruction)
-FROM classroom.example.com:5000/fedora
 
 CMD ["/bin/echo", "hello world"]
 ----
@@ -45,7 +41,7 @@ This image uses `fedora` as the base image. `CMD` command defines the command th
 . Build this image:
 
 ```console
-> docker build -t helloworld .
+$ docker build -t helloworld .
 Sending build context to Docker daemon 2.048 kB
 Step 1 : FROM fedora
 latest: Pulling from library/fedora
@@ -66,7 +62,7 @@ Successfully built 405849ed68f1
 . List the images available:
 
 ```console
-> docker images
+$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED             VIRTUAL SIZE
 helloworld          latest              405849ed68f1        18 seconds ago      204.3 MB
 fedora              latest              a887c7ad7f3f        6 days ago          204.3 MB
@@ -74,7 +70,7 @@ fedora              latest              a887c7ad7f3f        6 days ago          
 
 . Run the container:
 
-  docker run -it helloworld
+$  docker run -it helloworld
 
 to see the output:
 
@@ -82,12 +78,12 @@ to see the output:
 
 . Change the base image from `fedora` to `busybox` in `Dockerfile`. Build the image again:
 
-  docker build -t helloworld2 .
+$  docker build -t helloworld2 .
 
 and view the images as:
 
 ```console
-> docker images
+$ docker images
 REPOSITORY          TAG                 IMAGE ID            CREATED              VIRTUAL SIZE
 helloworld2         latest              3dece940fa4a        6 seconds ago        1.109 MB
 helloworld          latest              405849ed68f1        About a minute ago   204.3 MB
@@ -102,30 +98,26 @@ busybox             latest              c51f86c28340        8 days ago          
 
 [source, text]
 ----
-#From Internet (use only one FROM instruction)
 FROM jboss/wildfly
-
-#From Instructor (use only one FROM instruction)
-FROM classroom.example.com:5000/wildfly
 ----
 
 . Build the image:
 
-  docker build -t mywildfly .
+  $  docker build -t mywildfly .
 
 . Run the container:
 
-  docker run -it mywildfly
+  $  docker run -it mywildfly
 
 
 === Import and export images
 
 Docker images can be saved using `save` command to a .tar file:
 
-  docker save helloworld > helloworld.tar
+  $  docker save helloworld > helloworld.tar
 
 These tar files can then be imported using `load` command:
 
-  docker load -i helloworld.tar
+  $  docker load -i helloworld.tar
 
 

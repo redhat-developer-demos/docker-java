@@ -9,25 +9,21 @@ We're going to build the application first.
 
 . Clone the repo:
 
-  #From Internet
-  git clone https://github.com/jboss-developer/ticket-monster.git 
-    
-  #From Instructor
-  git clone http://root:dockeradmin@classroom.example.com:10080/root/ticket-monster.git 
+[source, text]
+----
+$ cd /root
 
+$ git clone https://github.com/jboss-developer/ticket-monster.git 
+----
 
 . Build the application:
 
 [source, text]
 ----
-  cd ticket-monster/demo
+$  cd ticket-monster/demo
   
-  #From Internet
-  mvn clean package
+$  mvn clean package
     
-  #From Instructor
-  curl http://classroom.example.com:8082/downloads/lab-settings.xml -o settings.xml
-  mvn -s settings.xml clean package
 ----
 
 ### Start Application Server
@@ -37,27 +33,17 @@ Create a folder to place the deployments and give it write access
 
 [source, text]
 ----
-mkdir deployments
-chmod a+w deployments
+$ mkdir /deployments
+$ chmod 777 /deployments
+$ chcon -Rt svirt_sandbox_file_t /deployments
 ----
 
 Start WildFly server as:
 
 [source, text]
 ----
-#From Internet
-docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly 
-
-#From Instructor
-docker run --name wildfly -d -p 8080:8080 -v `pwd`/deployments:/opt/jboss/wildfly/standalone/deployments/:rw classroom.example.com:5000/wildfly 
+$ docker run --name wildfly -d -p 8080:8080 -v /deployments:/opt/jboss/wildfly/standalone/deployments/:rw jboss/wildfly 
 ----
-
-[NOTE]
-====
-Windows users need to tweak this a bit and copy the deployments to c:/Users/<USER>/deployments because the directory mappings for boot2docker work differently on those systems. Please update the docker -v argument accordingly.
-
-'docker run --name wildfly -d -p 8080:8080 -v /c/Users/meisele/deployments:/opt/jboss/wildfly/standalone/deployments/:rw [classroom.example.com:5000|jboss]/wildfly'
-====
 
 This command starts a container named "`wildfly`".
 
@@ -67,10 +53,10 @@ Check logs to verify if the server has started.
 
 [source, text]
 ----
-docker logs -f wildfly
+$ docker logs -f wildfly
 ----
 
-Access http://dockerhost:8080 in your browser to make sure the instance is up and running.
+Access http://<external-ip>:8080 in your browser to make sure the instance is up and running.
 
 Now you're ready to deploy the application for the first time.
 
@@ -78,27 +64,35 @@ Copy the geneated WAR to your deploy folder.
 
 [source, text]
 ----
-cp target/ticket-monster.war deployments/
+$ cp target/ticket-monster.war /deployments
 ----
 
 Congratulations!
 
-You've deployed your first application to WildFly running in a Docker container from JBoss Developer Studio. You can check it by looking in the logs or accessing http://dockerhost:8080/ticket-monster/
+You've deployed your first application to WildFly running in a Docker container from JBoss Developer Studio. You can check it by looking in the logs or accessing http://<external-ip>:8080/ticket-monster/
 
 Stop WildFly container when you're done.
 
-  docker stop wildfly
-  docker rm wildfly
+  $ docker stop wildfly
+  $ docker rm wildfly
   
 
 ### Deploy Application Using CLI
 
 #### WildFly
 
-. Download WildFly 10.0.0.Final
-.. from Internet: http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip .
-.. from Instructor: http://classroom.example.com:8082/downloads/wildfly-10.0.0.Final.zip .
+. Download WildFly 10.0.0.Final from Internet: http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip .
+
 . Install it by extracting the archive.
+
+[source, text]
+----
+$ cd /root
+$ wget http://download.jboss.org/wildfly/10.0.0.Final/wildfly-10.0.0.Final.zip
+$ unzip wildfly-10.0.0.Final.zip 
+$ cd wildfly-10.0.0.Final/bin/
+----
+
 
 #### CLI
 
@@ -111,8 +105,7 @@ The Command Line Interface (CLI) is a tool for connecting to WildFly instances t
 
 Lets use the CLI to deploy ticket-monster to WildFly running in the container.
 
-. CLI needs to be locally installed and comes as part of WildFly. This should be available in the previously downloaded WildFly. Unzip into a folder of your choice (e.g. `/Users/<USER>/tools/`). This will create `wildfly-10.0.0.Final` directory here. This folder is referred to $WIDLFY_HOME from here on. Make sure to add the `/Users/<USER>/tools/wildfly-10.0.0.Final/bin` to your $PATH.
-
+. CLI needs to be locally installed and comes as part of WildFly. 
 . Run the "`wildfly-management`" image with fixed port mapping as explained in <<Management_Fixed_Port_Mapping>>.
 . Run the `jboss-cli` command and connect to the WildFly instance.
 
@@ -120,11 +113,7 @@ Start WildFly server as:
 
 [source, text]
 ----
-#From Internet
-docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin 
-
-#From Instructor
-docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-admin 
+$ docker run --name wildfly-managed -d -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin 
 ----
 
 This command starts a container named "`wildfly-managed`".
@@ -132,37 +121,40 @@ This command starts a container named "`wildfly-managed`".
 
 [source, text]
 ----
-./jboss-cli.sh --controller='dockerhost:9990'  -u='admin' -p='docker#admin' -c
+$ ./jboss-cli.sh --controller='localhost:9990'  -u='admin' -p='docker#admin' -c
 ----
 
 This will show the output as:
 
 [source, text]
 ----
-[standalone@dockerhost:9990 /]
+[standalone@localhost:9990 /]
 ----
 
 . Deploy the application as:
 
 [source, text]
 ----
-deploy <ticket-monster PATH>/target/ticket-monster.war --force
+deploy /root/ticket-monster/demo/target/ticket-monster.war --force
+
+exit
 ----
 
 . Stop Wildfly
 
 [source, text]
 ----
-docker stop wildfly-managed
-docker rm wildfly-managed
+$ docker stop wildfly-managed
+$ docker rm wildfly-managed
 ----
 
 
 Now you've sucessfully used the CLI to remote deploy the Ticket Monster application to WildFly running as docker container.
 
+////
 ### Deploy Application Using Web Console
 
-WildFly comes with a web-based administration console. It also relies on the same management APIs that are used by JBoss Developer Tools and the CLI. It provides a simple and easy to use web-based console to manage WildFly instance. For a Docker image, it needs to be explicitly enabled as explained in <<Enabling_WildFly_Administration>>. Once enabled, it can be accessed at http://dockerhost:9990.
+WildFly comes with a web-based administration console. It also relies on the same management APIs that are used by JBoss Developer Tools and the CLI. It provides a simple and easy to use web-based console to manage WildFly instance. For a Docker image, it needs to be explicitly enabled as explained in <<Enabling_WildFly_Administration>>. Once enabled, it can be accessed at http://<external-ip>:9990.
 
 .WildFly Web Console
 image::images/console1.png[]
@@ -171,7 +163,7 @@ Username and password credentials are shown in <<WildFly_Administration_Credenti
 
 [NOTE]
 ====
-Start a new container as `docker run -d --name wildfly-managed -p 8080:8080 -p 9990:9990 classroom.example.com:5000/wildfly-admin`.
+Start a new container as `docker run -d --name wildfly-managed -p 8080:8080 -p 9990:9990 rafabene/wildfly-admin`.
 ====
 
 Deploy the application using the console with the following steps:
@@ -207,4 +199,5 @@ image::images/wildfly-ticket-monster-output.png[]
 docker stop wildfly-managed
 docker rm wildfly-managed
 ----
+////
 
