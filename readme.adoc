@@ -8,7 +8,7 @@ v1.5-devnexus2017, Feb 12, 2017
 :imagesdir: ./chapters/images
 
 Latest HTML:
-https://htmlpreview.github.io/?https://github.com/redhat-developer/docker-java/blob/devnexus2017/readme.html
+http://htmlpreview.github.io/?https://github.com/redhat-developer-demos/docker-java/blob/devnexus2017/readme.html
 
 toc::[]
 
