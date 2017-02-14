@@ -198,9 +198,10 @@ The port mapping is shown in the `PORTS` column. Access the WildFly server at ht
 [NOTE]
 ===============================
 Check the External IP in Compute → Compute Engine → VM Instances
+
+Exact port number may be different in your case.
 ===============================
 
-NOTE: Exact port number may be different in your case.
 
 ### Run Container with Specified Port
 
@@ -227,7 +228,7 @@ Port exposure and mapping are the keys to successful work with Docker.
 See more about networking on the Docker website link:https://docs.docker.com/articles/networking/[Advanced Networking]
 ===============================
 
-Now we're ready to test http://dockerhost:8080 again. This works with the exposed port, as expected.
+Now we're ready to test http://<external-ip>:8080 again. This works with the exposed port, as expected.
 
 Lets stop the previously running container as:
 

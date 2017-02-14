@@ -41,9 +41,9 @@ Once the command completes, you should see a Virtual Computer called "mydocker-d
 
 image::images/gce-vminstance.png[]
 
-When you click on SSH, a web shell will be opened. Now, we will setup our CentOS Linux to run a docker daemon.
+When you click on **SSH**, a web shell will be opened. Now, we will setup our CentOS Linux to run a docker daemon.
 
-Let's do it. Execute the following commands in the _mydocker-daemon SSH terminal_:
+Let's do it. Execute the following commands in the _**mydocker-daemon SSH terminal**_:
 
 [source, text]
 ----

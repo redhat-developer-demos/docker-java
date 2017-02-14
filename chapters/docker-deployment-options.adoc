@@ -187,7 +187,7 @@ image::images/wildfly-add-deployments.png[]
 .Ticket Monster Deployed
 image::images/wildfly-javaee7-simple-sample-deployed.png[]
 
-This will complete the deployment of the Ticket Monster using Web Console. The output can be seen out http://dockerhost:8080/ticket-monster and looks like:
+This will complete the deployment of the Ticket Monster using Web Console. The output can be seen out http://<external-ip>:8080/ticket-monster and looks like:
 
 .Ticket Monster Output
 image::images/wildfly-ticket-monster-output.png[]

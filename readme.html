@@ -711,10 +711,10 @@ Open the Google Cloud Shell by clicking on the icon on the top right of the scre
 </div>
 </div>
 <div class="paragraph">
-<p>When you click on SSH, a web shell will be opened. Now, we will setup our CentOS Linux to run a docker daemon.</p>
+<p>When you click on <strong>SSH</strong>, a web shell will be opened. Now, we will setup our CentOS Linux to run a docker daemon.</p>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s do it. Execute the following commands in the <em>mydocker-daemon SSH terminal</em>:</p>
+<p>Let&#8217;s do it. Execute the following commands in the <em><strong>mydocker-daemon SSH terminal</strong></em>:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1183,18 +1183,9 @@ CONTAINER ID        IMAGE               COMMAND                CREATED          
 <div class="paragraph">
 <p>Check the External IP in Compute → Compute Engine → VM Instances</p>
 </div>
-</td>
-</tr>
-</table>
+<div class="paragraph">
+<p>Exact port number may be different in your case.</p>
 </div>
-<div class="admonitionblock note">
-<table>
-<tr>
-<td class="icon">
-<div class="title">Note</div>
-</td>
-<td class="content">
-Exact port number may be different in your case.
 </td>
 </tr>
 </table>
@@ -1238,7 +1229,7 @@ See more about networking on the Docker website <a href="https://docs.docker.com
 </table>
 </div>
 <div class="paragraph">
-<p>Now we&#8217;re ready to test <a href="http://dockerhost:8080" class="bare">http://dockerhost:8080</a> again. This works with the exposed port, as expected.</p>
+<p>Now we&#8217;re ready to test <a href="http://&lt;external-ip&gt;:8080" class="bare">http://&lt;external-ip&gt;:8080</a> again. This works with the exposed port, as expected.</p>
 </div>
 <div class="paragraph">
 <p>Lets stop the previously running container as:</p>
