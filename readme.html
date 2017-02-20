@@ -687,15 +687,17 @@ Open the Google Cloud Shell by clicking on the icon on the top right of the scre
 <p>Click Start <strong>Cloud Shell</strong></p>
 </div>
 <div class="paragraph">
-<p>In the Google Cloud Shell type the following command:</p>
+<p>In the Google Cloud Shell type the following commands:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="text">$ gcloud compute instances create --image-family=centos-7 --image-project=centos-cloud --machine-type n1-standard-2 --zone us-east1-b --boot-disk-size=200GB mydocker-daemon</code></pre>
+<pre class="CodeRay highlight"><code data-lang="text">$ gcloud compute firewall-rules create allow-all --allow=tcp:0-65535
+
+$ gcloud compute instances create --image-family=centos-7 --image-project=centos-cloud --machine-type n1-standard-2 --zone us-east1-b --boot-disk-size=200GB mydocker-daemon</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>This command will take some seconds to complete.</p>
+<p>These commands will take some seconds to complete.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -703,7 +705,7 @@ Open the Google Cloud Shell by clicking on the icon on the top right of the scre
 </div>
 </div>
 <div class="paragraph">
-<p>Once the command completes, you should see a Virtual Computer called "mydocker-daemon" created. Click in the SSH link.</p>
+<p>Once the second command completes, you should see a Virtual Computer called "mydocker-daemon" created. Click in the SSH link.</p>
 </div>
 <div class="imageblock">
 <div class="content">
