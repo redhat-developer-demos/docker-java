@@ -26,7 +26,7 @@ Now, let's get a vanilla `jboss/wildfly` image:
 $ docker pull jboss/wildfly:latest 
 ----
 
-By default, docker images are retrieved from https://hub.docker.com/[Docker Hub]. In our case, we're providing a so called private registry via the instructor laptop.
+By default, docker images are retrieved from https://hub.docker.com/[Docker Hub]. 
 
 You can see, that Docker is downloading the image with it's different layers.
 
